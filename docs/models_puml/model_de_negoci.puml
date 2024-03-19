@@ -1,0 +1,27 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rect
+
+actor Usuari as U
+rectangle "Pàgina Web de Venda de Sabatilles" {
+  usecase "Registrar Usuari" as R
+  usecase "Iniciar Sessió" as IS
+  usecase "Explorar Productes" as EP
+  usecase "Afegir Producte al Carret" as APC
+  usecase "Eliminar Producte del Carret" as EPC
+  usecase "Processar Comanda" as PC
+  usecase "Cancelar Comanda" as CC
+  usecase "Realitzar Pagament" as RP
+}
+
+U --> R
+U --> IS
+U --> EP
+U --> APC
+U --> EPC
+U --> PC
+U --> CC
+U --> RP
+
+@enduml

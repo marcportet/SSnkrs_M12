@@ -1,0 +1,74 @@
+@startuml
+
+class Usuari {
+  - idUsuari: int
+  - nom: string
+  - cognom: string
+  - correuElectrònic: string
+  - contrasenya: string
+}
+
+class Administrador {
+  + gestionarUsuaris()
+  + gestionarProductes()
+  + gestionarComandes()
+}
+
+class Marketing {
+  + gestionarProductes()
+  + gestionarComandes()
+}
+
+class Client {
+  + explorarProductes()
+  + afegirProducteAlCarret()
+  + eliminarProducteDelCarret()
+  + processarComanda()
+  + cancelarComanda()
+  + realitzarPagament()
+}
+
+class Producte {
+  - idProducte: int
+  - nom: string
+  - marca: string
+  - descripcio: string
+  - preu: float
+  - estoc: int
+}
+
+class CarretDeLaCompra {
+  - idCarret: int
+  - idUsuari: int
+  - productes: list<Producte>
+  + afegirProducte()
+  + eliminarProducte()
+  + calcularTotal()
+}
+
+class Comanda {
+  - idComanda: int
+  - idUsuari: int
+  - productes: list<Producte>
+  - dataCompra: date
+  - estat: string
+}
+
+class Pagament {
+  - idPagament: int
+  - idComanda: int
+  - total: float
+  - metodePagament: string
+  - dataPagament: date
+}
+
+Usuari "1" -- "1..*" Comanda
+Comanda "1" -- "1..*" Pagament
+Usuari "1" -- "1..*" CarretDeLaCompra
+CarretDeLaCompra "*" -- "1..*" Producte
+
+Administrador --|> Usuari
+Marketing --|> Usuari
+Client --|> Usuari
+
+@enduml
