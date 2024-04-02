@@ -1,0 +1,6 @@
+Componentes:
+Auth0 - https://auth0.com/ (Crear Login y registro)
+
+Mirar:
+- Flowbite
+- Tailwind
