@@ -8,6 +8,8 @@ Aquest es un projecte Laravel on es desenvolupa una Botiga online de sabatilles,
 * Utilitzacó de boostrap per a vistes responsive.
 ## Tecnologíes Utilitzades 🛠️
 * Laravel
+* Vue
+* MySQL
 * PHPmyadmin
 * HTML/CSS
 * Boostrap
