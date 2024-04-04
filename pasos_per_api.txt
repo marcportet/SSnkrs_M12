@@ -1,0 +1,5 @@
+1. Crear base e iniciar servidor (Ep3 - Vid1)
+2. Crear Readme i rutas (Ep3 - Vid2)
+3. Refactorizar rutas y codigo (Ep3 - Vid9)
+4. Crear Controlador (Ep3 - Vid10)
+
