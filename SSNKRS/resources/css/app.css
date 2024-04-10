@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*Distancia lateral brands Navbar*/
+ul.mt-6.space-y-6.sm\:mt-4.sm\:space-y-4 {
+    margin-left: -30px !important;
+}
+
+/*Quiatr underline*/
+
+a {
+    text-decoration: none !important;
+}
+
+/*Color text brand Navbar*/
+ul.mt-6.space-y-6.sm\:mt-4.sm\:space-y-4 a{
+    color: grey;
+}
