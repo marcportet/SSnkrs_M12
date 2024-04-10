@@ -37,7 +37,7 @@
                 <div class="border-b border-gray-200">
                   <TabList class="-mb-px flex space-x-8 px-4">
                     <Tab as="template" v-for="category in navigation.categories" :key="category.name" v-slot="{ selected }">
-                      <button :class="[selected ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-900', 'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium']">{{ category.name }}</button>
+                      <button :class="[selected ? 'border-blue-500 text-blue-500' : 'border-transparent text-gray-900', 'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium']">{{ category.name }}</button>
                     </Tab>
                   </TabList>
                 </div>
@@ -89,7 +89,7 @@
     </TransitionRoot>
 
     <header class="relative bg-white">
-      <p class="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">Consigue envio gratuito a partir de 200€ en tu pedido</p>
+      <p class="flex h-10 items-center justify-center bg-blue-500 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">Consigue envio gratuito a partir de 200€ en tu pedido</p>
 
       <nav aria-label="Top" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="border-b border-gray-200">
@@ -104,7 +104,7 @@
             <div class="ml-4 flex lg:ml-0">
               <a href="#">
                 <span class="sr-only">Your Company</span>
-                <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
+                <img class="h-8 w-auto" :src="'img/logotipo.png'" alt="" />
               </a>
             </div>
 
@@ -113,7 +113,7 @@
               <div class="flex h-full space-x-8">
                 <Popover v-for="category in navigation.categories" :key="category.name" class="flex" v-slot="{ open }">
                   <div class="relative flex">
-                    <PopoverButton :class="[open ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-700 hover:text-gray-800', 'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out']">{{ category.name }}</PopoverButton>
+                    <PopoverButton :class="[open ? 'border-blue-500 text-blue-500' : 'border-transparent text-gray-700 hover:text-gray-800', 'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out']">{{ category.name }}</PopoverButton>
                   </div>
 
                   <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0" enter-to-class="opacity-100" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100" leave-to-class="opacity-0">
@@ -215,7 +215,7 @@ const navigation = {
         {
           name: 'Mas Vendidas',
           href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg',
+          imageSrc: 'img/travis-jordan-low.png',
           imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
         },
         {
