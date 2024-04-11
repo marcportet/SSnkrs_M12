@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*Distancia lateral brands Navbar*/
+ul.mt-6.space-y-6.sm\:mt-4.sm\:space-y-4 {
+    margin-left: -30px !important;
+}
+
+/*Quiatr underline*/
+
+a {
+    text-decoration: none !important;
+}
+
+/*Color text brand Navbar*/
+ul.mt-6.space-y-6.sm\:mt-4.sm\:space-y-4 a{
+    color: grey;
+}
+
+
+/*Colores bg de tailwind 
+
+Principal: bg-blue-500 (rgb(59 130 246) )
+
+*/
+
+/* 
+    Añadir imagenes con :src="'img/logotipo.png'" 
+
+*/
