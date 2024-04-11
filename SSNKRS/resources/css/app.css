@@ -29,3 +29,29 @@ Principal: bg-blue-500 (rgb(59 130 246) )
     Añadir imagenes con :src="'img/logotipo.png'" 
 
 */
+
+
+
+/* CSS HOME */
+
+    /* Estilos para el carrusel */
+    #carouselExampleAutoplaying {
+        max-height: 85vh;
+        overflow: hidden;
+    }
+
+    /* Estilos para ajustar la altura del carrusel en pantallas más pequeñas */
+    @media (max-width: 768px) {
+        #carouselExampleAutoplaying {
+            max-height: 60vh; /* Puedes ajustar este valor según tus necesidades */
+        }
+    }
+
+    /* Estilos para ajustar la altura del carrusel en pantallas aún más pequeñas */
+    @media (max-width: 576px) {
+        #carouselExampleAutoplaying {
+            max-height: 40vh; /* Puedes ajustar este valor según tus necesidades */
+        }
+    }
+
+    
