@@ -221,7 +221,7 @@ const navigation = {
         {
           name: 'Nuevas Sneakers',
           href: '#',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-02-image-card-06.jpg',
+          imageSrc: 'img/sb-dunk-april.png',
           imageAlt:
             'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
         },
