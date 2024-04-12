@@ -209,6 +209,8 @@ import {
 } from '@headlessui/vue'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
+
+
 const navigation = {
   categories: [
     {
