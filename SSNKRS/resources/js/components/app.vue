@@ -48,17 +48,17 @@
                         <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                           <img :src="item.imageSrc" :alt="item.imageAlt" class="object-cover object-center" />
                         </div>
-                        <a :href="item.href" class="mt-6 block font-medium text-gray-900">
+                        <router-link :to="item.to" class="mt-6 block font-medium text-gray-900">
                           <span class="absolute inset-0 z-10" aria-hidden="true" />
                           {{ item.name }}
-                        </a>
+                        </router-link>
                       </div>
                     </div>
                     <div v-for="section in category.sections" :key="section.name">
                       <p :id="`${category.id}-${section.id}-heading-mobile`" class="font-medium text-gray-900">{{ section.name }}</p>
                       <ul role="list" :aria-labelledby="`${category.id}-${section.id}-heading-mobile`" class="mt-6 flex flex-col space-y-6">
                         <li v-for="item in section.items" :key="item.name" class="flow-root">
-                          <a :href="item.href" class="-m-2 block p-2 text-gray-500">{{ item.name }}</a>
+                          <router-link :to="item.to" class="-m-2 block p-2 text-gray-500">{{ item.name }}</router-link>
                         </li>
                       </ul>
                     </div>
@@ -68,16 +68,16 @@
 
               <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                 <div v-for="page in navigation.pages" :key="page.name" class="flow-root">
-                  <a :href="page.href" class="-m-2 block p-2 font-medium text-gray-900">{{ page.name }}</a>
+                  <router-link :to="page.to" class="-m-2 block p-2 font-medium text-gray-900">{{ page.name }}</router-link>
                 </div>
               </div>
 
               <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                 <div class="flow-root">
-                  <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Iniciar Sessión</a>
+                  <router-link to="/login" class="-m-2 block p-2 font-medium text-gray-900">Iniciar sesión</router-link>
                 </div>
                 <div class="flow-root">
-                  <a href="#" class="-m-2 block p-2 font-medium text-gray-900">Registrarse</a>
+                  <router-link to="/registro" class="-m-2 block p-2 font-medium text-gray-900">Registrarse</router-link>
                 </div>
               </div>
 
@@ -102,10 +102,10 @@
 
             <!-- Logo -->
             <div class="ml-4 flex lg:ml-0">
-              <a href="#">
+              <router-link to="/" >
                 <span class="sr-only">Your Company</span>
                 <img class="h-8 w-auto" :src="'img/logotipo.png'" alt="" />
-              </a>
+              </router-link>
             </div>
 
             <!-- Flyout menus -->
@@ -129,10 +129,10 @@
                                 <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                   <img :src="item.imageSrc" :alt="item.imageAlt" class="object-cover object-center" />
                                 </div>
-                                <a :href="item.href" class="mt-6 block font-medium text-gray-900">
+                                <router-link :to="item.to" class="mt-6 block font-medium text-gray-900">
                                   <span class="absolute inset-0 z-10" aria-hidden="true" />
                                   {{ item.name }}
-                                </a>
+                                </router-link>
                               </div>
                             </div>
                             <div class="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
@@ -140,7 +140,7 @@
                                 <p :id="`${section.name}-heading`" class="font-medium text-gray-900">{{ section.name }}</p>
                                 <ul role="list" :aria-labelledby="`${section.name}-heading`" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                   <li v-for="item in section.items" :key="item.name" class="flex">
-                                    <a :href="item.href" class="hover:text-gray-800">{{ item.name }}</a>
+                                    <router-link :to="item.to" class="hover:text-gray-800">{{ item.name }}</router-link>
                                   </li>
                                 </ul>
                               </div>
@@ -152,15 +152,15 @@
                   </transition>
                 </Popover>
 
-                <a v-for="page in navigation.pages" :key="page.name" :href="page.href" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">{{ page.name }}</a>
+                <router-link v-for="page in navigation.pages" :key="page.name" :to="page.to" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">{{ page.name }}</router-link>
               </div>
             </PopoverGroup>
 
             <div class="ml-auto flex items-center">
               <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                <a href="#" class="text-sm font-medium text-gray-700 hover:text-gray-800">Iniciar Sessión</a>
+                <router-link to="/login" active-class="border-b-2 border-blue-500 text-blue-500 ease-out" class="text-sm font-medium text-gray-700 hover:text-gray-800">Iniciar Sessión</router-link>
                 <span class="h-6 w-px bg-gray-200" aria-hidden="true" />
-                <a href="#" class="text-sm font-medium text-gray-700 hover:text-gray-800">Registrarse</a>
+                <router-link to="/registro" class="-m-2 block p-2 font-medium text-gray-900">Registrarse</router-link>
               </div>
 
               <!-- Search -->
@@ -173,17 +173,20 @@
 
               <!-- Cart -->
               <div class="ml-4 flow-root lg:ml-6">
-                <a href="#" class="group -m-2 flex items-center p-2">
+                <router-link to="/carrito" class="group -m-2 flex items-center p-2">
                   <ShoppingBagIcon class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
                   <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                   <span class="sr-only">items in cart, view bag</span>
-                </a>
+                </router-link>
               </div>
             </div>
           </div>
         </div>
       </nav>
     </header>
+    <div>
+    <router-view></router-view>
+  </div>
   </div>
 </template>
 
@@ -214,13 +217,13 @@ const navigation = {
       featured: [
         {
           name: 'Mas Vendidas',
-          href: '#',
+          to: '/',
           imageSrc: 'img/travis-jordan-low.png',
           imageAlt: 'Drawstring top with elastic loop closure and textured interior padding.',
         },
         {
           name: 'Nuevas Sneakers',
-          href: '#',
+          to: '/',
           imageSrc: 'img/sb-dunk-april.png',
           imageAlt:
             'Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.',
@@ -231,19 +234,19 @@ const navigation = {
           id: 'brands',
           name: 'Brands',
           items: [
-            { name: 'Adidas', href: '#' },
-            { name: 'Air Jordan', href: '#' },
-            { name: 'New Balance', href: '#' },
-            { name: 'Nike', href: '#' },
-            { name: 'Yeezy', href: '#' },
+            { name: 'Adidas', to: '#' },
+            { name: 'Air Jordan', to: '#' },
+            { name: 'New Balance', to: '#' },
+            { name: 'Nike', to: '#' },
+            { name: 'Yeezy', to: '#' },
           ],
         },
       ],
     },
   ],
 pages: [
-    { name: 'Lanzamientos', href: '#' },
-    { name: 'Contacte', href: '#' },
+    { name: 'Lanzamientos', to: '/lanzamientos' },
+    { name: 'Contacto', to: '/contacto' },
   ],
 }
 

@@ -19,9 +19,6 @@
 </head>
 <body>
     <div id="app">
-    <store-navigation></store-navigation>
-       
-
     </div>
 </body>
 </html>

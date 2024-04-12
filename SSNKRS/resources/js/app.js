@@ -5,7 +5,9 @@
  */
 
 import './bootstrap';
+
 import { createApp } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -13,13 +15,54 @@ import { createApp } from 'vue';
  * to use in your application's views. An example is included for you.
  */
 
-const app = createApp({});
+import App from './components/app.vue';
+
+import login from './components/login.vue';
+import registro from './components/registro.vue';
+
+import home from './components/home.vue';
+import lanzamientos from './components/lanzamientos.vue';
+import contacto from './components/contacto.vue';
+import carrito from './components/carrito.vue';
+
+const ssnkrsapp = createApp(App);
+
+const routes = [
+    {
+        path: '/',
+        component: home
+    },
+    { 
+        path: '/login', 
+        component: login 
+    },
+    { 
+        path: '/registro', 
+        component: registro 
+    },
+    { 
+        path: '/lanzamientos', 
+        component: lanzamientos 
+    },
+    { 
+        path: '/contacto', 
+        component: contacto
+    },
+    { 
+        path: '/carrito', 
+        component: carrito
+    },
+]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+})
 
 // import ExampleComponent from './components/ExampleComponent.vue';
 // app.component('example-component', ExampleComponent);
 
-import StoreNavigation from './components/store-navigation.vue';
-app.component('store-navigation', StoreNavigation);
+ssnkrsapp.use(router);
 
 /**
  * The following block of code may be used to automatically register your
@@ -39,4 +82,4 @@ app.component('store-navigation', StoreNavigation);
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
 
-app.mount('#app');
+ssnkrsapp.mount('#app');
