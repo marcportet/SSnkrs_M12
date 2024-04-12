@@ -17,7 +17,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-     @yield('head')
+    @yield('head')
 </head>
 <body>
 

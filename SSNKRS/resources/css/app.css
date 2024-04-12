@@ -31,27 +31,34 @@ Principal: bg-blue-500 (rgb(59 130 246) )
 */
 
 
-
 /* CSS HOME */
+/* Estilos para el carrusel */
+#carouselExampleAutoplaying {
+    max-height: 85vh;
+    overflow: hidden;
+}
 
-    /* Estilos para el carrusel */
-    #carouselExampleAutoplaying {
-        max-height: 85vh;
-        overflow: hidden;
-    }
+/* Estilos para lo mas vendido */
+.titulo{
+    padding: 5%;
+    font-size: 20px;
+    color:black;
+}
+.titulo {
+    padding: 5%;
+    font-size: 20px;
+    color: black;
+    display: flex;
+}
 
-    /* Estilos para ajustar la altura del carrusel en pantallas más pequeñas */
-    @media (max-width: 768px) {
-        #carouselExampleAutoplaying {
-            max-height: 60vh; /* Puedes ajustar este valor según tus necesidades */
-        }
-    }
+.vermas {
+    margin-left: auto;
+    color:black;
+}
+.vermas:hover{
+    color:#3B86F6;
+}
 
-    /* Estilos para ajustar la altura del carrusel en pantallas aún más pequeñas */
-    @media (max-width: 576px) {
-        #carouselExampleAutoplaying {
-            max-height: 40vh; /* Puedes ajustar este valor según tus necesidades */
-        }
-    }
+
 
     

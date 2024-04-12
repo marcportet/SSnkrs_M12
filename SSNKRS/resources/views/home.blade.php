@@ -31,4 +31,12 @@
     </button>
 </div>
 
+<div class="masVendidas">
+    <div class="titulo">
+        <span>Lo Mas Vendido</span>
+        <a class="vermas" href="#">ver mas</a>
+
+    </div>
+</div>
+
 @endsection
