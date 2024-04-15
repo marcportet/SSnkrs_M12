@@ -161,6 +161,7 @@
     </div>
 </template>
 
+<!--
 <script setup>
 const productos_masvendidos = [
     {
@@ -270,4 +271,39 @@ const productos_proximos = [
         imageAlt: "Front of men's Basic Tee in black.",
     },
 ];
+</script>
+-->
+
+<script setup>
+import axios from 'axios';
+
+const productos_masvendidos = [];
+const productos_nuevos = [];
+const productos_proximos = [];
+
+// Realizar solicitudes a la API y actualizar los arrays de productos
+axios.get('http://localhost:3000/api/sneakers')
+    .then(response => {
+        console.log(response.data)
+        productos_masvendidos = response.data;
+    })
+    .catch(error => {
+        console.error('Error al obtener los productos más vendidos:', error);
+    });
+
+axios.get('http://localhost:3000/api/sneakers')
+    .then(response => {
+        productos_nuevos = response.data;
+    })
+    .catch(error => {
+        console.error('Error al obtener los productos nuevos:', error);
+    });
+
+axios.get('http://localhost:3000/api/sneakers')
+    .then(response => {
+        productos_proximos = response.data;
+    })
+    .catch(error => {
+        console.error('Error al obtener los próximos lanzamientos:', error);
+    });
 </script>

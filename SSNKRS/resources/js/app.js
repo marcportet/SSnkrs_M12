@@ -25,6 +25,8 @@ import lanzamientos from './components/lanzamientos.vue';
 import contacto from './components/contacto.vue';
 import carrito from './components/carrito.vue';
 
+import detalle from './components/detalle.vue';
+
 const ssnkrsapp = createApp(App);
 
 const routes = [
@@ -51,6 +53,10 @@ const routes = [
     { 
         path: '/carrito', 
         component: carrito
+    },
+    { 
+        path: '/sneaker/:id', 
+        component: detalle
     },
 ]
 
