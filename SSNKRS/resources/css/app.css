@@ -39,14 +39,8 @@ Principal: bg-blue-500 (rgb(59 130 246) )
 
 /* Estilos para lo mas vendido */
 .titulo{
-    padding: 5%;
     font-size: 20px;
     color:black;
-}
-.titulo {
-    padding: 5%;
-    font-size: 20px;
-    color: black;
     display: flex;
 }
 
@@ -55,7 +49,7 @@ Principal: bg-blue-500 (rgb(59 130 246) )
     color:black;
     display: flex;
 }
+
 .vermas:hover{
     color:#3B86F6;
 }
-
