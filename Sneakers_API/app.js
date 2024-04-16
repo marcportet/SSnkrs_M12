@@ -22,8 +22,19 @@ app.listen(PORT, () => {
 
 // Endpoint para obtener todos los sneakers
 app.get("/api/sneakers", (req, res) => {
-  const sql =
-    "SELECT s.*, SUM(ss.stock) AS stock, GROUP_CONCAT(sz.size) AS sizes FROM sneakers s INNER JOIN sneaker_sizes ss ON s.id = ss.sneaker_id INNER JOIN sizes sz ON ss.size_id = sz.id GROUP BY s.id ORDER BY s.brand;";
+  let sql =
+    "SELECT s.*, SUM(ss.stock) AS stock, GROUP_CONCAT(sz.size) AS sizes FROM sneakers s INNER JOIN sneaker_sizes ss ON s.id = ss.sneaker_id INNER JOIN sizes sz ON ss.size_id = sz.id";
+
+  const columna = req.query.columna;
+  const filtro = req.query.filtro;
+
+  // Si hay un filtro, agregar la cláusula WHERE a la consulta SQL
+  if (filtro && columna) {
+    sql += " WHERE s." + columna + " LIKE '" + filtro + "'";
+  }
+
+  sql += " GROUP BY s.id ORDER BY s.brand;";
+
   db.query(sql, (err, result) => {
     if (err) {
       res.status(500).json({ message: err.message });
@@ -32,6 +43,7 @@ app.get("/api/sneakers", (req, res) => {
     }
   });
 });
+
 
 // Endpoint para obtener un sneaker por id
 app.get("/api/sneakers/:id", (req, res) => {
@@ -59,37 +71,41 @@ app.get("/api/sneakers/:id", (req, res) => {
 app.post("/api/sneakers", async (req, res) => {
   const { name, sizes, brand, price, stock, image } = req.body;
 
-  const imageName = image.split('/').pop()
-
-  cloudinary.uploader.upload(image,
-    { public_id: imageName });
-
-  // Insertar la sneaker en la tabla sneakers con la ruta de la imagen de Google Drive
-  const sneakerSql =
-    "INSERT INTO sneakers (name, brand, price, image) VALUES (?, ?, ?, ?);";
-  db.query(sneakerSql, [name, brand, price, imageName], (err, result) => {
-    if (err) {
-      return res.status(400).json({ message: err.message });
-    } else {
-      // Si no hay error, añadir tallas de la sneaker
-      const sneakerId = result.insertId;
-      const sneakerSizesSql =
-        "INSERT INTO sneaker_sizes (sneaker_id, size_id, stock) VALUES (?, ?, ?)";
-      for (let i = 0; i < sizes.length; i++) {
-        db.query(
-          sneakerSizesSql,
-          [sneakerId, sizes[i], stock[i]],
-          (err, result) => {
-            if (err) {
-              console.error("Error al insertar talla:", err);
-            }
-          }
-        );
-      }
-      return res
-        .status(201)
-        .json({ message: "Sneaker creado exitosamente" });
+  // Subir la imagen a Cloudinary y obtener la URL
+  cloudinary.uploader.upload(image, async (error, result) => {
+    if (error) {
+      return res.status(500).json({ message: "Error al subir la imagen" });
     }
+
+    const imageUrl = result.secure_url; // URL de la imagen en Cloudinary
+
+    // Insertar la sneaker en la tabla sneakers con la URL de la imagen de Cloudinary
+    const sneakerSql =
+      "INSERT INTO sneakers (name, brand, price, image) VALUES (?, ?, ?, ?);";
+    db.query(sneakerSql, [name, brand, price, imageUrl], (err, result) => {
+      if (err) {
+        return res.status(400).json({ message: err.message });
+      } else {
+        // Si no hay error, añadir tallas de la sneaker
+        const sneakerId = result.insertId;
+        const sneakerSizesSql =
+          "INSERT INTO sneaker_sizes (sneaker_id, size_id, stock) VALUES (?, ?, ?)";
+        for (let i = 0; i < sizes.length; i++) {
+          db.query(
+            sneakerSizesSql,
+            [sneakerId, sizes[i], stock[i]],
+            (err, result) => {
+              if (err) {
+                console.error("Error al insertar talla:", err);
+              }
+            }
+          );
+        }
+        return res
+          .status(201)
+          .json({ message: "Sneaker creado exitosamente" });
+      }
+    });
   });
 });
 
@@ -98,52 +114,56 @@ app.put("/api/sneakers/:id", (req, res) => {
   const sneakerId = req.params.id;
   const { name, sizes, brand, price, stock, image } = req.body;
 
-  const imageName = image.split('/').pop()
-
-  cloudinary.uploader.upload(image,
-    { public_id: imageName });
-
-  // Actualizar la información de la sneaker en la tabla sneakers
-  const sneakerSql =
-    "UPDATE sneakers SET name = ?, brand = ?, price = ?, image = ? WHERE id = ?";
-  db.query(
-    sneakerSql,
-    [name, brand, price, imageName, sneakerId],
-    (err, result) => {
-      if (err) {
-        return res.status(400).json({ message: err.message });
-      } else {
-        // Eliminar las tallas asociadas existentes en la tabla sneaker_sizes
-        const deleteSql = "DELETE FROM sneaker_sizes WHERE sneaker_id = ?";
-        db.query(deleteSql, [sneakerId], (err, result) => {
-          if (err) {
-            console.error("Error al eliminar tallas:", err);
-            return res
-              .status(500)
-              .json({ message: "Error interno del servidor" });
-          } else {
-            // Insertar las nuevas tallas asociadas en la tabla sneaker_sizes
-            const sneakerSizesSql =
-              "INSERT INTO sneaker_sizes (sneaker_id, size_id, stock) VALUES (?, ?, ?)";
-            for (let i = 0; i < sizes.length; i++) {
-              db.query(
-                sneakerSizesSql,
-                [sneakerId, sizes[i], stock[i]],
-                (err, result) => {
-                  if (err) {
-                    console.error("Error al insertar talla:", err);
-                  }
-                }
-              );
-            }
-            return res
-              .status(200)
-              .json({ message: "Sneaker y tallas actualizados exitosamente" });
-          }
-        });
-      }
+  // Subir la nueva imagen a Cloudinary y obtener la URL
+  cloudinary.uploader.upload(image, async (error, result) => {
+    if (error) {
+      return res.status(500).json({ message: "Error al subir la imagen" });
     }
-  );
+
+    const imageUrl = result.secure_url; // URL de la nueva imagen en Cloudinary
+
+    // Actualizar la información de la sneaker en la tabla sneakers con la URL de la nueva imagen
+    const sneakerSql =
+      "UPDATE sneakers SET name = ?, brand = ?, price = ?, image = ? WHERE id = ?";
+    db.query(
+      sneakerSql,
+      [name, brand, price, imageUrl, sneakerId],
+      (err, result) => {
+        if (err) {
+          return res.status(400).json({ message: err.message });
+        } else {
+          // Eliminar las tallas asociadas existentes en la tabla sneaker_sizes
+          const deleteSql = "DELETE FROM sneaker_sizes WHERE sneaker_id = ?";
+          db.query(deleteSql, [sneakerId], (err, result) => {
+            if (err) {
+              console.error("Error al eliminar tallas:", err);
+              return res
+                .status(500)
+                .json({ message: "Error interno del servidor" });
+            } else {
+              // Insertar las nuevas tallas asociadas en la tabla sneaker_sizes
+              const sneakerSizesSql =
+                "INSERT INTO sneaker_sizes (sneaker_id, size_id, stock) VALUES (?, ?, ?)";
+              for (let i = 0; i < sizes.length; i++) {
+                db.query(
+                  sneakerSizesSql,
+                  [sneakerId, sizes[i], stock[i]],
+                  (err, result) => {
+                    if (err) {
+                      console.error("Error al insertar talla:", err);
+                    }
+                  }
+                );
+              }
+              return res
+                .status(200)
+                .json({ message: "Sneaker y tallas actualizados exitosamente" });
+            }
+          });
+        }
+      }
+    );
+  });
 });
 
 // Endpoint para modificar las tallas de la sneaker por id

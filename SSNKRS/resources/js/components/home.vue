@@ -39,12 +39,13 @@
                 </a>
             </div>
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <div v-for="producto in productos_masvendidos" :key="producto.id" class="group relative">
+                <div v-for="producto in productos_masvendidos.slice(0, 4)" :key="producto.id" class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                        <img :src="producto.imageSrc" :alt="producto.imageAlt"
+                        <img :src="producto.image" :alt="producto.imageAlt"
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                     </div>
+
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-base text-gray-700">
@@ -74,7 +75,7 @@
                 </a>
             </div>
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <div v-for="producto in productos_nuevos" :key="producto.id" class="group relative">
+                <div v-for="producto in productos_nuevos.slice(0, 4)" :key="producto.id" class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                         <img :src="producto.imageSrc" :alt="producto.imageAlt"
@@ -84,7 +85,7 @@
                         <div>
                             <h3 class="text-base text-gray-700">
                                 <router-link @click="scrollToTop" :to="producto.href">
-                                    <span aria-hidden="true" class="absolute inset-0"/>
+                                    <span aria-hidden="true" class="absolute inset-0" />
                                     {{ producto.name }}
                                 </router-link>
                             </h3>
@@ -109,7 +110,7 @@
                 </a>
             </div>
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                <div v-for="producto in productos_proximos" :key="producto.id" class="group relative">
+                <div v-for="producto in productos_proximos.slice(0, 4)" :key="producto.id" class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
                         <img :src="producto.imageSrc" :alt="producto.imageAlt"
@@ -166,7 +167,12 @@ const productos_nuevos = ref([]);
 const productos_proximos = ref([]);
 
 // Realizar solicitudes a la API y actualizar los arrays de productos
-axios.get('http://localhost:3000/api/sneakers')
+axios.get('http://localhost:3000/api/sneakers', {
+    params: {
+        columna: "brand",
+        filtro: "YEEZY"
+    }
+})
     .then(response => {
         productos_masvendidos.value = response.data.map(producto => ({
             ...producto,
@@ -177,22 +183,33 @@ axios.get('http://localhost:3000/api/sneakers')
         console.error('Error al obtener los productos más vendidos:', error);
     });
 
-axios.get('http://localhost:3000/api/sneakers')
+
+axios.get('http://localhost:3000/api/sneakers', {
+    params: {
+        columna: "brand",
+        filtro: "YEEZY"
+    }
+})
     .then(response => {
         productos_nuevos.value = response.data.map(producto => ({
             ...producto,
-            href: `/detalle/${producto.id}`
+            href: `/detalle/${producto.id}`,
         }));
     })
     .catch(error => {
         console.error('Error al obtener los productos nuevos:', error);
     });
 
-axios.get('http://localhost:3000/api/sneakers')
+axios.get('http://localhost:3000/api/sneakers', {
+    params: {
+        columna: "brand",
+        filtro: "YEEZY"
+    }
+})
     .then(response => {
         productos_proximos.value = response.data.map(producto => ({
             ...producto,
-            href: `/detalle/${producto.id}`
+            href: `/detalle/${producto.id}`,
         }));
     })
     .catch(error => {
