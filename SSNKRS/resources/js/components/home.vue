@@ -48,14 +48,14 @@
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-base text-gray-700">
-                                <a :href="producto.href">
+                                <router-link @click="scrollToTop" :to="producto.href">
                                     <span aria-hidden="true" class="absolute inset-0" />
                                     {{ producto.name }}
-                                </a>
+                                </router-link>
                             </h3>
-                            <p class="mt-1 text-base text-gray-500">{{ producto.color }}</p>
+                            <p class="mt-1 text-base text-gray-500">{{ producto.brand }}</p>
                         </div>
-                        <p class="text-base font-medium text-gray-900">{{ producto.price }}</p>
+                        <p class="text-base font-medium text-gray-900">{{ producto.price }}€</p>
                     </div>
                 </div>
             </div>
@@ -83,14 +83,14 @@
                     <div class="mt-4 flex justify-between">
                         <div>
                             <h3 class="text-base text-gray-700">
-                                <a :href="producto.href">
-                                    <span aria-hidden="true" class="absolute inset-0" />
+                                <router-link @click="scrollToTop" :to="producto.href">
+                                    <span aria-hidden="true" class="absolute inset-0"/>
                                     {{ producto.name }}
-                                </a>
+                                </router-link>
                             </h3>
-                            <p class="mt-1 text-base text-gray-500">{{ producto.color }}</p>
+                            <p class="mt-1 text-base text-gray-500">{{ producto.brand }}</p>
                         </div>
-                        <p class="text-base font-medium text-gray-900">{{ producto.price }}</p>
+                        <p class="text-base font-medium text-gray-900">{{ producto.price }}€</p>
                     </div>
                 </div>
             </div>
@@ -127,32 +127,28 @@
                 <div class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
-                        <img :src="'img/wastep.jpg'"
-                            alt="Front of men's Basic Tee in black."
+                        <img :src="'img/wastep.jpg'" alt="Front of men's Basic Tee in black."
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                 </div>
                 <div class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
-                        <img :src="'img/marcp.jpg'"
-                            alt="Front of men's Basic Tee in black."
+                        <img :src="'img/marcp.jpg'" alt="Front of men's Basic Tee in black."
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                 </div>
                 <div class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
-                        <img :src="'img/scrapw.jpg'"
-                            alt="Front of men's Basic Tee in black."
+                        <img :src="'img/scrapw.jpg'" alt="Front of men's Basic Tee in black."
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                 </div>
                 <div class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
-                        <img :src="'img/joelc.jpg'"
-                            alt="Front of men's Basic Tee in black."
+                        <img :src="'img/joelc.jpg'" alt="Front of men's Basic Tee in black."
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                 </div>
@@ -161,131 +157,21 @@
     </div>
 </template>
 
-<!--
 <script setup>
-const productos_masvendidos = [
-    {
-        id: 1,
-        name: "Basic Tee",
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: "$35",
-        color: "Black",
-    },
-    {
-        id: 1,
-        name: "Basic Tee",
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: "$35",
-        color: "Black",
-    },
-    {
-        id: 1,
-        name: "Basic Tee",
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: "$35",
-        color: "Black",
-    },
-    {
-        id: 1,
-        name: "Basic Tee",
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: "$35",
-        color: "Black",
-    },
-    // More products...
-];
-const productos_nuevos = [
-    {
-        id: 1,
-        name: "Basic Tee",
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: "$35",
-        color: "Black",
-    },
-    {
-        id: 1,
-        name: "Basic Tee",
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: "$35",
-        color: "Black",
-    },
-    {
-        id: 1,
-        name: "Basic Tee",
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: "$35",
-        color: "Black",
-    },
-    {
-        id: 1,
-        name: "Basic Tee",
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: "$35",
-        color: "Black",
-    },
-];
-const productos_proximos = [
-    {
-        id: 1,
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-    },
-    {
-        id: 1,
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-    },
-    {
-        id: 1,
-        href: "#",
-        imageSrc:
-            "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
-    },
-];
-</script>
--->
-
-<script setup>
+import { ref } from 'vue';
 import axios from 'axios';
 
-const productos_masvendidos = [];
-const productos_nuevos = [];
-const productos_proximos = [];
+const productos_masvendidos = ref([]);
+const productos_nuevos = ref([]);
+const productos_proximos = ref([]);
 
 // Realizar solicitudes a la API y actualizar los arrays de productos
 axios.get('http://localhost:3000/api/sneakers')
     .then(response => {
-        console.log(response.data)
-        productos_masvendidos = response.data;
+        productos_masvendidos.value = response.data.map(producto => ({
+            ...producto,
+            href: `/detalle/${producto.id}`
+        }));
     })
     .catch(error => {
         console.error('Error al obtener los productos más vendidos:', error);
@@ -293,7 +179,10 @@ axios.get('http://localhost:3000/api/sneakers')
 
 axios.get('http://localhost:3000/api/sneakers')
     .then(response => {
-        productos_nuevos = response.data;
+        productos_nuevos.value = response.data.map(producto => ({
+            ...producto,
+            href: `/detalle/${producto.id}`
+        }));
     })
     .catch(error => {
         console.error('Error al obtener los productos nuevos:', error);
@@ -301,9 +190,22 @@ axios.get('http://localhost:3000/api/sneakers')
 
 axios.get('http://localhost:3000/api/sneakers')
     .then(response => {
-        productos_proximos = response.data;
+        productos_proximos.value = response.data.map(producto => ({
+            ...producto,
+            href: `/detalle/${producto.id}`
+        }));
     })
     .catch(error => {
         console.error('Error al obtener los próximos lanzamientos:', error);
     });
+</script>
+
+<script>
+export default {
+    methods: {
+        scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+}   
 </script>

@@ -48,7 +48,7 @@
                         <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                           <img :src="item.imageSrc" :alt="item.imageAlt" class="object-cover object-center" />
                         </div>
-                        <router-link :to="item.to" class="mt-6 block font-medium text-gray-900">
+                        <router-link @click="scrollToTop" :to="item.to" class="mt-6 block font-medium text-gray-900">
                           <span class="absolute inset-0 z-10" aria-hidden="true" />
                           {{ item.name }}
                         </router-link>
@@ -58,7 +58,7 @@
                       <p :id="`${category.id}-${section.id}-heading-mobile`" class="font-medium text-gray-900">{{ section.name }}</p>
                       <ul role="list" :aria-labelledby="`${category.id}-${section.id}-heading-mobile`" class="mt-6 flex flex-col space-y-6">
                         <li v-for="item in section.items" :key="item.name" class="flow-root">
-                          <router-link :to="item.to" class="-m-2 block p-2 text-gray-500">{{ item.name }}</router-link>
+                          <router-link @click="scrollToTop" :to="item.to" class="-m-2 block p-2 text-gray-500">{{ item.name }}</router-link>
                         </li>
                       </ul>
                     </div>
@@ -68,16 +68,16 @@
 
               <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                 <div v-for="page in navigation.pages" :key="page.name" class="flow-root">
-                  <router-link :to="page.to" class="-m-2 block p-2 font-medium text-gray-900">{{ page.name }}</router-link>
+                  <router-link @click="scrollToTop" :to="page.to" class="-m-2 block p-2 font-medium text-gray-900">{{ page.name }}</router-link>
                 </div>
               </div>
 
               <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                 <div class="flow-root">
-                  <router-link to="/login" class="-m-2 block p-2 font-medium text-gray-900">Iniciar sesión</router-link>
+                  <router-link @click="scrollToTop" to="/login" class="-m-2 block p-2 font-medium text-gray-900">Iniciar sesión</router-link>
                 </div>
                 <div class="flow-root">
-                  <router-link to="/registro" class="-m-2 block p-2 font-medium text-gray-900">Registrarse</router-link>
+                  <router-link @click="scrollToTop" to="/registro" class="-m-2 block p-2 font-medium text-gray-900">Registrarse</router-link>
                 </div>
               </div>
 
@@ -102,7 +102,7 @@
 
             <!-- Logo -->
             <div class="ml-4 flex lg:ml-0">
-              <router-link to="/" >
+              <router-link @click="scrollToTop" to="/" >
                 <span class="sr-only">ssnkrs</span>
                 <img class="h-8 w-auto" :src="'img/logotipo.png'" alt="" />
               </router-link>
@@ -129,7 +129,7 @@
                                 <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                   <img :src="item.imageSrc" :alt="item.imageAlt" class="object-cover object-center" />
                                 </div>
-                                <router-link :to="item.to" class="mt-6 block font-medium text-gray-900">
+                                <router-link @click="scrollToTop" :to="item.to" class="mt-6 block font-medium text-gray-900">
                                   <span class="absolute inset-0 z-10" aria-hidden="true" />
                                   {{ item.name }}
                                 </router-link>
@@ -140,7 +140,7 @@
                                 <p :id="`${section.name}-heading`" class="font-medium text-gray-900">{{ section.name }}</p>
                                 <ul role="list" :aria-labelledby="`${section.name}-heading`" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
                                   <li v-for="item in section.items" :key="item.name" class="flex">
-                                    <router-link :to="item.to" class="hover:text-gray-800">{{ item.name }}</router-link>
+                                    <router-link @click="scrollToTop" :to="item.to" class="hover:text-gray-800">{{ item.name }}</router-link>
                                   </li>
                                 </ul>
                               </div>
@@ -152,15 +152,15 @@
                   </transition>
                 </Popover>
 
-                <router-link v-for="page in navigation.pages" :key="page.name" :to="page.to" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">{{ page.name }}</router-link>
+                <router-link @click="scrollToTop" v-for="page in navigation.pages" :key="page.name" :to="page.to" class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">{{ page.name }}</router-link>
               </div>
             </PopoverGroup>
 
             <div class="ml-auto flex items-center">
               <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                <router-link to="/login" active-class="border-b-2 border-blue-500 text-blue-500 ease-out" class="text-sm font-medium text-gray-700 hover:text-gray-800">Iniciar Sessión</router-link>
+                <router-link @click="scrollToTop" to="/login" active-class="border-b-2 border-blue-500 text-blue-500 ease-out" class="text-sm font-medium text-gray-700 hover:text-gray-800">Iniciar Sessión</router-link>
                 <span class="h-6 w-px bg-gray-200" aria-hidden="true" />
-                <router-link to="/registro" class="-m-2 block p-2 font-medium text-gray-900">Registrarse</router-link>
+                <router-link @click="scrollToTop" to="/registro" class="-m-2 block p-2 font-medium text-gray-900">Registrarse</router-link>
               </div>
 
               <!-- Search -->
@@ -173,7 +173,7 @@
 
               <!-- Cart -->
               <div class="ml-4 flow-root lg:ml-6">
-                <router-link to="/carrito" class="group -m-2 flex items-center p-2">
+                <router-link @click="scrollToTop" to="/carrito" class="group -m-2 flex items-center p-2">
                   <ShoppingBagIcon class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" aria-hidden="true" />
                   <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                   <span class="sr-only">items in cart, view bag</span>
@@ -448,4 +448,14 @@ pages: [
 }
 
 const open = ref(false)
+</script>
+
+<script>
+export default {
+    methods: {
+        scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+}   
 </script>
