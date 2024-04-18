@@ -111,7 +111,7 @@
         class="flex m-0 h-6 items-center justify-center bg-blue-500 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
       </p>
 
-      <nav aria-label="Top" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <nav aria-label="Top" class="mx-auto  px-4 sm:px-6 lg:px-8">
         <div class="border-b border-gray-200">
           <div class="flex h-16 items-center">
             <button type="button" class="relative rounded-md bg-white p-2 text-gray-400 lg:hidden" @click="open = true">
@@ -147,7 +147,7 @@
                       <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true" />
 
                       <div class="relative bg-white">
-                        <div class="mx-auto max-w-7xl px-8">
+                        <div class="mx-auto px-8">
                           <div class="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
                             <div class="col-start-2 grid grid-cols-2 gap-x-8">
                               <div v-for="item in category.featured" :key="item.name"
@@ -225,7 +225,7 @@
       <router-view></router-view>
     </div>
     <footer class="bg-white">
-      <div class="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+      <div class="mx-auto space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div class="sm:flex sm:items-center sm:justify-between">
           <div class="text-teal-600">
             <span class="sr-only">ssnkrs</span>
@@ -444,6 +444,7 @@ const navigation = {
   pages: [
     { name: 'Lanzamientos', to: '/lanzamientos' },
     { name: 'Contacto', to: '/contacto' },
+    { name: 'Catálogo', to: '/catalogo' },
   ],
 }
 

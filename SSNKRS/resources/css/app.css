@@ -39,7 +39,6 @@ Principal: bg-blue-500 (rgb(59 130 246) )
 
 /* Estilos para lo mas vendido */
 .titulo {
-    padding: 5%;
     font-size: 20px;
     color: black;
     display: flex;

@@ -110,7 +110,7 @@
                 </a>
             </div>
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                <div v-for="producto in productos_proximos.slice(0, 4)" :key="producto.id" class="group relative">
+                <div v-for="producto in productos_proximos.slice(0, 3)" :key="producto.id" class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
                         <img :src="producto.image" :alt="producto.name"

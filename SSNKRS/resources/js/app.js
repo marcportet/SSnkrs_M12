@@ -24,6 +24,8 @@ import home from './components/home.vue';
 import lanzamientos from './components/lanzamientos.vue';
 import contacto from './components/contacto.vue';
 import carrito from './components/carrito.vue';
+import catalogo from './components/catalogo.vue';
+
 
 import detalle from './components/detalle.vue';
 
@@ -57,6 +59,9 @@ const routes = [
     { 
         path: '/detalle/:id', 
         component: detalle
+    },{ 
+        path: '/catalogo', 
+        component: catalogo
     },
 ]
 
