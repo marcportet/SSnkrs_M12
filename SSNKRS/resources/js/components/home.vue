@@ -42,7 +42,7 @@
                 <div v-for="producto in productos_masvendidos.slice(0, 4)" :key="producto.id" class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                        <img :src="producto.image" :alt="producto.imageAlt"
+                        <img :src="producto.image" :alt="producto.name"
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                     </div>
 
@@ -78,7 +78,7 @@
                 <div v-for="producto in productos_nuevos.slice(0, 4)" :key="producto.id" class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                        <img :src="producto.imageSrc" :alt="producto.imageAlt"
+                        <img :src="producto.image" :alt="producto.name"
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                     </div>
                     <div class="mt-4 flex justify-between">
@@ -113,7 +113,7 @@
                 <div v-for="producto in productos_proximos.slice(0, 4)" :key="producto.id" class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
-                        <img :src="producto.imageSrc" :alt="producto.imageAlt"
+                        <img :src="producto.image" :alt="producto.name"
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                     </div>
                 </div>
@@ -170,7 +170,7 @@ const productos_proximos = ref([]);
 axios.get('http://localhost:3000/api/sneakers', {
     params: {
         columna: "brand",
-        filtro: "YEEZY"
+        filtro: "NEW BALANCE"
     }
 })
     .then(response => {

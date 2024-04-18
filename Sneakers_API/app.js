@@ -69,7 +69,7 @@ app.get("/api/sneakers/:id", (req, res) => {
 
 // Endpoint para crear un sneaker
 app.post("/api/sneakers", async (req, res) => {
-  const { name, sizes, brand, price, stock, image } = req.body;
+  const { name, brand, price, image, sizes, stock } = req.body;
 
   // Subir la imagen a Cloudinary y obtener la URL
   cloudinary.uploader.upload(image, async (error, result) => {
@@ -132,34 +132,37 @@ app.put("/api/sneakers/:id", (req, res) => {
         if (err) {
           return res.status(400).json({ message: err.message });
         } else {
-          // Eliminar las tallas asociadas existentes en la tabla sneaker_sizes
-          const deleteSql = "DELETE FROM sneaker_sizes WHERE sneaker_id = ?";
-          db.query(deleteSql, [sneakerId], (err, result) => {
-            if (err) {
-              console.error("Error al eliminar tallas:", err);
-              return res
-                .status(500)
-                .json({ message: "Error interno del servidor" });
-            } else {
-              // Insertar las nuevas tallas asociadas en la tabla sneaker_sizes
-              const sneakerSizesSql =
-                "INSERT INTO sneaker_sizes (sneaker_id, size_id, stock) VALUES (?, ?, ?)";
-              for (let i = 0; i < sizes.length; i++) {
-                db.query(
-                  sneakerSizesSql,
-                  [sneakerId, sizes[i], stock[i]],
-                  (err, result) => {
-                    if (err) {
-                      console.error("Error al insertar talla:", err);
+          if (sizes != undefined && stock != undefined) {
+            // Eliminar las tallas asociadas existentes en la tabla sneaker_sizes
+            const deleteSql = "DELETE FROM sneaker_sizes WHERE sneaker_id = ?";
+            db.query(deleteSql, [sneakerId], (err, result) => {
+              if (err) {
+                console.error("Error al eliminar tallas:", err);
+                return res
+                  .status(500)
+                  .json({ message: "Error interno del servidor" });
+              } else {
+                // Insertar las nuevas tallas asociadas en la tabla sneaker_sizes
+                const sneakerSizesSql =
+                  "INSERT INTO sneaker_sizes (sneaker_id, size_id, stock) VALUES (?, ?, ?)";
+                for (let i = 0; i < sizes.length; i++) {
+                  db.query(
+                    sneakerSizesSql,
+                    [sneakerId, sizes[i], stock[i]],
+                    (err, result) => {
+                      if (err) {
+                        console.error("Error al insertar talla:", err);
+                      }
                     }
-                  }
-                );
+                  );
+                }
+
               }
-              return res
-                .status(200)
-                .json({ message: "Sneaker y tallas actualizados exitosamente" });
-            }
-          });
+            });
+          }
+          return res
+            .status(200)
+            .json({ message: "Sneaker y tallas actualizados exitosamente" });
         }
       }
     );
@@ -184,15 +187,17 @@ app.put("/api/sneakers_sizes/:id", (req, res) => {
       const sneakerSizesSql =
         "INSERT INTO sneaker_sizes (sneaker_id, size_id, stock) VALUES (?, ?, ?)";
       for (let i = 0; i < sizes.length; i++) {
-        db.query(
-          sneakerSizesSql,
-          [sneakerId, sizes[i], stock[i]],
-          (err, result) => {
-            if (err) {
-              console.error("Error al insertar talla:", err);
+        if (stock[i] != 0) {
+          db.query(
+            sneakerSizesSql,
+            [sneakerId, sizes[i], stock[i]],
+            (err, result) => {
+              if (err) {
+                console.error("Error al insertar talla:", err);
+              }
             }
-          }
-        );
+          );
+        }
       }
       return res
         .status(200)
