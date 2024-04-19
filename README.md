@@ -24,9 +24,11 @@ Aquest es un projecte Laravel on es desenvolupa una Botiga online de sabatilles,
 ## Guía de Instal·lació 🔩
 
 - Instal·lacions laravel:
+
 ```
 composer install
 ```
+
 - Tailwind Forms:
 
 ```
@@ -37,14 +39,17 @@ npm install -D @tailwindcss/forms
 
 - Iniciar Projecte:
   - Laravel
-  ```
-  php artisan serve
-  npm run dev
-  ```
-  - API
-  ```
-  node app.js
-  ```
+
+```
+php artisan serve
+npm run dev
+```
+
+- API
+
+```
+node app.js
+```
 
 ## Webgrafía 📖
 
