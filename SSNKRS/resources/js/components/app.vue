@@ -46,8 +46,8 @@
                     <Tab as="template" v-for="category in navigation.categories" :key="category.name"
                       v-slot="{ selected }">
                       <button
-                        :class="[selected ? 'border-blue-500 text-blue-500' : 'border-transparent text-gray-900', 'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium']">{{
-                        category.name }}</button>
+                        :class="[selected ? 'border-blue-500 text-blue-700' : 'border-transparent text-gray-900', 'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium']">{{
+                          category.name }}</button>
                     </Tab>
                   </TabList>
                 </div>
@@ -90,12 +90,13 @@
 
               <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                 <div class="flow-root">
-                  <router-link @click="scrollToTop" to="/login" class="-m-2 block p-2 font-medium text-gray-900">Iniciar
+                  <router-link @click="scrollToTop" to="/login"
+                    :class="[isActive('/login') ? 'text-blue-700 ease-out' : 'text-gray-900', '-m-2 block p-2 font-medium']">Iniciar
                     sesión</router-link>
                 </div>
                 <div class="flow-root">
                   <router-link @click="scrollToTop" to="/registro"
-                    class="-m-2 block p-2 font-medium text-gray-900">Registrarse</router-link>
+                    :class="[isActive('/registro') ? 'text-blue-700 ease-out' : 'text-gray-900', '-m-2 block p-2 font-medium']">Registrarse</router-link>
                 </div>
               </div>
 
@@ -135,7 +136,7 @@
                   :placement="'top'">
                   <div class="relative flex">
                     <PopoverButton
-                      :class="[open ? 'border-blue-500 text-blue-500' : 'border-transparent text-gray-700 hover:text-gray-800', 'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out']">
+                      :class="[open ? 'border-blue-500 text-blue-700' : 'border-transparent text-gray-900', 'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out']">
                       {{ category.name }}</PopoverButton>
                   </div>
 
@@ -184,7 +185,7 @@
                 </Popover>
 
                 <router-link @click="scrollToTop" v-for="page in navigation.pages" :key="page.name" :to="page.to"
-                  class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">{{ page.name
+                  class="flex items-center text-sm font-medium text-gray-900">{{ page.name
                   }}</router-link>
               </div>
             </PopoverGroup>
@@ -192,11 +193,11 @@
             <div class="ml-auto flex items-center">
               <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                 <router-link @click="scrollToTop" to="/login"
-                  active-class="border-b-2 border-blue-500 text-blue-500 ease-out"
-                  class="text-sm font-medium text-gray-700 hover:text-gray-800">Iniciar Sessión</router-link>
+                  :class="[isActive('/login') ? 'text-blue-700 ease-out' : 'text-gray-900', 'text-sm font-medium']">Iniciar
+                  Sessión</router-link>
                 <span class="h-6 w-px bg-gray-200" aria-hidden="true" />
                 <router-link @click="scrollToTop" to="/registro"
-                  class="-m-2 block p-2 font-medium text-gray-900">Registrarse</router-link>
+                :class="[isActive('/registro') ? 'text-blue-700 ease-out' : 'text-gray-900', 'text-sm font-medium']">Registrarse</router-link>
               </div>
 
               <!-- Search -->
@@ -423,7 +424,7 @@ const navigation = {
           name: 'Nuevas Sneakers',
           to: '/',
           imageSrc: 'img/sb-dunk-april.png',
-          imageAlt:'sb-dunk-april.png',
+          imageAlt: 'sb-dunk-april.png',
         },
       ],
       sections: [
@@ -456,6 +457,9 @@ export default {
   methods: {
     scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    isActive(route) {
+      return this.$route.path === route;
     }
   }
 }   

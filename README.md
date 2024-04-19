@@ -29,6 +29,12 @@ Aquest es un projecte Laravel on es desenvolupa una Botiga online de sabatilles,
 composer install
 ```
 
+- Tailwind Elements:
+
+```
+npm install tw-elements
+```
+
 - Tailwind Forms:
 
 ```
