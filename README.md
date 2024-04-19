@@ -15,7 +15,18 @@ Aquest es un projecte Laravel on es desenvolupa una Botiga online de sabatilles,
 * Boostrap
 * Javascript
 ## Guía de Instal·lació 🔩
-    -Tailwind Forms:
-        npm install -D @tailwindcss/forms
+* Tailwind Forms:
+    - npm install -D @tailwindcss/forms
+## Guía de Funcionament 🔩
+* Iniciar Projecte:
+    - Laravel
+    ```
+    php artisan serve
+    npm run dev
+    ```
+    - API
+    ```
+    node app.js
+    ```
 ## Webgrafía 📖
 ## Gratituds 🎁
