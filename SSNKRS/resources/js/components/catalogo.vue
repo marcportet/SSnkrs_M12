@@ -70,7 +70,7 @@
 
       <main class="mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-          <h1 class="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+          <h1 class="text-4xl font-bold tracking-tight text-gray-900"></h1>
 
           <div class="flex items-center">
             <Menu as="div" class="relative inline-block text-left">
@@ -141,11 +141,11 @@
             <div class="lg:col-span-3">
             <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <div v-for="producto in productos_nuevos" :key="producto.id" class="group relative">
+                <div v-for="producto in allproductos" :key="producto.id" class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                         <img :src="producto.image" :alt="producto.name"
-                            class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+                            class="w-full object-cover object-center lg:w-full" style="margin-top:20%; height:60%;" />
                     </div>
                     <div class="mt-4 flex justify-between">
                         <div>
@@ -190,7 +190,7 @@ import {
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/20/solid'
 
-const productos_nuevos = ref([]);
+const allproductos = ref([]);
 
 const sortOptions = [
   { name: 'Precio: Bajo a Alto', href: '#', current: false },
@@ -245,7 +245,7 @@ const filters = [
 // Realizar solicitudes a la API y actualizar los arrays de productos
 axios.get('http://localhost:3000/api/sneakers')
     .then(response => {
-        productos_nuevos.value = response.data.map(producto => ({
+        allproductos.value = response.data.map(producto => ({
             ...producto,
             href: `/detalle/${producto.id}`,
         }));
