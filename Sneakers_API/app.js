@@ -117,7 +117,7 @@ app.put("/api/sneakers/:id", (req, res) => {
   // Subir la nueva imagen a Cloudinary y obtener la URL
   cloudinary.uploader.upload(image, async (error, result) => {
     if (error) {
-      return res.status(500).json({ message: "Error al subir la imagen" });
+      return res.status(500).json({ message: "Error al subir la imagen" + error });
     }
 
     const imageUrl = result.secure_url; // URL de la nueva imagen en Cloudinary
@@ -201,7 +201,7 @@ app.put("/api/sneakers_sizes/:id", (req, res) => {
       }
       return res
         .status(200)
-        .json({ message: "Sneaker y tallas actualizados exitosamente" });
+        .json({ message: "Tallas de la sneaker actualizadas exitosamente" });
     }
   });
 });
