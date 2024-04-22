@@ -38,7 +38,7 @@
                   <h3 class="sr-only">Categories</h3>
                   <ul role="list" class="px-2 py-3 font-medium text-gray-900">
                     <li v-for="category in subCategories" :key="category.name">
-                      <a :href="category.href" class="block px-2 py-3">{{ category.name }}</a>
+                      <a :to="category.href" class="block px-2 py-3">{{ category.name }}</a>
                     </li>
                   </ul>
 
@@ -97,11 +97,6 @@
               </transition>
 
             </Menu>
-
-            <button type="button" class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
-              <span class="sr-only">View grid</span>
-              <Squares2X2Icon class="h-5 w-5" aria-hidden="true" />
-            </button>
             <button type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden" @click="mobileFiltersOpen = true">
               <span class="sr-only">Filters</span>
               <FunnelIcon class="h-5 w-5" aria-hidden="true" />
@@ -142,6 +137,8 @@
                 </DisclosurePanel>
               </Disclosure>
             </form>
+
+            
 
             <!-- Product grid -->
             <div class="lg:col-span-3">
@@ -204,7 +201,7 @@ const sortOptions = ref([
 ]);
 
 const subCategories = [
-  { name: 'Limpiar', href: '#' },
+  { name: 'Limpiar', href: '/catalogo'},
 ]
 const filters = [
   {
@@ -214,7 +211,7 @@ const filters = [
       { value: 'adidas', label: 'Adidas', checked: false },
       { value: 'airjordan', label: 'Air Jordan', checked: false },
       { value: 'newbalance', label: 'New Balance', checked: false },
-      { value: 'nike', label: 'Nike', checked: true },
+      { value: 'nike', label: 'Nike', checked: false },
       { value: 'yeezy', label: 'Yeezy', checked: false },
     ],
   },
@@ -224,7 +221,7 @@ const filters = [
     options: [
       { value: 'high', label: 'High', checked: false },
       { value: 'mid', label: 'Mid', checked: false },
-      { value: 'low', label: 'Low', checked: true },
+      { value: 'low', label: 'Low', checked: false },
     ],
   },
   {
@@ -236,8 +233,8 @@ const filters = [
       { value: '37', label: '37', checked: false },
       { value: '38', label: '38', checked: false },
       { value: '39', label: '39', checked: false },
-      { value: '40', label: '40', checked: true },
-      { value: '41', label: '41', checked: true },
+      { value: '40', label: '40', checked: false },
+      { value: '41', label: '41', checked: false },
       { value: '42', label: '42', checked: false },
       { value: '43', label: '43', checked: false },
       { value: '44', label: '44', checked: false },
@@ -280,6 +277,33 @@ const sortByPrice = () => {
     }
   }
 };
+
+
+const selectedBrand = ref('all');
+
+const filterProductsByBrand = (brand) => {
+  selectedBrand.value = brand; // Actualiza el valor seleccionado
+  filterByBrand(brand); // Llama al método de filtrado
+};
+
+const filterByBrand = (brand) => {
+  if (brand === 'all') {
+    // Si se selecciona "todos", mostrar todos los productos
+    allproductos.value = response.data.map(producto => ({
+      ...producto,
+      href: `/detalle/${producto.id}`,
+    }));
+  } else {
+    // Filtrar los productos por la marca seleccionada
+    allproductos.value = response.data.filter(producto => producto.brand === brand)
+      .map(producto => ({
+        ...producto,
+        href: `/detalle/${producto.id}`,
+      }));
+  }
+};
+
+
 </script>
 
 
