@@ -81,15 +81,21 @@
                 </MenuButton>
               </div>
 
-              <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                <MenuItems class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div class="py-1">
-                    <MenuItem v-for="option in sortOptions" :key="option.name" v-slot="{ active }">
-                      <a :href="option.href" :class="[option.current ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">{{ option.name }}</a>
-                    </MenuItem>
-                  </div>
-                </MenuItems>
+               <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+                <div>
+                  <MenuItems class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div class="py-1">
+                      <MenuItem v-for="(option, index) in sortOptions" :key="option.name" v-slot="{ active }">
+                        <a :href="option.href" @click.prevent="updateSortOption(index); sortByPrice()"
+                          :class="[option.current ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                          {{ option.name }}
+                        </a>
+                      </MenuItem>
+                    </div>
+                  </MenuItems>
+                </div>
               </transition>
+
             </Menu>
 
             <button type="button" class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
@@ -192,12 +198,11 @@ import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from
 
 const allproductos = ref([]);
 
-const sortOptions = [
-  { name: 'Precio: Bajo a Alto', href: '#', current: false },
-  { name: 'Price: Alto a Bajo', href: '#', current: true },
-  { name: 'Nombre: A - Z', href: '#', current: false },
-  { name: 'Nombre: Z - A', href: '#', current: false },
-]
+const sortOptions = ref([
+  { name: 'Precio: Bajo a Alto', href: '#', current: true },
+  { name: 'Precio: Alto a Bajo', href: '#', current: false },
+]);
+
 const subCategories = [
   { name: 'Limpiar', href: '#' },
 ]
@@ -255,6 +260,26 @@ axios.get('http://localhost:3000/api/sneakers')
     });
 
 const mobileFiltersOpen = ref(false)
+
+
+// Metode per canviar el estat de current de les opcions de sort
+const updateSortOption = (index) => {
+  sortOptions.value.forEach((option, i) => {
+    option.current = i === index;
+  });
+};
+
+//Metode per ordenar els productes segons la opcio selecionada
+const sortByPrice = () => {
+  const selectedOption = sortOptions.value.find(option => option.current);
+  if (selectedOption) {
+    if (selectedOption.name === 'Precio: Bajo a Alto') {
+      allproductos.value.sort((a, b) => a.price - b.price);
+    } else if (selectedOption.name === 'Precio: Alto a Bajo') {
+      allproductos.value.sort((a, b) => b.price - a.price);
+    }
+  }
+};
 </script>
 
 
