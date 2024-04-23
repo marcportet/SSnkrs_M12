@@ -49,7 +49,7 @@ app.get("/api/sneakers", (req, res) => {
 app.get("/api/sneakers/:id", (req, res) => {
   const sneakerId = req.params.id;
   const sql =
-    "SELECT s.*, SUM(ss.stock) AS stock, GROUP_CONCAT(sz.size) AS sizes FROM sneakers s INNER JOIN sneaker_sizes ss ON s.id = ss.sneaker_id INNER JOIN sizes sz ON ss.size_id = sz.id WHERE s.id = ? GROUP BY s.id";
+    "SELECT s.*, GROUP_CONCAT(ss.stock) AS stock, GROUP_CONCAT(sz.size) AS sizes FROM sneakers s INNER JOIN sneaker_sizes ss ON s.id = ss.sneaker_id INNER JOIN sizes sz ON ss.size_id = sz.id WHERE s.id = ? GROUP BY s.id";
   db.query(sql, sneakerId, (err, result) => {
     if (err) {
       res.status(500).json({ message: err.message });

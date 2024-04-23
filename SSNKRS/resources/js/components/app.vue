@@ -197,7 +197,7 @@
                   Sessión</router-link>
                 <span class="h-6 w-px bg-gray-200" aria-hidden="true" />
                 <router-link @click="scrollToTop" to="/registro"
-                :class="[isActive('/registro') ? 'text-blue-700 ease-out' : 'text-gray-900', 'text-sm font-medium']">Registrarse</router-link>
+                  :class="[isActive('/registro') ? 'text-blue-700 ease-out' : 'text-gray-900', 'text-sm font-medium']">Registrarse</router-link>
               </div>
 
               <!-- Search -->
@@ -235,7 +235,8 @@
 
           <ul class="mt-8 flex justify-start gap-6 sm:mt-0 sm:justify-end">
             <li>
-              <a href="https://www.instagram.com/ssnkrs_es/?hl=es" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:opacity-75">
+              <a href="https://www.instagram.com/ssnkrs_es/?hl=es" rel="noreferrer" target="_blank"
+                class="text-gray-700 transition hover:opacity-75">
                 <span class="sr-only">Instagram</span>
 
                 <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -247,7 +248,8 @@
             </li>
 
             <li>
-              <a href="https://twitter.com/ssnkrs_es" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:opacity-75">
+              <a href="https://twitter.com/ssnkrs_es" rel="noreferrer" target="_blank"
+                class="text-gray-700 transition hover:opacity-75">
                 <span class="sr-only">Twitter</span>
 
                 <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -258,7 +260,8 @@
             </li>
 
             <li>
-              <a href="https://github.com/marcportet/SSnkrs_M12" rel="noreferrer" target="_blank" class="text-gray-700 transition hover:opacity-75">
+              <a href="https://github.com/marcportet/SSnkrs_M12" rel="noreferrer" target="_blank"
+                class="text-gray-700 transition hover:opacity-75">
                 <span class="sr-only">GitHub</span>
 
                 <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -419,9 +422,8 @@ const navigation = {
     },
   ],
   pages: [
-    { name: 'Lanzamientos', to: '/lanzamientos' },
-    { name: 'Contacto', to: '/contacto' },
     { name: 'Catálogo', to: '/catalogo' },
+    { name: 'Contacto', to: '/contacto' },
   ],
 }
 
