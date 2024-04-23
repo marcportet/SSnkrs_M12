@@ -29,7 +29,7 @@
 
         <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="titulo">
-                <span>Lo Mas Vendido</span>
+                <span>Lo Mejor de NIKE</span>
                 <a class="vermas" href="#">
                     ver mas
                     <svg class="h-8" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
@@ -41,7 +41,7 @@
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 <div v-for="producto in productos_masvendidos.slice(0, 4)" :key="producto.id" class="group relative">
                     <div
-                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
                         <img :src="producto.image" :alt="producto.name"
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                     </div>
@@ -65,7 +65,7 @@
 
         <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="titulo">
-                <span>Nuevas Sneakers</span>
+                <span>Lo Mejor de YEEZY</span>
                 <a class="vermas" href="#">
                     ver mas
                     <svg class="h-8" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
@@ -77,7 +77,7 @@
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 <div v-for="producto in productos_nuevos.slice(0, 4)" :key="producto.id" class="group relative">
                     <div
-                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
                         <img :src="producto.image" :alt="producto.name"
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                     </div>
@@ -101,20 +101,27 @@
         <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="titulo">
                 <span>Próximos Lazamientos</span>
-                <a class="vermas" href="#">
-                    ver mas
-                    <svg class="h-8" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
-                    </svg>
-                </a>
             </div>
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                <div v-for="producto in productos_proximos.slice(0, 3)" :key="producto.id" class="group relative">
+                <div class="group relative">
                     <div
-                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
-                        <img :src="producto.image" :alt="producto.name"
-                            class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
+                        <img :src="'img/img-lanzamiento-1.png'" alt="Front of men's Basic Tee in black."
+                            class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    </div>
+                </div>
+                <div class="group relative">
+                    <div
+                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
+                        <img :src="'img/img-lanzamiento-2.png'" alt="Front of men's Basic Tee in black."
+                            class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    </div>
+                </div>
+                <div class="group relative">
+                    <div
+                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
+                        <img :src="'img/img-lanzamiento-3.png'" alt="Front of men's Basic Tee in black."
+                            class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                 </div>
             </div>
@@ -127,28 +134,28 @@
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                 <div class="group relative">
                     <div
-                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
+                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
                         <img :src="'img/wastep.jpg'" alt="Front of men's Basic Tee in black."
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                 </div>
                 <div class="group relative">
                     <div
-                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
+                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
                         <img :src="'img/marcp.jpg'" alt="Front of men's Basic Tee in black."
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                 </div>
                 <div class="group relative">
                     <div
-                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
+                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
                         <img :src="'img/scrapw.jpg'" alt="Front of men's Basic Tee in black."
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                 </div>
                 <div class="group relative">
                     <div
-                        class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
+                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-85">
                         <img :src="'img/joelc.jpg'" alt="Front of men's Basic Tee in black."
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
@@ -170,7 +177,7 @@ const productos_proximos = ref([]);
 axios.get('http://localhost:3000/api/sneakers', {
     params: {
         columna: "brand",
-        filtro: "NEW BALANCE"
+        filtro: "NIKE"
     }
 })
     .then(response => {
