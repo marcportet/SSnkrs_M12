@@ -38,7 +38,7 @@
                   <h3 class="sr-only">Categories</h3>
                   <ul role="list" class="px-2 py-3 font-medium text-gray-900">
                     <li v-for="category in subCategories" :key="category.name">
-                      <a :to="category.href" class="block px-2 py-3">{{ category.name }}</a>
+                      <a :href="category.href" class="block px-2 py-3">{{ category.name }}</a>
                     </li>
                   </ul>
 
@@ -277,32 +277,6 @@ const sortByPrice = () => {
     }
   }
 };
-
-
-const selectedBrand = ref('all');
-
-const filterProductsByBrand = (brand) => {
-  selectedBrand.value = brand; // Actualiza el valor seleccionado
-  filterByBrand(brand); // Llama al método de filtrado
-};
-
-const filterByBrand = (brand) => {
-  if (brand === 'all') {
-    // Si se selecciona "todos", mostrar todos los productos
-    allproductos.value = response.data.map(producto => ({
-      ...producto,
-      href: `/detalle/${producto.id}`,
-    }));
-  } else {
-    // Filtrar los productos por la marca seleccionada
-    allproductos.value = response.data.filter(producto => producto.brand === brand)
-      .map(producto => ({
-        ...producto,
-        href: `/detalle/${producto.id}`,
-      }));
-  }
-};
-
 
 </script>
 
