@@ -394,13 +394,13 @@ const navigation = {
       name: 'Sneakers',
       featured: [
         {
-          name: 'Mas Vendidas',
+          name: '',
           to: '/',
           imageSrc: 'img/travis-jordan-low.png',
           imageAlt: 'travis-jordan-low.png',
         },
         {
-          name: 'Nuevas Sneakers',
+          name: '',
           to: '/',
           imageSrc: 'img/sb-dunk-april.png',
           imageAlt: 'sb-dunk-april.png',

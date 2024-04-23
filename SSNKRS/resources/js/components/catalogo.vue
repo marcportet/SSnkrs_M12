@@ -38,7 +38,7 @@
                   <h3 class="sr-only">Categories</h3>
                   <ul role="list" class="px-2 py-3 font-medium text-gray-900">
                     <li v-for="category in subCategories" :key="category.name">
-                      <a :href="category.href" class="block px-2 py-3">{{ category.name }}</a>
+                      <a :to="category.href" class="block px-2 py-3">{{ category.name }}</a>
                     </li>
                   </ul>
 
@@ -70,7 +70,7 @@
 
       <main class="mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-          <h1 class="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+          <h1 class="text-4xl font-bold tracking-tight text-gray-900"></h1>
 
           <div class="flex items-center">
             <Menu as="div" class="relative inline-block text-left">
@@ -81,21 +81,22 @@
                 </MenuButton>
               </div>
 
-              <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-                <MenuItems class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div class="py-1">
-                    <MenuItem v-for="option in sortOptions" :key="option.name" v-slot="{ active }">
-                      <a :href="option.href" :class="[option.current ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">{{ option.name }}</a>
-                    </MenuItem>
-                  </div>
-                </MenuItems>
+               <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+                <div>
+                  <MenuItems class="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <div class="py-1">
+                      <MenuItem v-for="(option, index) in sortOptions" :key="option.name" v-slot="{ active }">
+                        <a :href="option.href" @click.prevent="updateSortOption(index); sortByPrice()"
+                          :class="[option.current ? 'font-medium text-gray-900' : 'text-gray-500', active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm']">
+                          {{ option.name }}
+                        </a>
+                      </MenuItem>
+                    </div>
+                  </MenuItems>
+                </div>
               </transition>
-            </Menu>
 
-            <button type="button" class="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
-              <span class="sr-only">View grid</span>
-              <Squares2X2Icon class="h-5 w-5" aria-hidden="true" />
-            </button>
+            </Menu>
             <button type="button" class="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden" @click="mobileFiltersOpen = true">
               <span class="sr-only">Filters</span>
               <FunnelIcon class="h-5 w-5" aria-hidden="true" />
@@ -137,15 +138,17 @@
               </Disclosure>
             </form>
 
+            
+
             <!-- Product grid -->
             <div class="lg:col-span-3">
             <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <div v-for="producto in productos_nuevos" :key="producto.id" class="group relative">
+                <div v-for="producto in allproductos" :key="producto.id" class="group relative">
                     <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                         <img :src="producto.image" :alt="producto.name"
-                            class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+                            class="w-full object-cover object-center lg:w-full" style="margin-top:20%; height:60%;" />
                     </div>
                     <div class="mt-4 flex justify-between">
                         <div>
@@ -190,16 +193,15 @@ import {
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/20/solid'
 
-const productos_nuevos = ref([]);
+const allproductos = ref([]);
 
-const sortOptions = [
-  { name: 'Precio: Bajo a Alto', href: '#', current: false },
-  { name: 'Price: Alto a Bajo', href: '#', current: true },
-  { name: 'Nombre: A - Z', href: '#', current: false },
-  { name: 'Nombre: Z - A', href: '#', current: false },
-]
+const sortOptions = ref([
+  { name: 'Precio: Bajo a Alto', href: '#', current: true },
+  { name: 'Precio: Alto a Bajo', href: '#', current: false },
+]);
+
 const subCategories = [
-  { name: 'Limpiar', href: '#' },
+  { name: 'Limpiar', href: '/catalogo'},
 ]
 const filters = [
   {
@@ -209,7 +211,7 @@ const filters = [
       { value: 'adidas', label: 'Adidas', checked: false },
       { value: 'airjordan', label: 'Air Jordan', checked: false },
       { value: 'newbalance', label: 'New Balance', checked: false },
-      { value: 'nike', label: 'Nike', checked: true },
+      { value: 'nike', label: 'Nike', checked: false },
       { value: 'yeezy', label: 'Yeezy', checked: false },
     ],
   },
@@ -219,7 +221,7 @@ const filters = [
     options: [
       { value: 'high', label: 'High', checked: false },
       { value: 'mid', label: 'Mid', checked: false },
-      { value: 'low', label: 'Low', checked: true },
+      { value: 'low', label: 'Low', checked: false },
     ],
   },
   {
@@ -231,8 +233,8 @@ const filters = [
       { value: '37', label: '37', checked: false },
       { value: '38', label: '38', checked: false },
       { value: '39', label: '39', checked: false },
-      { value: '40', label: '40', checked: true },
-      { value: '41', label: '41', checked: true },
+      { value: '40', label: '40', checked: false },
+      { value: '41', label: '41', checked: false },
       { value: '42', label: '42', checked: false },
       { value: '43', label: '43', checked: false },
       { value: '44', label: '44', checked: false },
@@ -245,7 +247,7 @@ const filters = [
 // Realizar solicitudes a la API y actualizar los arrays de productos
 axios.get('http://localhost:3000/api/sneakers')
     .then(response => {
-        productos_nuevos.value = response.data.map(producto => ({
+        allproductos.value = response.data.map(producto => ({
             ...producto,
             href: `/detalle/${producto.id}`,
         }));
@@ -255,6 +257,53 @@ axios.get('http://localhost:3000/api/sneakers')
     });
 
 const mobileFiltersOpen = ref(false)
+
+
+// Metode per canviar el estat de current de les opcions de sort
+const updateSortOption = (index) => {
+  sortOptions.value.forEach((option, i) => {
+    option.current = i === index;
+  });
+};
+
+//Metode per ordenar els productes segons la opcio selecionada
+const sortByPrice = () => {
+  const selectedOption = sortOptions.value.find(option => option.current);
+  if (selectedOption) {
+    if (selectedOption.name === 'Precio: Bajo a Alto') {
+      allproductos.value.sort((a, b) => a.price - b.price);
+    } else if (selectedOption.name === 'Precio: Alto a Bajo') {
+      allproductos.value.sort((a, b) => b.price - a.price);
+    }
+  }
+};
+
+
+const selectedBrand = ref('all');
+
+const filterProductsByBrand = (brand) => {
+  selectedBrand.value = brand; // Actualiza el valor seleccionado
+  filterByBrand(brand); // Llama al método de filtrado
+};
+
+const filterByBrand = (brand) => {
+  if (brand === 'all') {
+    // Si se selecciona "todos", mostrar todos los productos
+    allproductos.value = response.data.map(producto => ({
+      ...producto,
+      href: `/detalle/${producto.id}`,
+    }));
+  } else {
+    // Filtrar los productos por la marca seleccionada
+    allproductos.value = response.data.filter(producto => producto.brand === brand)
+      .map(producto => ({
+        ...producto,
+        href: `/detalle/${producto.id}`,
+      }));
+  }
+};
+
+
 </script>
 
 
