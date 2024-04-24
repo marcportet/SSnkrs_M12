@@ -22,6 +22,12 @@
           leave-to="opacity-0">
           <div class="fixed inset-0 bg-black bg-opacity-25" />
         </TransitionChild>
+        <div class="ml-4 flex lg:ml-0">
+          <router-link @click="scrollToTop" to="/">
+            <span class="sr-only">ssnkrs</span>
+            <img class="h-8 w-auto" :src="'img/logotipo.png'" alt="" />
+          </router-link>
+        </div>
 
         <div class="fixed inset-0 z-40 flex">
           <TransitionChild as="template" enter="transition ease-in-out duration-300 transform"
