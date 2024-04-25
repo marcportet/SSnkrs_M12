@@ -75,7 +75,7 @@
                       </div>
                     </DisclosurePanel>
                   </Disclosure>
-                  <button @click.prevent="filtros_mobil()" @click="mobileFiltersOpen = false"
+                  <button @click.prevent="filtros('form_mobil')" @click="mobileFiltersOpen = false"
                     class="ml-3 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                     Aplicar Filtros</button>
                 </form>
@@ -166,7 +166,7 @@
                 </DisclosurePanel>
               </Disclosure>
               <div class="w-full mt-3 flex items-center justify-center">
-                <button @click.prevent="filtros_pc()"
+                <button @click.prevent="filtros('form_pc')"
                   class="flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
                   Aplicar Filtros</button>
               </div>
@@ -226,6 +226,9 @@ import {
 } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/20/solid'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const allproductos = ref([]);
 const allproductos_original = ref([]);
@@ -270,8 +273,17 @@ const filters = [
     ],
   },
 ]
+
+const brand_filtro = route.params.brand
+
 // Realizar solicitudes a la API y actualizar los arrays de productos
-axios.get('http://localhost:3000/api/sneakers')
+axios.get('http://localhost:3000/api/sneakers', {
+  params: {
+    type: "like",
+    columna: "brand",
+    filtro: brand_filtro,
+  }
+})
   .then(response => {
     allproductos.value = response.data.map(producto => ({
       ...producto,
@@ -308,49 +320,8 @@ const sortByPrice = () => {
   }
 };
 
-function filtros_mobil() {
-  var form = document.getElementById("form_mobil");
-  var formData = new FormData(form);
-  var data = {};
-
-  formData.forEach(function (value, key) {
-    if (data.hasOwnProperty(key)) {
-      if (!Array.isArray(data[key])) {
-        data[key] = [data[key]];
-      }
-      data[key].push(value);
-    } else {
-      data[key] = value;
-    }
-  });
-
-  var originalProducts = allproductos_original.value.slice();
-
-  if (Object.keys(data).length > 0) {
-    var filteredProducts = originalProducts.filter(function (product) {
-      return Object.keys(data).every(function (key) {
-        switch (key) {
-          case "brand[]":
-            return data[key].includes(product.brand);
-          case "size[]":
-            var selectedSizes = Array.isArray(data[key]) ? data[key] : [data[key]];
-            return selectedSizes.every(function (size) {
-              return product.sizes.includes(size);
-            });
-          default:
-            return true;
-        }
-      });
-    });
-
-    allproductos.value = filteredProducts;
-  } else {
-    allproductos.value = originalProducts;
-  }
-}
-
-function filtros_pc() {
-  var form = document.getElementById("form_pc");
+function filtros(idform) {
+  var form = document.getElementById(idform);
   var formData = new FormData(form);
   var data = {};
 

@@ -36,31 +36,36 @@ const routes = [
         path: '/',
         component: home
     },
-    { 
-        path: '/login', 
-        component: login 
+    {
+        path: '/login',
+        component: login
     },
-    { 
-        path: '/registro', 
-        component: registro 
+    {
+        path: '/registro',
+        component: registro
     },
-    { 
-        path: '/lanzamientos', 
-        component: lanzamientos 
+    {
+        path: '/lanzamientos',
+        component: lanzamientos
     },
-    { 
-        path: '/contacto', 
+    {
+        path: '/contacto',
         component: contacto
     },
-    { 
-        path: '/carrito', 
+    {
+        path: '/carrito',
         component: carrito
     },
-    { 
-        path: '/detalle/:id', 
+    {
+        path: '/detalle/:id',
         component: detalle
-    },{ 
-        path: '/catalogo', 
+    }, 
+    {
+        path: '/catalogo',
+        component: catalogo
+    },
+    {
+        path: '/catalogo/:brand',
         component: catalogo
     },
 ]

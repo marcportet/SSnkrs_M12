@@ -25,15 +25,34 @@ app.get("/api/sneakers", (req, res) => {
   let sql =
     "SELECT s.*, SUM(ss.stock) AS stock, GROUP_CONCAT(sz.size) AS sizes FROM sneakers s INNER JOIN sneaker_sizes ss ON s.id = ss.sneaker_id INNER JOIN sizes sz ON ss.size_id = sz.id";
 
+  const type = req.query.type;
+  const num = req.query.num;
   const columna = req.query.columna;
   const filtro = req.query.filtro;
 
-  // Si hay un filtro, agregar la cláusula WHERE a la consulta SQL
-  if (filtro && columna) {
-    sql += " WHERE s." + columna + " LIKE '" + filtro + "'";
-  }
+  if (type) {
+    switch (type) {
+      case "like":
+        if(filtro){
+          sql += " WHERE s." + columna + " LIKE '" + filtro + "'";
+        }
+        break;
+      case "num":
 
-  sql += " GROUP BY s.id ORDER BY s.brand;";
+        break;
+      case "limit":
+        sql += " GROUP BY s.id ORDER BY s.brand";
+        sql += " LIMIT " + num;
+        break;
+
+      default:
+        break;
+    }
+  }
+  if (type != "limit" || !type) {
+    sql += " GROUP BY s.id ORDER BY s.brand"; 
+  }
+  sql += ";";
 
   db.query(sql, (err, result) => {
     if (err) {
