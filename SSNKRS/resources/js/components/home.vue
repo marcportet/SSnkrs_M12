@@ -29,8 +29,8 @@
 
         <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="titulo">
-                <span>Lo Mejor de NIKE</span>
-                <a class="vermas" href="#">
+                <span>Escogidas por expertos</span>
+                <a class="vermas" href="/catalogo">
                     ver mas
                     <svg class="h-8" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -39,9 +39,8 @@
                 </a>
             </div>
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                <div v-for="producto in productos_masvendidos.slice(0, 4)" :key="producto.id" class="group relative">
-                    <div
-                        class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
+                <div v-for="producto in productos" :key="producto.id" class="group relative">
+                    <div class="w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
                         <img :src="producto.image" :alt="producto.name"
                             class="h-full w-full object-cover object-center lg:h-full lg:w-full" />
                     </div>
@@ -62,11 +61,11 @@
             </div>
         </div>
 
-
+        <!-- 
         <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="titulo">
                 <span>Lo Mejor de YEEZY</span>
-                <a class="vermas" href="#">
+                <a class="vermas" href="/catalogo">
                     ver mas
                     <svg class="h-8" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -96,7 +95,7 @@
                 </div>
             </div>
         </div>
-
+        -->
 
         <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
             <div class="titulo">
@@ -169,58 +168,25 @@
 import { ref } from 'vue';
 import axios from 'axios';
 
-const productos_masvendidos = ref([]);
+const productos = ref([]);
 const productos_nuevos = ref([]);
 const productos_proximos = ref([]);
 
 // Realizar solicitudes a la API y actualizar los arrays de productos
 axios.get('http://localhost:3000/api/sneakers', {
     params: {
-        columna: "brand",
-        filtro: "NIKE"
+        type: "limit",
+        num: "8",
     }
 })
     .then(response => {
-        productos_masvendidos.value = response.data.map(producto => ({
+        productos.value = response.data.map(producto => ({
             ...producto,
             href: `/detalle/${producto.id}`
         }));
     })
     .catch(error => {
         console.error('Error al obtener los productos más vendidos:', error);
-    });
-
-
-axios.get('http://localhost:3000/api/sneakers', {
-    params: {
-        columna: "brand",
-        filtro: "YEEZY"
-    }
-})
-    .then(response => {
-        productos_nuevos.value = response.data.map(producto => ({
-            ...producto,
-            href: `/detalle/${producto.id}`,
-        }));
-    })
-    .catch(error => {
-        console.error('Error al obtener los productos nuevos:', error);
-    });
-
-axios.get('http://localhost:3000/api/sneakers', {
-    params: {
-        columna: "brand",
-        filtro: "YEEZY"
-    }
-})
-    .then(response => {
-        productos_proximos.value = response.data.map(producto => ({
-            ...producto,
-            href: `/detalle/${producto.id}`,
-        }));
-    })
-    .catch(error => {
-        console.error('Error al obtener los próximos lanzamientos:', error);
     });
 </script>
 
