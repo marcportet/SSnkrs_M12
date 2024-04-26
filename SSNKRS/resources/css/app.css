@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Estilos para lo mas vendido */
+.titulo {
+    font-size: 20px;
+    color: black;
+    display: flex;
+}
+
+.vermas {
+    margin-left: auto;
+    color:black;
+    display: flex;
+}
+
+.vermas:hover{
+    color:#3B86F6;
+}
+.carousel-inner {
+    height: 91vh;
+}
