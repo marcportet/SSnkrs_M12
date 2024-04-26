@@ -66,8 +66,7 @@
                           class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                           <img :src="item.imageSrc" :alt="item.imageAlt" class="object-cover object-center" />
                         </div>
-                        <a @click="scrollToTop" :href="item.href"
-                          class="mt-6 block font-medium text-gray-900">
+                        <a @click="scrollToTop" :href="item.href" class="mt-6 block font-medium text-gray-900">
                           <span class="absolute inset-0 z-10" aria-hidden="true" />
                           {{ item.name }}
                         </a>
@@ -90,9 +89,8 @@
 
               <div class="space-y-6 border-t border-gray-200 px-4 py-6">
                 <div v-for="page in navigation.pages" :key="page.name" class="flow-root">
-                  <a @click="scrollToTop" :href="page.href"
-                    class="-m-2 block p-2 font-medium text-gray-900">{{
-                      page.name }}</a>
+                  <a @click="scrollToTop" :href="page.href" class="-m-2 block p-2 font-medium text-gray-900">{{
+                    page.name }}</a>
                 </div>
               </div>
 
@@ -198,14 +196,42 @@
             </PopoverGroup>
 
             <div class="ml-auto flex items-center">
-              <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+              <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6"
+                v-if="!$page.props.auth.user">
                 <a @click="scrollToTop" href="/login">Iniciar
-                  <!-- :class="[isActive('/login') ? 'text-blue-700 ease-out' : 'text-gray-900', 'text-sm font-medium']" -->
                   Sessión</a>
-                <span class="h-6 w-px bg-gray-200" aria-hidden="true" />
+                <span class="h-6 w-px bg-gray-200" aria-hidden="true"></span>
                 <a @click="scrollToTop" href="/register">Registrarse</a>
-                <!-- :class="[isActive('/registro') ? 'text-blue-700 ease-out' : 'text-gray-900', 'text-sm font-medium']" -->
+
               </div>
+              <Dropdown align="right" width="48" v-if="$page.props.auth.user">
+                <template #trigger>
+                  <span class="inline-flex rounded-md">
+                    <button type="button"
+                      class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                      {{ $page.props.auth.user.name }}
+
+                      <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </span>
+                </template>
+
+                <template #content>
+                  <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
+                  <DropdownLink :href="route('logout')" method="post" as="button">
+                    Log Out
+                  </DropdownLink>
+                </template>
+              </Dropdown>
+
+
+
+
 
               <!-- Search -->
               <div class="flex lg:ml-6">
@@ -250,7 +276,8 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
 defineProps({ user: Object })
 
 const navigation = {
@@ -298,13 +325,21 @@ const open = ref(false)
 
 <script>
 export default {
+  data() {
+    return {
+      isOpen: false
+    };
+  },
   methods: {
     scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+    toggleMenu() {
+      this.isOpen = !this.isOpen;
     },
     isActive(route) {
       return this.$route.path === route;
     }
   }
-}   
+}
 </script>
