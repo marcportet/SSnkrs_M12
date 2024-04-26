@@ -15,6 +15,8 @@
   ```
 -->
 <template>
+  <layout>
+    <Navbar />
     <div class="bg-white">
       <div class="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Shopping Cart</h1>
@@ -123,11 +125,14 @@
         </form>
       </div>
     </div>
+    <Footer />
+  </layout>
   </template>
   
   <script>
   import { CheckIcon, ClockIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-  
+  import Navbar from '../navbar.vue';
+  import Footer from '../footer.vue';
   const products = [
     {
       id: 1,
@@ -170,6 +175,13 @@
       ClockIcon,
       QuestionMarkCircleIcon,
       XMarkIcon,
+      Navbar,
+      Footer,
+    },
+    methods: {
+        scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     },
     setup() {
       return {
