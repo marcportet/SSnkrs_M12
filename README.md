@@ -32,11 +32,21 @@ composer install
 - Instal·lacions inertia (sel·lecionar vue):
 
 ```
+composer require inertiajs/inertia-laravel
+```
+
+```
 php artisan breeze:install
- 
+
 php artisan migrate
 npm install
 npm run dev
+```
+
+- Ziggy (rutas laravel en JavaScript)
+
+```
+composer require tightenco/ziggy
 ```
 
 - Tailwind Elements:
