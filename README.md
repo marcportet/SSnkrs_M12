@@ -29,6 +29,16 @@ Aquest es un projecte Laravel on es desenvolupa una Botiga online de sabatilles,
 composer install
 ```
 
+- Instal·lacions inertia (sel·lecionar vue):
+
+```
+php artisan breeze:install
+ 
+php artisan migrate
+npm install
+npm run dev
+```
+
 - Tailwind Elements:
 
 ```
