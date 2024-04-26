@@ -1,5 +1,6 @@
 <template>
     <layout>
+
         <Head title="Contacto" />
         <Navbar />
         <section class="relative flex flex-wrap lg:h-screen lg:items-center">
@@ -68,7 +69,6 @@
 
 <script setup>
 import { Head } from '@inertiajs/vue3'
-
 defineProps({ user: Object })
 </script>
 

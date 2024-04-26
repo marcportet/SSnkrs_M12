@@ -85,18 +85,13 @@
 import { ref } from 'vue'
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
-import { useRoute } from 'vue-router'
 import { Head } from '@inertiajs/vue3'
 
 defineProps({ user: Object })
 
-/** 
-const route = useRoute()
-const productId = route.params.id
-
 const sneaker_API = ref([]);
 
-axios.get(`http://localhost:3000/api/sneakers/${productId}`)
+axios.get(`http://localhost:3000/api/sneakers/` + route().params.id)
   .then(response => {
     sneaker_API.value = response.data.map(producto => ({
       ...producto,
@@ -111,7 +106,6 @@ axios.get(`http://localhost:3000/api/sneakers/${productId}`)
   .catch(error => {
     console.error('Error al obtener los productos más vendidos:', error);
   });
-  */
 </script>
 
 <script>

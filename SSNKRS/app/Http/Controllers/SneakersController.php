@@ -13,34 +13,12 @@ use Inertia\Response;
 
 class SneakersController extends Controller
 {
-    public function catalogo($marca = null)
+    public function catalogo()
     {
-        if ($marca) {
-            switch ($marca) {
-                case 'NIKE':
-                    return Inertia::render('Views/nike_sneakers');
-                    break;
-                case 'JORDAN':
-                    return Inertia::render('Views/nike_sneakers');
-                    break;
-                case 'ADIDAS':
-                    return Inertia::render('Views/nike_sneakers');
-                    break;
-                case 'NEW BALANCE':
-                    return Inertia::render('Views/adidas_sneakers');
-                    break;
-                case 'YEEZY':
-                    return Inertia::render('Views/nike_sneakers');
-                    break;
-                default:
-                    return Inertia::render('Views/catalogo');
-                    break;
-            }
-        }
         return Inertia::render('Views/catalogo');
     }
 
-    public function detalle($id)
+    public function detalle()
     {
         return Inertia::render('Views/detalle');
     }

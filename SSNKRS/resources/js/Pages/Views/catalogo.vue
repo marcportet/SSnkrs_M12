@@ -14,6 +14,7 @@
 -->
 <template>
   <Layout>
+
     <Head title="Catalogo" />
     <div class="bg-white">
       <Navbar />
@@ -175,8 +176,6 @@
                 </div>
               </form>
 
-
-
               <!-- Product grid -->
               <div class="lg:col-span-3">
                 <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -214,7 +213,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 import axios from 'axios';
 import {
   Dialog,
@@ -228,16 +227,12 @@ import {
   MenuItems,
   TransitionChild,
   TransitionRoot,
-} from '@headlessui/vue'
-import { XMarkIcon } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/20/solid'
-import { useRoute } from 'vue-router'
-
-import { Head } from '@inertiajs/vue3'
+} from '@headlessui/vue';
+import { XMarkIcon } from '@heroicons/vue/24/outline';
+import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/vue/20/solid';
+import { Head } from '@inertiajs/vue3';
 
 defineProps({ user: Object })
-
-const route = useRoute()
 
 const allproductos = ref([]);
 const allproductos_original = ref([]);
@@ -288,7 +283,7 @@ axios.get('http://localhost:3000/api/sneakers', {
   params: {
     type: "like",
     columna: "brand",
-    filtro: "",
+    filtro: route().params.marca,
   }
 })
   .then(response => {
@@ -375,14 +370,14 @@ import Navbar from '../navbar.vue';
 import Footer from '../footer.vue';
 
 export default {
-    methods: {
-        scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    },
-    components: {
-        Navbar,
-        Footer
+  methods: {
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+  },
+  components: {
+    Navbar,
+    Footer
+  }
 }   
 </script>
