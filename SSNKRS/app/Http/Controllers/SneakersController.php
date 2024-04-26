@@ -49,4 +49,8 @@ class SneakersController extends Controller
     {
         return Inertia::render('Views/contacto');
     }
+    public function carrito()
+    {
+        return Inertia::render('Views/carrito');
+    }
 }

@@ -28,5 +28,5 @@ Route::middleware('auth')->group(function () {
 Route::get('/catalogo/{marca?}', [SneakersController::class, 'catalogo'])->name('catalogo');
 Route::get('/detalle/{id}', [SneakersController::class, 'detalle'])->name('detalle');
 Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto');
-
+Route::get('/carrito', [SneakersController::class, 'carrito'])->name('carrito');
 require __DIR__.'/auth.php';

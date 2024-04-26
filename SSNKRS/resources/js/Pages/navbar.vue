@@ -103,7 +103,7 @@
                     sesión</a>
                 </div>
                 <div class="flow-root">
-                  <a @click="scrollToTop" href="/registro">Registrarse</a>
+                  <a @click="scrollToTop" href="/register">Registrarse</a>
                   <!-- :class="[isActive('/registro') ? 'text-blue-700 ease-out' : 'text-gray-900', '-m-2 block p-2 font-medium']" -->
                 </div>
               </div>
@@ -203,7 +203,7 @@
                   <!-- :class="[isActive('/login') ? 'text-blue-700 ease-out' : 'text-gray-900', 'text-sm font-medium']" -->
                   Sessión</a>
                 <span class="h-6 w-px bg-gray-200" aria-hidden="true" />
-                <a @click="scrollToTop" href="/registro">Registrarse</a>
+                <a @click="scrollToTop" href="/register">Registrarse</a>
                 <!-- :class="[isActive('/registro') ? 'text-blue-700 ease-out' : 'text-gray-900', 'text-sm font-medium']" -->
               </div>
 
