@@ -1,6 +1,5 @@
 <template>
     <Layout>
-
         <Head title="Home" />
         <div class="home bg-white">
             <Navbar />
@@ -34,7 +33,7 @@
             <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
                 <div class="titulo">
                     <span>Escogidas por expertos</span>
-                    <a class="vermas" href="/catalogo">
+                    <a class="vermas" :href="route('catalogo')">
                         ver mas
                         <svg class="h-8" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -53,10 +52,10 @@
                         <div class="mt-4 flex justify-between">
                             <div>
                                 <h3 class="text-base text-gray-700">
-                                    <router-link @click="scrollToTop" :to="producto.href">
+                                    <a @click="scrollToTop" :href="route('detalle',producto.id)">
                                         <span aria-hidden="true" class="absolute inset-0" />
                                         {{ producto.name }}
-                                    </router-link>
+                                    </a>
                                 </h3>
                                 <p class="mt-1 text-base text-gray-500">{{ producto.brand }}</p>
                             </div>
@@ -154,7 +153,6 @@ axios.get('http://localhost:3000/api/sneakers', {
     .then(response => {
         productos.value = response.data.map(producto => ({
             ...producto,
-            href: `/detalle/${producto.id}`
         }));
     })
     .catch(error => {
