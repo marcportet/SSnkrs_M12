@@ -122,7 +122,7 @@ const submit = () => {
                         <div class="mt-12">
                             <button :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                                 class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
-                                Register
+                                Crear cuenta
                             </button>
                         </div>
                         <p class="my-8 text-sm text-gray-400 text-center">o continua con</p>
