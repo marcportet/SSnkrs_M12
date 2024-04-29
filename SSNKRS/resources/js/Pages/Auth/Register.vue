@@ -29,10 +29,28 @@ const submit = () => {
                 class="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
                 <div class="md:max-w-md w-full sm:px-6 py-4">
                     <form @submit.prevent="submit">
-                        <div class="mb-8">
+                        <div class="mb-8 flex">
+                            <a :href="route('home')">
+                                <svg class="w-[23px] h-[23px] text-gray-800 dark:text-white" style="height: 35;"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    fill="#333333" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M11.293 3.293a1 1 0 0 1 1.414 0l6 6 2 2a1 1 0 0 1-1.414 1.414L19 12.414V19a2 2 0 0 1-2 2h-3a1 1 0 0 1-1-1v-3h-2v3a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6.586l-.293.293a1 1 0 0 1-1.414-1.414l2-2 6-6Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                            <svg class="w-[23px] h-[23px] text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24" style="height: 37;">
+                                <path stroke="#333333" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1" d="m9 5 7 7-7 7" />
+                            </svg>
                             <h3 class="text-3xl font-extrabold">Crear cuenta</h3>
                         </div>
-                        <div>
+                        <p class="text-sm mt-4 ">Tienes cuenta? <a :href="route('login')"
+                                class="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Inicia
+                                sesión aqui</a></p>
+                        <div class="mt-4">
                             <InputLabel class="text-xs block mb-2" for="name" value="Name" />
                             <div class="relative flex items-center">
                                 <TextInput id="name" type="text" v-model="form.name" required autofocus
@@ -76,7 +94,7 @@ const submit = () => {
                                     class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none"
                                     placeholder="Introducir contraseña" />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb"
-                                    class="w-[18px] h-[18px] absolute right-2 cursor-pointer" viewBox="0 0 128 128">
+                                    class="w-[18px] h-[18px] absolute right-2 " viewBox="0 0 128 128">
                                     <path
                                         d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z"
                                         data-original="#000000"></path>
@@ -93,7 +111,7 @@ const submit = () => {
                                     class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none"
                                     placeholder="Introducir contraseña de nuevo" />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb"
-                                    class="w-[18px] h-[18px] absolute right-2 cursor-pointer" viewBox="0 0 128 128">
+                                    class="w-[18px] h-[18px] absolute right-2 " viewBox="0 0 128 128">
                                     <path
                                         d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z"
                                         data-original="#000000"></path>
@@ -102,8 +120,8 @@ const submit = () => {
                             <InputError class="mt-2" :message="form.errors.password" />
                         </div>
                         <div class="mt-12">
-                            <button :class="{ 'opacity-25': form.processing }"
-                                :disabled="form.processing" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                            <button :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
+                                class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
                                 Register
                             </button>
                         </div>
@@ -151,9 +169,9 @@ const submit = () => {
                         </div>
                     </form>
                 </div>
-                <div class="md:h-full max-md:mt-10 bg-[#000842] rounded-xl lg:p-12 p-8">
-                    <img src="https://readymadeui.com/signin-image.webp" class="w-full h-full object-contain"
-                        alt="login-image" />
+                <div class="md:h-full max-md:mt-10 rounded-xl ">
+                    <img src="img/gif-sneakers.gif" class="w-full h-full object-contain rounded-xl"
+                        alt="register-image" />
                 </div>
             </div>
         </div>
