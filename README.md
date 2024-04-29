@@ -61,6 +61,11 @@ npm install tw-elements
 npm install -D @tailwindcss/forms
 ```
 
+- Inici Sessio Google:
+
+```
+composer require laravel/socialite
+```
 ## Guía de Funcionament 🔩
 
 - Iniciar Projecte:
