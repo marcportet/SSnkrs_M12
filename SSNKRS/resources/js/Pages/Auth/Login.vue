@@ -167,7 +167,7 @@ const submit = () => {
             </form>
           </div>
           <div class="md:h-full max-md:mt-10 rounded-xl">
-            <img src="img/gif-sneakers.gif" class="w-full h-full object-contain" alt="login-image" />
+            <img src="img/gif-sneakers.gif" class="w-full h-full object-contain rounded-xl" alt="login-image" />
           </div>
         </div>
       </div>
