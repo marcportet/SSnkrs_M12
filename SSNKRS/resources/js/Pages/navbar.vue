@@ -101,7 +101,7 @@
                     sesión</a>
                 </div>
                 <div class="flow-root">
-                  <a @click="scrollToTop" href="/register">Registrarse</a>
+                  <a @click="scrollToTop" href="/register">Crear cuenta</a>
                   <!-- :class="[isActive('/registro') ? 'text-blue-700 ease-out' : 'text-gray-900', '-m-2 block p-2 font-medium']" -->
                 </div>
               </div>
@@ -201,7 +201,7 @@
                 <a @click="scrollToTop" href="/login">Iniciar
                   Sessión</a>
                 <span class="h-6 w-px bg-gray-200" aria-hidden="true"></span>
-                <a @click="scrollToTop" href="/register">Registrarse</a>
+                <a @click="scrollToTop" href="/register">Crear cuenta</a>
 
               </div>
               <Dropdown align="right" width="48" v-if="$page.props.auth.user">
