@@ -25,7 +25,7 @@
         <div class="ml-4 flex lg:ml-0">
           <a @click="scrollToTop" href="/">
             <span class="sr-only">ssnkrs</span>
-            <img class="h-8 w-auto" :src="'img/logotipo.png'" alt="" />
+            <img class="h-8 w-auto" :src="'/img/logotipo.png'" alt="" />
           </a>
         </div>
 
@@ -131,7 +131,7 @@
             <div class="ml-4 flex lg:ml-0">
               <a @click="scrollToTop" href="/">
                 <span class="sr-only">ssnkrs</span>
-                <img class="h-8 w-auto" :src="'img/logotipo.png'" alt="" />
+                <img class="h-8 w-auto" :src="'/img/logotipo.png'" alt="" />
               </a>
             </div>
 
@@ -289,13 +289,13 @@ const navigation = {
         {
           name: '',
           href: '/',
-          imageSrc: 'img/travis-jordan-low.png',
+          imageSrc: '/img/travis-jordan-low.png',
           imageAlt: 'travis-jordan-low.png',
         },
         {
           name: '',
           href: '/',
-          imageSrc: 'img/sb-dunk-april.png',
+          imageSrc: '/img/sb-dunk-april.png',
           imageAlt: 'sb-dunk-april.png',
         },
       ],
