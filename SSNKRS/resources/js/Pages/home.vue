@@ -1,5 +1,6 @@
 <template>
     <Layout>
+
         <Head title="Home" />
         <div class="home bg-white">
             <Navbar />
@@ -52,7 +53,7 @@
                         <div class="mt-4 flex justify-between">
                             <div>
                                 <h3 class="text-base text-gray-700">
-                                    <a @click="scrollToTop" :href="route('detalle',producto.id)">
+                                    <a @click="scrollToTop" :href="route('detalle', producto.id)">
                                         <span aria-hidden="true" class="absolute inset-0" />
                                         {{ producto.name }}
                                     </a>
