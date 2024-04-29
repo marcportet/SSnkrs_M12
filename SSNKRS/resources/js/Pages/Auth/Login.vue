@@ -119,7 +119,7 @@ const submit = () => {
             </div>
             <p class="my-8 text-sm text-gray-400 text-center">o continua con</p>
             <div class="space-x-8 flex justify-center">
-              <button type="button" class="border-none outline-none">
+              <a href="/google-auth/redirect" type="button" class="border-none outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30px" class="inline" viewBox="0 0 512 512">
                   <path fill="#fbbd00"
                     d="M120 256c0-25.367 6.989-49.13 19.131-69.477v-86.308H52.823C18.568 144.703 0 198.922 0 256s18.568 111.297 52.823 155.785h86.308v-86.308C126.989 305.13 120 281.367 120 256z"
@@ -140,7 +140,7 @@ const submit = () => {
                     d="M256 120V0C187.62 0 123.333 26.629 74.98 74.98a259.849 259.849 0 0 0-22.158 25.235l86.308 86.308C162.883 146.72 206.376 120 256 120z"
                     data-original="#eb4132" />
                 </svg>
-              </button>
+              </a>
               <button type="button" class="border-none outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30px" fill="#000" viewBox="0 0 22.773 22.773">
                   <path

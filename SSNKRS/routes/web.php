@@ -5,7 +5,9 @@ use App\Http\Controllers\SneakersController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return Inertia::render('home', [
         'canLogin' => Route::has('login'),
@@ -14,6 +16,26 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('home');
+
+Route::get('/google-auth/redirect', function () {
+    return Socialite::driver('google')->redirect();
+});
+ 
+Route::get('/google-auth/callback', function () {
+    $user_google = Socialite::driver('google')->user();
+
+    $user = User::updateOrCreate([
+        'google_id' => $user_google->id,
+    ],[
+        'name' => $user_google->name,
+        'email' => $user_google->email,
+    ]);
+ 
+    Auth::login($user);
+    
+    return redirect('/');
+    // $user->token
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
