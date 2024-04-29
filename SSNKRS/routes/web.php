@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 Route::get('/', function () {
     return Inertia::render('home', [
         'canLogin' => Route::has('login'),
@@ -20,19 +21,19 @@ Route::get('/', function () {
 Route::get('/google-auth/redirect', function () {
     return Socialite::driver('google')->redirect();
 });
- 
+
 Route::get('/google-auth/callback', function () {
     $user_google = Socialite::driver('google')->user();
 
     $user = User::updateOrCreate([
         'google_id' => $user_google->id,
-    ],[
+    ], [
         'name' => $user_google->name,
         'email' => $user_google->email,
     ]);
- 
+
     Auth::login($user);
-    
+
     return redirect('/');
     // $user->token
 });
@@ -51,4 +52,4 @@ Route::get('/catalogo/{marca?}', [SneakersController::class, 'catalogo'])->name(
 Route::get('/detalle/{id}', [SneakersController::class, 'detalle'])->name('detalle');
 Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto');
 Route::get('/carrito', [SneakersController::class, 'carrito'])->name('carrito');
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
