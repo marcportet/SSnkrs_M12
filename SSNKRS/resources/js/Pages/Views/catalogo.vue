@@ -132,7 +132,7 @@
             </div>
           </div>
 
-          <section aria-labelledby="products-heading" class="pb-24 pt-6">
+          <section aria-labelledby="products-heading" class=" pt-6">
             <h2 id="products-heading" class="sr-only">Products</h2>
 
             <div class="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
@@ -180,7 +180,8 @@
               <div class="lg:col-span-3">
                 <div class="pt-5 pb-3 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
                   <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                    <div v-for="producto in allproductos" :key="producto.id" class="group relative">
+                    <div v-for="producto in allproductos.slice(startIndex, endIndex)" :key="producto.id"
+                      class="group relative">
                       <div
                         class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                         <img :src="producto.image" :alt="producto.name"
@@ -200,8 +201,50 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="flex justify-center mt-8">
+                    <button @click="goToPage(1)" :disabled="currentPage === 1"
+                      class="px-3 py-1 mr-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-3 h-3">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+                      </svg>
+                    </button>
+                    <button @click="previousPage" :disabled="currentPage === 1"
+                      class="px-3 py-1 mr-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-3 h-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                      </svg>
+                    </button>
+                    <!-- Agregar números de página -->
+                    <div v-for="page in visiblePages" :key="page">
+                      <button @click="goToPage(page)"
+                        :class="['px-3 py-1 mx-1 rounded-md border border-gray-300 bg-white text-sm font-medium', { 'bg-blue-600 text-gray-800': page === currentPage }]"
+                        class="text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        {{ page }}
+                      </button>
+                    </div>
+                    <button @click="nextPage" :disabled="currentPage === totalPages"
+                      class="px-3 py-1 ml-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-3 h-3">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                      </svg>
+                    </button>
+                    <button @click="goToPage(totalPages)" :disabled="currentPage === totalPages" 
+                      class="px-3 py-1 ml-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-3 h-3">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                      </svg>
+
+                    </button>
+                  </div>
+
                 </div>
-                <!-- Your content -->
               </div>
             </div>
           </section>
@@ -213,7 +256,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import axios from 'axios';
 import {
   Dialog,
@@ -278,7 +321,6 @@ const filters = [
   },
 ]
 
-// Realizar solicitudes a la API y actualizar los arrays de productos
 axios.get('http://localhost:3000/api/sneakers', {
   params: {
     type: "like",
@@ -300,15 +342,13 @@ axios.get('http://localhost:3000/api/sneakers', {
 
 const mobileFiltersOpen = ref(false)
 
-
-// Metode per canviar el estat de current de les opcions de sort
+//FILTROS
 const updateSortOption = (index) => {
   sortOptions.value.forEach((option, i) => {
     option.current = i === index;
   });
 };
 
-//Metode per ordenar els productes segons la opcio selecionada
 const sortByPrice = () => {
   const selectedOption = sortOptions.value.find(option => option.current);
   if (selectedOption) {
@@ -360,6 +400,44 @@ function filtros(idform) {
     allproductos.value = originalProducts;
   }
 }
+
+// PAGINACION
+
+const currentPage = ref(1);
+const productsPerPage = 12;
+const startIndex = computed(() => (currentPage.value - 1) * productsPerPage);
+const endIndex = computed(() => Math.min(startIndex.value + productsPerPage, allproductos.value.length));
+const totalPages = computed(() => Math.ceil(allproductos.value.length / productsPerPage));
+
+const previousPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+};
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+};
+
+const visiblePages = computed(() => {
+  const totalVisiblePages = 5;
+  const halfVisiblePages = Math.floor(totalVisiblePages / 2);
+  const firstVisiblePage = Math.max(1, currentPage.value - halfVisiblePages);
+  const lastVisiblePage = Math.min(totalPages.value, firstVisiblePage + totalVisiblePages - 1);
+  const visiblePagesArray = [];
+
+  for (let page = firstVisiblePage; page <= lastVisiblePage; page++) {
+    visiblePagesArray.push(page);
+  }
+
+  return visiblePagesArray;
+});
+
+const goToPage = (page) => {
+  currentPage.value = page;
+};
 </script>
 
 
