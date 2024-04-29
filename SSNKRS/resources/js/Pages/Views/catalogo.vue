@@ -189,10 +189,10 @@
                       <div class="mt-4 flex justify-between">
                         <div>
                           <h3 class="text-base text-gray-700">
-                            <router-link @click="scrollToTop" :to="producto.href">
+                            <a @click="scrollToTop" :href="route('detalle', producto.id)">
                               <span aria-hidden="true" class="absolute inset-0" />
                               {{ producto.name }}
-                            </router-link>
+                            </a>
                           </h3>
                           <p class="mt-1 text-base text-gray-500">{{ producto.brand }}</p>
                         </div>
@@ -289,11 +289,9 @@ axios.get('http://localhost:3000/api/sneakers', {
   .then(response => {
     allproductos.value = response.data.map(producto => ({
       ...producto,
-      href: `/detalle/${producto.id}`,
     }));
     allproductos_original.value = response.data.map(producto => ({
       ...producto,
-      href: `/detalle/${producto.id}`,
     }));
   })
   .catch(error => {
