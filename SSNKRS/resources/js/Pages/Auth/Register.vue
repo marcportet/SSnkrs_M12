@@ -23,7 +23,7 @@ const submit = () => {
 <template>
     <div class="font-[sans-serif] text-[#333]">
 
-        <Head title="Register" />
+        <Head title="Crear Cuenta" />
         <div class="min-h-screen flex flex-col items-center justify-center">
             <div
                 class="grid md:grid-cols-2 items-center gap-4 max-w-6xl w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
@@ -107,7 +107,7 @@ const submit = () => {
                                 Register
                             </button>
                         </div>
-                        <p class="my-8 text-sm text-gray-400 text-center">or continue with</p>
+                        <p class="my-8 text-sm text-gray-400 text-center">o continua con</p>
                         <div class="space-x-8 flex justify-center">
                             <button type="button" class="border-none outline-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30px" class="inline"
