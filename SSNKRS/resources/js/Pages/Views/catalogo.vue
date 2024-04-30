@@ -280,8 +280,8 @@ defineProps({ user: Object })
 const allproductos = ref([]);
 const allproductos_original = ref([]);
 
-const sortOptions = ref([
-  { name: 'Precio: Bajo a Alto', href: '#', current: true },
+const sortOptions = ref([ 
+  { name: 'Precio: Bajo a Alto', href: '#', current: false },
   { name: 'Precio: Alto a Bajo', href: '#', current: false },
 ]);
 
