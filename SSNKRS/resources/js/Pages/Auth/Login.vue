@@ -98,13 +98,6 @@ const submit = () => {
               </div>
             </div>
             <div class="flex items-center justify-between gap-2 mt-5">
-              <div class="flex items-center">
-                <Checkbox name="remember" v-model:checked="form.remember"
-                  class="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                <label for="remember-me" class="ml-3 block text-sm">
-                  Recuerdame
-                </label>
-              </div>
               <Link v-if="canResetPassword" :href="route('password.request')"
                 class="text-blue-600 font-semibold text-sm hover:underline">
               ¿Ha olvidado su contraseña?
