@@ -21,9 +21,56 @@
               <div class="mt-10">
                 <div class="flex items-center justify-between">
                   <h3 class="text-sm font-medium text-gray-900">Size</h3>
-                  <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-500">Size guide</a>
+                  <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-500"
+                    @click.prevent="popupGuideSize = true">Size guide</a>
                 </div>
+                <div v-if="popupGuideSize" class="fixed inset-0 flex items-center justify-center z-10">
+                  <div class="absolute inset-0 bg-gray-900 opacity-50"></div>
+                  <div class="bg-white p-8 rounded-lg z-20">
+                    <!-- Contenido del Size Guide -->
+                    <h2 class="text-lg font-semibold mb-4">Size Guide</h2>
+                    <table class="table table-striped-columns">
+                      <tbody>
+                        <tr>
+                          <th scope="row">EU</th>
+                          <td>35</td>
+                          <td>36</td>
+                          <td>37</td>
+                          <td>38</td>
+                          <td>39</td>
+                          <td>40</td>
+                          <td>41</td>
+                          <td>42</td>
+                          <td>43</td>
+                          <td>44</td>
+                          <td>45</td>
+                          <td>46</td>
+                          <td>47</td>
+                        </tr>
+                        <tr>
+                          <th scope="row">US</th>
+                          <td>3.5</td>
+                          <td>4</td>
+                          <td>5</td>
+                          <td>5.5</td>
+                          <td>6.5</td>
+                          <td>7</td>
+                          <td>8</td>
+                          <td>8.5</td>
+                          <td>9.5</td>
+                          <td>10</td>
+                          <td>11</td>
+                          <td>12</td>
+                          <td>13.5</td>
+                        </tr>
+                      </tbody>
+                    </table>
 
+                    <!-- Botón para cerrar el modal -->
+                    <button @click="popupGuideSize = false"
+                      class="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">Cerrar</button>
+                  </div>
+                </div>
                 <RadioGroup v-model="selectedSize" class="mt-4">
                   <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
                   <div class="grid grid-cols-4 gap-4 sm:grid-cols-7 lg:grid-cols-4">
@@ -86,6 +133,7 @@ import { ref } from 'vue'
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import { Head } from '@inertiajs/vue3'
+const popupGuideSize = ref(false);
 
 defineProps({ user: Object })
 
