@@ -394,9 +394,10 @@ function filtros(idform) {
         }
       });
     });
-
+    currentPage.value = 1;
     allproductos.value = filteredProducts;
   } else {
+    currentPage.value = 1;
     allproductos.value = originalProducts;
   }
 }
