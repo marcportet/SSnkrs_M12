@@ -10,17 +10,20 @@ import { nextTick, ref } from 'vue';
 
 const confirmingUserDeletion = ref(false);
 const passwordInput = ref(null);
+const emailInput = ref(null);
 
 const user = usePage().props.auth.user;
 
 const form = useForm({
     password: '',
+    email: '',
 });
 
 const confirmUserDeletion = () => {
     confirmingUserDeletion.value = true;
 
     nextTick(() => passwordInput.value.focus());
+    nextTick(() => emailInput.value.focus());
 };
 
 const deleteUser = () => {
@@ -36,6 +39,7 @@ const deleteGoogleUser = () => {
     form.delete(route('profile.google_destroy'), {
         preserveScroll: true,
         onSuccess: () => closeModal(),
+        onError: () => emailInput.value.focus(),
         onFinish: () => form.reset(),
     });
 };
@@ -80,6 +84,15 @@ const closeModal = () => {
                         class="mt-1 block w-3/4" placeholder="Password" @keyup.enter="deleteUser" />
 
                     <InputError :message="form.errors.password" class="mt-2" />
+                </div>
+
+                <div class="mt-6" v-if="user.google_id">
+                    <InputLabel for="email" value="Email" class="sr-only" />
+
+                    <TextInput id="email" ref="emailInput" v-model="form.email" type="text"
+                        class="mt-1 block w-3/4" placeholder="Email" @keyup.enter="deleteUser" />
+
+                    <InputError :message="form.errors.email" class="mt-2" />
                 </div>
 
                 <div class="mt-6 flex justify-end">

@@ -63,7 +63,15 @@ class ProfileController extends Controller
 
     public function google_destroy(Request $request): RedirectResponse
     {
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
         $user = $request->user();
+
+        if ($request->input('email') !== $user->email) {
+            return redirect()->back()->withErrors(['email' => 'El correo electrónico proporcionado no coincide con el correo electrónico de la cuenta.']);
+        }
 
         Auth::logout();
 
