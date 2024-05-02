@@ -60,4 +60,18 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function google_destroy(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
+    }
 }

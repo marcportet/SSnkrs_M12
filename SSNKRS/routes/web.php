@@ -45,7 +45,8 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile/google_destroy', [ProfileController::class, 'google_destroy'])->name('profile.google_destroy');
 });
 
 Route::get('/catalogo/{marca?}', [SneakersController::class, 'catalogo'])->name('catalogo');
