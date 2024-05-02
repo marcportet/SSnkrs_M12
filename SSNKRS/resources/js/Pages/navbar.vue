@@ -208,7 +208,13 @@
                 <template #trigger>
                   <span class="inline-flex rounded-md">
                     <button type="button"
-                      class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                      class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-800 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-4 h-4 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                      </svg>
+
                       {{ $page.props.auth.user.name }}
 
                       <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
@@ -222,24 +228,12 @@
                 </template>
 
                 <template #content>
-                  <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
-                  <DropdownLink :href="route('logout')" method="post" as="button">
-                    Log Out
+                  <DropdownLink :href="route('profile.edit')"> Perfil </DropdownLink>
+                  <DropdownLink :href="route('logout')" @click="show = true" method="post" as="button">
+                    Cerrar Sesión
                   </DropdownLink>
                 </template>
               </Dropdown>
-
-
-
-
-
-              <!-- Search -->
-              <div class="flex lg:ml-6">
-                <a href="#" class="p-2 text-gray-400 hover:text-gray-500">
-                  <span class="sr-only">Search</span>
-                  <MagnifyingGlassIcon class="h-6 w-6" aria-hidden="true" />
-                </a>
-              </div>
 
               <!-- Cart -->
               <div class="ml-4 flow-root lg:ml-6">
@@ -255,11 +249,51 @@
         </div>
       </nav>
     </header>
+    <!-- Alert Cerrar Sesión -->
+    <div aria-live="assertive" class="position-absolute inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start mt-20"
+      style="z-index: 3;">
+      <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
+        <transition enter-active-class="transform ease-out duration-300 transition"
+          enter-from-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+          enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
+          leave-active-class="transition ease-in duration-100" leave-from-class="opacity-100"
+          leave-to-class="opacity-0">
+          <div v-if="show"
+            class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div class="p-4">
+              <div class="flex items-start">
+                <div class="flex-shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="green" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                </div>
+                <div class="ml-3 w-0 flex-1 pt-0.5">
+                  <p class="text-sm font-medium text-gray-900">¡Has cerrado sesión con exito!</p>
+                  <p class="mt-1 text-sm text-gray-500">Vuelve a iniciar sesión para acceder a tu cuenta.</p>
+                </div>
+                <div class="ml-4 flex-shrink-0 flex">
+                  <button @click="show = false"
+                    class="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <span class="sr-only">Close</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                      stroke="currentColor" class="w-6 h-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 import {
   Dialog,
   DialogPanel,
@@ -275,10 +309,12 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
-import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 defineProps({ user: Object })
+
+const show = ref(false)
 
 const navigation = {
   categories: [
