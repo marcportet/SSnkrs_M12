@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static function correoEstaRegistrado($correo) {
+        // Buscar el correo en la tabla de usuarios
+        $usuario = User::where('email', $correo)->first();
+        
+        // Si se encontró un usuario con ese correo, devuelve true, de lo contrario, devuelve false
+        return $usuario !== null;
+    }
 }

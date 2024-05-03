@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SneakersController;
 use Illuminate\Foundation\Application;
@@ -8,6 +9,7 @@ use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/', function () {
     return Inertia::render('home', [
@@ -53,3 +55,5 @@ Route::get('/detalle/{id}', [SneakersController::class, 'detalle'])->name('detal
 Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto');
 Route::get('/carrito', [SneakersController::class, 'carrito'])->name('carrito');
 require __DIR__ . '/auth.php';
+
+Route::post('/contacto',ContactController::class)->name('contact');

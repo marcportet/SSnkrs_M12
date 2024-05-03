@@ -94,9 +94,9 @@
                 </div>
               </div>
 
-              <div class="space-y-6 border-t border-gray-200 px-4 py-6">
+              <div class="space-y-6 border-t border-gray-200 px-4 py-6" v-if="!$page.props.auth.user">
                 <div class="flow-root">
-                  <a @click="scrollToTop" href="/login">Iniciar
+                  <a @click="scrollToTop" href="/login" >Iniciar
                     <!-- :class="[isActive('/login') ? 'text-blue-700 ease-out' : 'text-gray-900', '-m-2 block p-2 font-medium']" -->
                     sesión</a>
                 </div>

@@ -5,6 +5,7 @@
         <Navbar />
         <section class="relative flex flex-wrap lg:h-screen lg:items-center">
             <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
+                
                 <div class="mx-auto max-w-lg text-center">
                     <h1 class="text-center text-2xl font-bold text-blue-600 sm:text-3xl">Contactanos en unos segundos
                     </h1>
@@ -14,23 +15,28 @@
                         inferiores, le
                         contestaremos lo antes posible.
                     </p>
+                    <br>
+                <div v-if="showMessage" class="inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white w-100">
+                    Correo enviado correctamente!
+                </div>
                 </div>
 
-                <form action="#" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
+                <form @submit.prevent="submitForm" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
                     <div>
-                        <label for="complete_name" class="sr-only">Nombre y Apellidos</label>
+                        <label for="name" class="sr-only">Nombre y Apellidos</label>
 
                         <div class="relative">
-                            <input type="text" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            <input v-model="form.name" type="text" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Introduce el Nombre y Apellidos" />
                         </div>
+                        <span v-if="form.errors.name" class="text-sm m-2 text-red-400">{{ form.errors.name }}</span>
                     </div>
 
                     <div>
                         <label for="email" class="sr-only">Email</label>
 
                         <div class="relative">
-                            <input type="email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            <input v-model="form.email" type="email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Enter email" />
 
                             <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -41,15 +47,18 @@
                                 </svg>
                             </span>
                         </div>
+                        <span v-if="form.errors.email" class="text-sm m-2 text-red-400">{{ form.errors.email }}</span>
                     </div>
 
                     <div>
-                        <label for="descripcion" class="sr-only">descripcion</label>
+                        <label for="text" class="sr-only">descripcion</label>
 
                         <div class="relative">
-                            <textarea class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            <textarea v-model="form.text" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 style="resize: none;height: 200px;" placeholder="Describe el problema" />
                         </div>
+
+                        <span v-if="form.errors.text" class="text-sm m-2 text-red-400">{{ form.errors.text }}</span>
                     </div>
 
                     <button type="submit"
@@ -69,7 +78,33 @@
 
 <script setup>
 import { Head } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3'
+import { ref } from 'vue'
+
 defineProps({ user: Object })
+
+const showMessage = ref(false);
+
+function setshowMessage(value){
+    showMessage.value = value;
+}
+
+function clearForm(){
+    form.reset();
+    setshowMessage(true);
+    setTimeout(()=> setshowMessage(false),3000)
+}
+const form = useForm({
+    name: '',
+    email: '',
+    text: ''
+})
+
+const submitForm = () => {
+    form.post(route('contact'), {
+        onSuccess: () => clearForm(),
+    })
+}
 </script>
 
 <script>
@@ -86,5 +121,5 @@ export default {
         Navbar,
         Footer
     }
-}   
+}
 </script>
