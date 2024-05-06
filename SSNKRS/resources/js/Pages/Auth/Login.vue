@@ -80,7 +80,6 @@ const submit = () => {
                 </svg>
               </div>
               <InputError class="mt-2" :message="form.errors.email" />
-
             </div>
             <div class="mt-8">
               <InputLabel for="password" value="Password" class="text-xs block mb-2">Contraseña</InputLabel>
@@ -89,7 +88,6 @@ const submit = () => {
                 <TextInput id="password" type="password"
                   class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none"
                   v-model="form.password" required autocomplete="current-password" placeholder="Introducir contraseña" />
-                <InputError class="mt-2" :message="form.errors.password" />
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb"
                   class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 128 128">
                   <path
@@ -97,6 +95,7 @@ const submit = () => {
                     data-original="#000000"></path>
                 </svg>
               </div>
+              <InputError class="mt-2" :message="form.errors.password" />
             </div>
             <div class="flex items-center justify-between gap-2 mt-5">
               <Link v-if="canResetPassword" :href="route('password.request')"

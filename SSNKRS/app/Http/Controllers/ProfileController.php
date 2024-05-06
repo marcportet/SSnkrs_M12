@@ -60,4 +60,26 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function google_destroy(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        $user = $request->user();
+
+        if ($request->input('email') !== $user->email) {
+            return redirect()->back()->withErrors(['email' => 'El correo electrónico proporcionado no coincide con el correo electrónico de la cuenta.']);
+        }
+
+        Auth::logout();
+
+        $user->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return Redirect::to('/');
+    }
 }
