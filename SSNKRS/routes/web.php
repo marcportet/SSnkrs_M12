@@ -25,6 +25,19 @@ Route::get('/google-auth/redirect', function () {
 });
 
 Route::get('/google-auth/callback', function () {
+
+    // Si el correo que se intenta inicar con google ya esta registrado
+    // inicia session con el correo de esa cuenta.
+    $userGoogle = Socialite::driver('google')->user();
+
+    $existingUser = User::where('email', $userGoogle->email)->first();
+
+    if ($existingUser) {
+        Auth::login($existingUser);
+        return redirect('/');
+    }
+
+    //Login con google
     $user_google = Socialite::driver('google')->user();
 
     $user = User::updateOrCreate([
