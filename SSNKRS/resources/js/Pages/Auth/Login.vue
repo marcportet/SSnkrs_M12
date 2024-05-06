@@ -62,7 +62,6 @@ const submit = () => {
                 <TextInput id="email" type="email"
                   class="w-full text-sm border-b border-gray-300 focus:border-[#333] px-2 py-3 outline-none"
                   v-model="form.email" required autofocus autocomplete="username" placeholder="Introducir correo electrónico"></TextInput>
-                <InputError class="mt-2" :message="form.errors.email" />
                 <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb"
                   class="w-[18px] h-[18px] absolute right-2" viewBox="0 0 682.667 682.667">
                   <defs>
@@ -80,6 +79,8 @@ const submit = () => {
                   </g>
                 </svg>
               </div>
+              <InputError class="mt-2" :message="form.errors.email" />
+
             </div>
             <div class="mt-8">
               <InputLabel for="password" value="Password" class="text-xs block mb-2">Contraseña</InputLabel>
