@@ -21,6 +21,9 @@ class User extends Authenticatable
         'email',
         'password',
         'google_id',
+        'id_client',
+        'id_admin',
+        'id_marketing',
     ];
 
     /**
@@ -52,5 +55,10 @@ class User extends Authenticatable
         
         // Si se encontró un usuario con ese correo, devuelve true, de lo contrario, devuelve false
         return $usuario !== null;
+    }
+    
+    public function client()
+    {
+        return $this->hasOne(Client::class);
     }
 }
