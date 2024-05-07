@@ -68,6 +68,7 @@ Route::get('/catalogo/{marca?}', [SneakersController::class, 'catalogo'])->name(
 Route::get('/detalle/{id}', [SneakersController::class, 'detalle'])->name('detalle');
 Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto');
 Route::get('/carrito', [SneakersController::class, 'carrito'])->name('carrito');
+Route::get('/fqs', [SneakersController::class, 'fqs'])->name('fqs');
 require __DIR__ . '/auth.php';
 
 Route::post('/contacto',ContactController::class)->name('contact');
