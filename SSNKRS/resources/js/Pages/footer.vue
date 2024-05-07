@@ -57,7 +57,7 @@
 
             <ul class="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Equipo </a>
+                <a href="equipo" class="text-gray-700 transition hover:opacity-75"> Equipo </a>
               </li>
             </ul>
           </div>
