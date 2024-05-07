@@ -48,89 +48,35 @@
           </ul>
         </div>
 
-        <div class="grid grid-cols-1 gap-8 border-t border-gray-100 mt-4 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-8">
+        <div class="grid grid-cols-1 gap-8 border-t border-gray-100 mt-2 pt-8 sm:grid-cols-2 lg:grid-cols-4 lg:pt-8">
           <div>
-            <p class="font-medium text-gray-900">Services</p>
+          </div>
+
+          <div>
+            <p class="font-medium text-gray-900">Empresa</p>
 
             <ul class="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> 1on1 Coaching </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Company Review </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Accounts Review </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> HR Consulting </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> SEO Optimisation </a>
+                <a href="#" class="text-gray-700 transition hover:opacity-75"> Equipo </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <p class="font-medium text-gray-900">Company</p>
+            <p class="font-medium text-gray-900">Links de ayuda</p>
 
             <ul class="mt-6 space-y-4 text-sm">
               <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> About </a>
+                <a href="contacto" class="text-gray-700 transition hover:opacity-75"> Contacto </a>
               </li>
 
               <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Meet the Team </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Accounts Review </a>
+                <a href="fqs" class="text-gray-700 transition hover:opacity-75"> FAQs </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <p class="font-medium text-gray-900">Helpful Links</p>
-
-            <ul class="mt-6 space-y-4 text-sm">
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Contact </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> FAQs </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Live Chat </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <p class="font-medium text-gray-900">Legal</p>
-
-            <ul class="mt-6 space-y-4 text-sm">
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Accessibility </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Returns Policy </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Refund Policy </a>
-              </li>
-
-              <li>
-                <a href="#" class="text-gray-700 transition hover:opacity-75"> Hiring Statistics </a>
-              </li>
-            </ul>
           </div>
         </div>
 
