@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="px-6 xl:px-0">
-                        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pb-6 gap-8">
+                        <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3 xl:grid-cols-2 pb-6 gap-8">
                             <div role="cell" class="bg-gray-100">
                                 <div class="bg-white p-5 rounded-md relative h-full w-full">
                                     <!-- class="absolute inset-0 object-center object-cover h-full w-full"  -->
@@ -25,7 +25,7 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                             </svg>
-                                            <h4 class="text-md text-gray-900 dark:text-gray-100">First time, what do I do next?</h4>
+                                            <h4 class="text-md text-gray-900 dark:text-black-100">Como es la guia de tallas?</h4>
                                         </div>
                                         <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full space-x-3">
                                             <div>
@@ -33,7 +33,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100">Changing you profile picture and other information</h4>
+                                            <h4 class="text-md text-black-900 dark:text-black-100">Cuanto tardan los envios en llegar?</h4>
                                         </div>
                                         <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
                                             <div>
@@ -41,7 +41,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">I didnt get a confirmation email, what should I do next</h4>
+                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Que compañias de envios hacen el reparto?</h4>
                                         </div>
                                         <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
                                             <div>
@@ -49,7 +49,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">What is the refund policy if I have to cancel during the month</h4>
+                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Cuantos dias de devolucion hay?</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">First time, what do I do next?</h4>
+                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Puedo cambiar mi contraseña?</h4>
                                         </div>
                                         <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
                                             <div>
@@ -74,7 +74,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Changing you profile picture and other information</h4>
+                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Puedo hacer cambios de informacion de perfil?</h4>
                                         </div>
                                         <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
                                             <div>
@@ -82,48 +82,7 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">I didnt get a confirmation email, what should I do next</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div role="cell" class="bg-gray-100">
-                                <div class="relative bg-white p-5 rounded-md relative h-full w-full">
-                                    <!-- class="absolute inset-0 object-center object-cover h-full w-full"  -->
-                                    <h1 class="pb-4 text-2xl font-semibold">Privacidad y cookies</h1>
-                                    <span><img class="bg-gray-200 p-2 mb-5 rounded-full" src="https://i.ibb.co/QX80fYm/lock-closed-1.png" alt="home-1" /></span>
-                                    <div class="my-5">
-                                        <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">First time, what do I do next?</h4>
-                                        </div>
-                                        <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Changing you profile picture and other information</h4>
-                                        </div>
-                                        <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">I didnt get a confirmation email, what should I do next</h4>
-                                        </div>
-                                        <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">What is the refund policy if I have to cancel during the month</h4>
+                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Como elimino mi cuenta?</h4>
                                         </div>
                                     </div>
                                 </div>
