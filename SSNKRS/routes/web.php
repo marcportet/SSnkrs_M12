@@ -69,6 +69,11 @@ Route::get('/detalle/{id}', [SneakersController::class, 'detalle'])->name('detal
 Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto');
 Route::get('/carrito', [SneakersController::class, 'carrito'])->name('carrito');
 Route::get('/fqs', [SneakersController::class, 'fqs'])->name('fqs');
+
+Route::get('/equipo', function () {
+    return Inertia::render('Views/equipo');
+})->name('equipo');
+
 require __DIR__ . '/auth.php';
 
 Route::post('/contacto',ContactController::class)->name('contact');

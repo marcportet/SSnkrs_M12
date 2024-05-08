@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\Client;
 
 class ProfileController extends Controller
 {
@@ -29,16 +30,22 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        $clientId = $request->user()->id_client;
+        $client = Client::find($clientId);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $client->fill($request->validated());
+
+        $client->save();
+
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+            $user->save();
         }
-
-        $request->user()->save();
 
         return Redirect::route('profile.edit');
     }
+
 
     /**
      * Delete the user's account.

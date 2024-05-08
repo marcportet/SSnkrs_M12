@@ -15,11 +15,23 @@ defineProps({
 });
 
 const user = usePage().props.auth.user;
+const client = usePage().props.auth.client;
 
 const form = useForm({
     name: user.name,
     email: user.email,
+    dataN: client.dataN,
+    telefon: client.telefon,
+    calle: client.calle,
+    poblacion: client.poblacion,
+    cpostal: client.cpostal,
+    info_adicional: client.info_adicional,
 });
+
+function filterNonNumeric(event) {
+    const input = event.target.value;
+    form.telefon = input.replace(/\D/g, ''); // Solo deja los dígitos
+}
 </script>
 
 <template>
@@ -36,7 +48,7 @@ const form = useForm({
             <div>
                 <InputLabel for="name" value="Nombre" />
 
-                <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus
+                <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus
                     autocomplete="name" />
 
                 <InputError class="mt-2" :message="form.errors.name" />
@@ -45,10 +57,58 @@ const form = useForm({
             <div>
                 <InputLabel for="email" value="Correo electrónico   " />
 
-                <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required
+                <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email"
                     autocomplete="username" />
 
                 <InputError class="mt-2" :message="form.errors.email" />
+            </div>
+
+            <div>
+                <InputLabel for="dataN" value="Fecha de nacimiento" />
+
+                <input
+                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"
+                    ref="input" id="dataN" type="date" v-model="form.dataN" autocomplete="username" />
+
+                <InputError class="mt-2" :message="form.errors.dataN" />
+            </div>
+
+            <div>
+                <InputLabel for="telefon" value="Numero de teléfon" />
+                <div class="relative mt-2 rounded-md shadow-sm">
+                    <input type="text" name="telefon" id="telefon"
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        autocomplete="telefon" v-model="form.telefon" @input="filterNonNumeric" />
+                </div>
+
+                <InputError class="mt-2" :message="form.errors.telefon" />
+            </div>
+
+            <div class="grid grid-cols-3 gap-4">
+                <div>
+                    <InputLabel for="poblacion" value="Población" />
+                    <input type="text" name="poblacion" id="poblacion"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        autocomplete="poblacion" v-model="form.cpostal" />
+
+                    <InputError class="mt-2" :message="form.errors.poblacion" />
+                </div>
+                <div>
+                    <InputLabel for="calle" value="Calle" />
+                    <input type="text" name="calle" id="calle"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        autocomplete="calle" v-model="form.cpostal" />
+
+                    <InputError class="mt-2" :message="form.errors.calle" />
+                </div>
+                <div>
+                    <InputLabel for="cpostal" value="Código postal" />
+                    <input type="text" name="cpostal" id="cpostal"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        autocomplete="cpostal" v-model="form.cpostal" @input="filterNonNumeric" />
+
+                    <InputError class="mt-2" :message="form.errors.cpostal" />
+                </div>
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
