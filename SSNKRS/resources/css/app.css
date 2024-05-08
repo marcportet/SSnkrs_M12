@@ -18,3 +18,13 @@
 .vermas:hover{
     color:#3B86F6;
 }
+
+#acordeon > details {
+    margin-bottom: 15px;
+    color: black;
+}
+
+#acordeon > details > p {
+    margin-top: 10px;
+    color: rgb(49, 49, 49);
+}

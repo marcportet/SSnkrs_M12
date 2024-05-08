@@ -20,46 +20,26 @@
                                 <div class="bg-white p-5 rounded-md relative h-full w-full">
                                     <!-- class="absolute inset-0 object-center object-cover h-full w-full"  -->
                                     <h1 class="pb-4 text-2xl font-semibold">Productos</h1>
+                                    <img width="32" height="32" src="https://img.icons8.com/windows/32/shopping-bag.png" alt="shopping-bag" class="bg-gray-200 p-2 mb-5 rounded-full"/>
+                                  <div id="acordeon">
+                                    <details>
+                                        <summary>Descripción de la guía de tallas</summary>
+                                        <p>Nuestra guía de tallas está disponible en el detalle de cada producto bajo "Guía de tallas".</p>
+                                    </details>
+                                    <details>
+                                        <summary>Tiempo estimado de entrega</summary>
+                                        <p>Los envíos suelen demorar entre 5 y 10 días hábiles, excluyendo los fines de semana.</p>
+                                    </details>
+                                    <details>
+                                        <summary>Proveedores de servicios de envío</summary>
+                                        <p>Trabajamos directamente con la compañía de Correos para realizar los envíos.</p>
+                                    </details>
+                                    <details>
+                                        <summary>Política de devoluciones</summary>
+                                        <p>El período de devolución es de 30 días a partir de la recepción del producto por parte del cliente.</p>
+                                    </details>
+                                  </div>
 
-
-                                    <div class="accordion" id="accordionPanelsStayOpenExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-        Accordion Item #1
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-      <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-        Accordion Item #2
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-      <div class="accordion-body">
-        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-        Accordion Item #3
-      </button>
-    </h2>
-    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
-      <div class="accordion-body">
-        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
-</div>
                                 </div>
                             </div>
                             <div role="cell" class="bg-gray-100">
@@ -67,32 +47,20 @@
                                     <!-- class="absolute inset-0 object-center object-cover h-full w-full"  -->
                                     <h1 class="pb-4 text-2xl font-semibold">Preferencias del perfil</h1>
                                     <span><img class="bg-gray-200 p-2 mb-5 rounded-full" src="https://i.ibb.co/HFC1hqn/people-1.png" alt="home-1" /></span>
-                                    <div class="my-5">
-                                        <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Puedo cambiar mi contraseña?</h4>
-                                        </div>
-                                        <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Puedo hacer cambios de informacion de perfil?</h4>
-                                        </div>
-                                        <div class="flex items-center pb-4 dark:border-gray-700 cursor-pointer w-full">
-                                            <div>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="12.5" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                </svg>
-                                            </div>
-                                            <h4 class="text-md text-black-900 dark:text-black-100 pl-4">Como elimino mi cuenta?</h4>
-                                        </div>
-                                    </div>
+                                    <div id="acordeon">
+                                      <details>
+                                        <summary>Cambio de contraseña</summary>
+                                        <p>Sí, para cambiar tu contraseña, debes acceder a la sección de información de tu perfil, donde encontrarás las instrucciones para realizar el cambio.</p>
+                                    </details>
+                                    <details>
+                                        <summary>Actualización de información de perfil</summary>
+                                        <p>Para actualizar la información de tu perfil, accede a la sección correspondiente en tu perfil. Allí podrás modificar todos los detalles que desees.</p>
+                                    </details>
+                                    <details>
+                                        <summary>Procedimiento para eliminar la cuenta</summary>
+                                        <p>Desde la sección de información del perfil, tienes la opción de eliminar tu cuenta en nuestra plataforma. Sin embargo, se te pedirá confirmación y deberás ingresar tu contraseña para completar el proceso.</p>
+                                    </details>
+                                  </div>
                                 </div>
                             </div>
                         </div>
