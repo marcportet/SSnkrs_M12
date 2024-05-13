@@ -96,17 +96,21 @@
 
               <div class="space-y-6 border-t border-gray-200 px-4 py-6" v-if="!$page.props.auth.user">
                 <div class="flow-root">
-                  <a @click="scrollToTop" href="/login" >Iniciar
-                    <!-- :class="[isActive('/login') ? 'text-blue-700 ease-out' : 'text-gray-900', '-m-2 block p-2 font-medium']" -->
+                  <a @click="scrollToTop" href="/login">Iniciar
                     sesión</a>
                 </div>
                 <div class="flow-root">
                   <a @click="scrollToTop" href="/register">Crear cuenta</a>
-                  <!-- :class="[isActive('/registro') ? 'text-blue-700 ease-out' : 'text-gray-900', '-m-2 block p-2 font-medium']" -->
                 </div>
               </div>
-
-
+              <div class="space-y-6 border-t border-gray-200 px-4 py-6" v-if="$page.props.auth.user">
+                <div class="flow-root">
+                  <Link @click="scrollToTop" :href="route('profile.edit')">Perfil</Link>
+                </div>
+                <div class="flow-root">
+                  <Link :href="route('logout')" @click="show = true" method="POST" as="button">Cerrar Sesión</Link>
+                </div>
+              </div>
             </DialogPanel>
           </TransitionChild>
         </div>
@@ -204,7 +208,7 @@
                 <a @click="scrollToTop" href="/register">Crear cuenta</a>
 
               </div>
-              <Dropdown align="right" width="48" v-if="$page.props.auth.user">
+              <Dropdown class="hidden lg:block" align="right" width="48" v-if="$page.props.auth.user">
                 <template #trigger>
                   <span class="inline-flex rounded-md">
                     <button type="button"
@@ -250,7 +254,8 @@
       </nav>
     </header>
     <!-- Alert Cerrar Sesión -->
-    <div aria-live="assertive" class="position-absolute inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start mt-20"
+    <div aria-live="assertive"
+      class="position-absolute inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start mt-20"
       style="z-index: 3;">
       <div class="w-full flex flex-col items-center space-y-4 sm:items-end">
         <transition enter-active-class="transform ease-out duration-300 transition"
@@ -312,6 +317,7 @@ import {
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
+import { Link } from '@inertiajs/vue3';
 defineProps({ user: Object })
 
 const show = ref(false)
