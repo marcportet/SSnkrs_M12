@@ -5,6 +5,8 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue'
+
 
 defineProps({
     status: {
@@ -17,8 +19,23 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('password.email'));
+    form.post(route('password.email'),{
+        onSuccess: () => clearForm(),
+    }
+    );
 };
+
+const showMessage = ref(false);
+
+function setshowMessage(value){
+    showMessage.value = value;
+}
+
+function clearForm(){
+    form.reset();
+    setshowMessage(true);
+    setTimeout(()=> setshowMessage(false),3000)
+}
 </script>
 
 <template>
@@ -48,6 +65,10 @@ const submit = () => {
                             </svg>
                             <h3 class="text-3xl font-extrabold">Contraseña Olvidada</h3>
                         </div>
+                        <div v-if="showMessage" style="height: 50px; text-align: center;" class="inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white w-100">
+                            Correo enviado correctamente!
+                        </div>
+                        <br><br>
                         <div class="mb-4 text-sm text-gray-600">
                             ¿Olvidaste tu contraseña? Ningún problema. Simplemente háganos saber su dirección de correo
                             electrónico y le enviaremos un correo electrónico.
