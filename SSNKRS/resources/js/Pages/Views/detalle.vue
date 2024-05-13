@@ -116,9 +116,12 @@
               </div>
             </div>
              -->
-              <button type="submit"
-                class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                Añadir al Carrito</button>
+             <button :disabled="!$page.props.auth.user || $page.props.auth.user.id_admin !== null" 
+              :class="{ 'bg-gray-400 hover:bg-gray-400': !$page.props.auth.user || $page.props.auth.user.id_admin !== null }" 
+              type="submit"
+              class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              {{ !$page.props.auth.user || $page.props.auth.user.id_admin !== null ? 'No disponible' : 'Añadir al Carrito' }}
+            </button>
             </div>
           </div>
         </form>
