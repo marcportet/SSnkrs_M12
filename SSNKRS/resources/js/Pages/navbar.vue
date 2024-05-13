@@ -353,6 +353,14 @@ const navigation = {
             { name: 'Yeezy', href: '/catalogo/YEEZY' },
           ],
         },
+        {
+          id: 'others',
+          name: 'Otras Paginas',
+          items: [
+            { name: 'Equipo', href: '/equipo' },
+            { name: 'FQs', href: '/fqs' },
+          ],
+        }
       ],
     },
   ],
