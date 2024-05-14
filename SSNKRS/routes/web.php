@@ -75,6 +75,7 @@ Route::put('/carrito/{id_producto}/{id_cliente}/{size}', [SneakersController::cl
 
 
 Route::get('/fqs', [SneakersController::class, 'fqs'])->name('fqs');
+
 Route::get('/equipo', function () {
     return Inertia::render('Views/equipo');
 })->name('equipo');
