@@ -67,4 +67,8 @@ class SneakersController extends Controller
     {
         return Inertia::render('Views/stock');
     }
+    public function usuarios()
+    {
+        return Inertia::render('Views/usuarios');
+    }
 }
