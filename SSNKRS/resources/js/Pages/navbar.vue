@@ -92,6 +92,10 @@
                   <a @click="scrollToTop" :href="page.href" class="-m-2 block p-2 font-medium text-gray-900">{{
                     page.name }}</a>
                 </div>
+                <div v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null">
+                    <a href="/stock" class="-m-2 block p-2 font-medium text-gray-900">Stock</a>
+                </div>
+
               </div>
 
               <div class="space-y-6 border-t border-gray-200 px-4 py-6" v-if="!$page.props.auth.user">
@@ -195,7 +199,11 @@
 
                 <a @click="scrollToTop" v-for="page in navigation.pages" :key="page.name" :href="page.href"
                   class="flex items-center text-sm font-medium text-gray-900">{{ page.name
-                  }}</a>
+                  }}
+                </a>
+                <div v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" class="separador"></div>
+                <a  v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" href="/stock" class="flex items-center text-sm font-medium text-gray-900">Stock</a>
+              
               </div>
             </PopoverGroup>
 
