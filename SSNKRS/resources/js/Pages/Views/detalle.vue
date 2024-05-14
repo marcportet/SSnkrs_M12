@@ -120,12 +120,19 @@
               </div>
             </div>
              -->
-             <button :disabled="!$page.props.auth.user || $page.props.auth.user.id_admin !== null" 
-              :class="{ 'bg-gray-400 hover:bg-gray-400': !$page.props.auth.user || $page.props.auth.user.id_admin !== null }" 
-              type="submit"
-              class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              <Link v-if="$page.props.auth.client" @click="resetform"
+                :href="'/carrito/' + sneaker.id + '/' + $page.props.auth.client.id + '/' + selectedSize" method="put"
+                as="button" type="button" :disabled="!$page.props.auth.user || $page.props.auth.user.id_admin !== null"
+                :class="{ 'bg-gray-400 hover:bg-gray-400': !$page.props.auth.user || $page.props.auth.user.id_admin !== null }"
+                class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
               {{ !$page.props.auth.user || $page.props.auth.user.id_admin !== null ? 'No disponible' : 'Añadir al Carrito' }}
-            </button>
+              </Link>
+              <Link v-else method="put" as="button" type="button"
+                :disabled="!$page.props.auth.user || $page.props.auth.user.id_admin !== null"
+                :class="{ 'bg-gray-400 hover:bg-gray-400': !$page.props.auth.user || $page.props.auth.user.id_admin !== null }"
+                class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              {{ !$page.props.auth.user || $page.props.auth.user.id_admin !== null ? 'No disponible' : 'Añadir al Carrito' }}
+              </Link>
             </div>
           </div>
         </form>
