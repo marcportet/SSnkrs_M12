@@ -28,3 +28,9 @@
     margin-top: 10px;
     color: rgb(49, 49, 49);
 }
+
+.separador{
+    border-left: 1px solid #c2c2c2;
+    height: 40px;
+    margin-top: 12px;
+}
