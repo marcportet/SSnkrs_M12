@@ -53,9 +53,11 @@ Route::get('/google-auth/callback', function () {
     // $user->token
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+/**
+Route::get('/', function () {
+    return Inertia::render('home');
 })->middleware(['auth', 'verified'])->name('dashboard');
+ */
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -67,9 +69,12 @@ Route::middleware('auth')->group(function () {
 Route::get('/catalogo/{marca?}', [SneakersController::class, 'catalogo'])->name('catalogo');
 Route::get('/detalle/{id}', [SneakersController::class, 'detalle'])->name('detalle');
 Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto');
-Route::get('/carrito', [SneakersController::class, 'carrito'])->name('carrito');
+
+Route::get('/carrito/{id_carrito}', [SneakersController::class, 'carrito'])->name('carrito.show');
+Route::put('/carrito/{id_producto}/{id_cliente}/{size}', [SneakersController::class, 'carrito_add'])->name('carrito.add');
+
+
 Route::get('/fqs', [SneakersController::class, 'fqs'])->name('fqs');
-Route::get('/stock', [SneakersController::class, 'stock'])->name('stock');
 
 Route::get('/equipo', function () {
     return Inertia::render('Views/equipo');
@@ -77,4 +82,4 @@ Route::get('/equipo', function () {
 
 require __DIR__ . '/auth.php';
 
-Route::post('/contacto',ContactController::class)->name('contact');
+Route::post('/contacto', ContactController::class)->name('contact');

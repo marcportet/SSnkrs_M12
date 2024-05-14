@@ -20,5 +20,6 @@ class Client extends Model
         'poblacion',
         'calle',
         'cpostal',
+        'id_carrito',
     ];
 }

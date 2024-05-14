@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Carrito;
+
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
@@ -27,9 +31,32 @@ class SneakersController extends Controller
     {
         return Inertia::render('Views/contacto');
     }
-    public function carrito()
+
+    public function carrito($id_carrito)
     {
-        return Inertia::render('Views/carrito');
+        $carrito = DB::table('carritos')
+            ->where('id', $id_carrito)
+            ->first();
+        return Inertia::render('Views/carrito', ['carrito' => $carrito]);
+    }
+
+    public function carrito_add($id_producto, $id_cliente, $size)
+    {
+        $client = Client::find($id_cliente);
+        $carrito = Carrito::find($client->id_carrito);
+
+        $productos = json_decode($carrito->productos, true);
+        $nuevo_producto = array(
+            'size' => $size,
+            'id_producto' => $id_producto
+        );
+        $productos[] = $nuevo_producto;
+
+        $productos_json = json_encode($productos);
+
+        $carrito->update(['productos' => $productos_json]);
+
+        return redirect()->back();
     }
 
     public function fqs()

@@ -11,6 +11,10 @@
         <form class="mt-10">
           <div
             class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
+            <div v-if="showMessage"
+              class="inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white w-full mb-3">
+              Añadido al carrito correctamente!
+            </div>
             <div class="lg:col-span-2  lg:pr-8">
               <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{{ sneaker.name }}</h1>
               <p class="text-3xl tracking-tight text-gray-900">{{ sneaker.price }}€</p>
@@ -116,11 +120,11 @@
               </div>
             </div>
              -->
-            <button :disabled="!$page.props.auth.user || $page.props.auth.user.id_admin !== null" 
+             <button :disabled="!$page.props.auth.user || $page.props.auth.user.id_admin !== null" 
               :class="{ 'bg-gray-400 hover:bg-gray-400': !$page.props.auth.user || $page.props.auth.user.id_admin !== null }" 
               type="submit"
               class="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-              {{ !$page.props.auth.user || $page.props.auth.user.id_admin !== null ? 'Necesitas estar registrado' : 'Añadir al Carrito' }}
+              {{ !$page.props.auth.user || $page.props.auth.user.id_admin !== null ? 'No disponible' : 'Añadir al Carrito' }}
             </button>
             </div>
           </div>
@@ -132,7 +136,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { Link } from '@inertiajs/vue3'
 import { StarIcon } from '@heroicons/vue/20/solid'
 import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@headlessui/vue'
 import { Head } from '@inertiajs/vue3'
@@ -142,7 +147,22 @@ defineProps({ user: Object })
 
 const sneaker_API = ref([]);
 
-axios.get(`http://localhost:3000/api/sneakers/` + route().params.id)
+const productID = route().params.id;
+
+const selectedSize = ref(null);
+
+function resetform() {
+  selectedSize.value = null;
+  setshowMessage(true);
+}
+
+const showMessage = ref(false);
+
+function setshowMessage(value) {
+  showMessage.value = value;
+}
+
+axios.get(`http://localhost:3000/api/sneakers/` + productID)
   .then(response => {
     sneaker_API.value = response.data.map(producto => ({
       ...producto,
