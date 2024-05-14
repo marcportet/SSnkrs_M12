@@ -69,6 +69,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/catalogo/{marca?}', [SneakersController::class, 'catalogo'])->name('catalogo');
 Route::get('/detalle/{id}', [SneakersController::class, 'detalle'])->name('detalle');
 Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto');
+Route::get('/stock', [SneakersController::class, 'stock'])->name('stock');
+Route::get('/usuarios', [SneakersController::class, 'usuarios'])->name('usuarios');
 
 Route::get('/carrito/{id_carrito}', [SneakersController::class, 'carrito'])->name('carrito.show');
 Route::put('/carrito/{id_producto}/{id_cliente}/{size}', [SneakersController::class, 'carrito_add'])->name('carrito.add');
