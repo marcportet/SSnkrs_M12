@@ -93,7 +93,9 @@
                     page.name }}</a>
                 </div>
                 <div v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null">
+                    <div class="separadorDown"></div>
                     <a href="/stock" class="-m-2 block p-2 font-medium text-gray-900">Stock</a>
+                    <a href="/usuarios" class="-m-2 block p-2 font-medium text-gray-900">Usuarios</a>
                 </div>
 
               </div>
@@ -203,7 +205,7 @@
                 </a>
                 <div v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" class="separador"></div>
                 <a  v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" href="/stock" class="flex items-center text-sm font-medium text-gray-900">Stock</a>
-              
+                <a  v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" href="/usuarios" class="flex items-center text-sm font-medium text-gray-900">Usuarios</a>
               </div>
             </PopoverGroup>
 

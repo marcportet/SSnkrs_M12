@@ -3,7 +3,7 @@
       <Navbar />
       <div class="flex-1 overflow-x-auto flex justify-center">
         <div class="p-1.5 min-w-full">
-          <div class="overflow-hidden">
+          <div class="overflow-scroll">
             <table class="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr>
@@ -11,44 +11,35 @@
                   <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Nombre</th>
                   <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Email</th>
                   <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Permisos</th>
+                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Admin</th>
+                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Marketing</th>
+                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Client</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
-                <tr v-for="user in paginatedUsuario" :key="user.id">
+                <tr v-for="user in users" :key="user.id">
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ user.id }}</td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ user.name }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ user.emauil }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"></td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ user.email }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                    <span v-if="user.id_admin">Admin, </span>
+                    <span v-if="user.id_client">Client</span>
+                    <span v-if="user.id_marketing">, Marketing</span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                    <button v-if="!user.id_admin" type="button" class="btn btn-warning">Añadir Rol Admin</button>
+                    <button v-if="user.id_admin" type="button" class="btn btn-danger">Eliminar Rol Admin</button>&nbsp;&nbsp;
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                    <button v-if="user.id_client && !user.id_marketing" type="button" class="btn btn-info">Añadir Rol Marketing</button>
+                    <button v-if="user.id_marketing" type="button" class="btn btn-danger">Eliminar Rol Marketing</button>&nbsp;&nbsp;
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                    <button v-if="user.id_client" type="button" class="btn btn-danger">Eliminar Cliente</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
-            <div class="flex justify-center mt-8">
-              <button @click="goToPage(1)" :disabled="currentPage === 1" class="px-3 py-1 mr-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
-                </svg>
-              </button>
-              <button @click="previousPage" :disabled="currentPage === 1" class="px-3 py-1 mr-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                </svg>
-              </button>
-              <div v-for="page in visiblePages" :key="page">
-                <button @click="goToPage(page)" :class="['px-3 py-1 mx-1 rounded-md border border-gray-300 bg-white text-sm font-medium', { 'bg-blue-600 text-gray-800': page === currentPage }]" class="text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                  {{ page }}
-                </button>
-              </div>
-              <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 ml-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                </svg>
-              </button>
-              <button @click="goToPage(totalPages)" :disabled="currentPage === totalPages" class="px-3 py-1 ml-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
-                </svg>
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -68,58 +59,23 @@
       Navbar,
       Footer,
     },
-    setup() {
-      const currentPage = ref(1);
-      const usuariosPerPage = 12;
-  
-      //Paginacion
-      
-      const startIndex = computed(() => (currentPage.value - 1) * usuariosPerPage);
-      const endIndex = computed(() => Math.min(startIndex.value + usuariosPerPage, user.value.length));
-      const paginatedUsuario = computed(() => user.value.slice(startIndex.value, endIndex.value));
-      const totalPages = computed(() => Math.ceil(user.value.length / usuariosPerPage));
-  
-      const previousPage = () => {
-        if (currentPage.value > 1) {
-          currentPage.value--;
-        }
-      };
-  
-      const nextPage = () => {
-        if (currentPage.value < totalPages.value) {
-          currentPage.value++;
-        }
-      };
-  
-      const visiblePages = computed(() => {
-        const totalVisiblePages = 5;
-        const halfVisiblePages = Math.floor(totalVisiblePages / 2);
-        const firstVisiblePage = Math.max(1, currentPage.value - halfVisiblePages);
-        const lastVisiblePage = Math.min(totalPages.value, firstVisiblePage + totalVisiblePages - 1);
-        const visiblePagesArray = [];
-  
-        for (let page = firstVisiblePage; page <= lastVisiblePage; page++) {
-          visiblePagesArray.push(page);
-        }
-  
-        return visiblePagesArray;
-      });
-  
-      const goToPage = (page) => {
-        currentPage.value = page;
-      };
-  
-      return {
-        user,
-        currentPage,
-        paginatedUsuario,
-        totalPages,
-        previousPage,
-        nextPage,
-        visiblePages,
-        goToPage,
-      };
+    props:{
+        users: Object,
     },
+    methods: {
+        
+    getPermissions(user) {
+      if (user.id_admin === '1') {
+        return 'Admin';
+      } else if (user.id_marketing === '1') {
+        return 'Marketing';
+      } else if (user.id_client === '1') {
+        return 'Client';
+      } else {
+        return 'No te permisos';
+      }
+    }
+  }
   };
   </script>
   

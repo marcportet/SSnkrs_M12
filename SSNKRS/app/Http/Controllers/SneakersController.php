@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Carrito;
+use App\Models\User;
+
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProfileUpdateRequest;
@@ -69,6 +71,9 @@ class SneakersController extends Controller
     }
     public function usuarios()
     {
-        return Inertia::render('Views/usuarios');
+        $users = DB::table('users')->get();
+                
+        return Inertia::render('Views/usuarios', ['users' => $users]);
     }
+
 }
