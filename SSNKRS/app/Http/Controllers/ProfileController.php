@@ -12,7 +12,8 @@ use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Client;
 use App\Models\User;
-
+use App\Models\Marketing;
+use App\Models\Admin;
 
 class ProfileController extends Controller
 {
@@ -70,6 +71,9 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+    /**
+     * Delete cuenta por id
+     */
     public function destroy_id($id): RedirectResponse
     {
         $user = User::find($id);
@@ -78,6 +82,68 @@ class ProfileController extends Controller
 
         return Redirect::to('/usuarios');
     }
+
+      /**
+     * Añadir rol de Marketing a un $id
+     */
+    public function add_marketing($id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        $marketing = Marketing::create([]);
+
+        $user->id_marketing = $marketing->id;
+
+        $user->save();
+
+        return Redirect::to('/usuarios');
+    }
+
+   /**
+     * Quitar rol de Marketing a un $id
+     */
+    public function remove_marketing($id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        $user->id_marketing = null;
+
+        $user->save();
+
+        return Redirect::to('/usuarios');
+    }
+
+
+    /**
+     * Añadir rol de Admin a un $id
+     */
+    public function add_admin($id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        $admin = Admin::create([]);
+
+        $user->id_admin = $admin->id;
+
+        $user->save();
+
+        return Redirect::to('/usuarios');
+    }
+
+   /**
+     * Quitar rol de Admin a un $id
+     */
+    public function remove_admin($id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        $user->id_admin = null;
+
+        $user->save();
+
+        return Redirect::to('/usuarios');
+    }
+
     public function google_destroy(Request $request): RedirectResponse
     {
         $request->validate([
