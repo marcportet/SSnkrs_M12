@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 use App\Models\Client;
+use App\Models\User;
+
 
 class ProfileController extends Controller
 {
@@ -68,6 +70,14 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+    public function destroy_id($id): RedirectResponse
+    {
+        $user = User::find($id);
+
+        $user->delete();
+
+        return Redirect::to('/usuarios');
+    }
     public function google_destroy(Request $request): RedirectResponse
     {
         $request->validate([
