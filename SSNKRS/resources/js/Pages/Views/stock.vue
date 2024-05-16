@@ -3,7 +3,18 @@
     <Navbar />
     <div class="flex-1 overflow-x-auto flex justify-center">
       <div class="p-1.5 min-w-full">
-        <div class="overflow-hidden">
+        <div class="overflow-hidden"><br>
+          <div class="flex">
+            &nbsp;&nbsp;
+            <svg style="margin-top: 10px;" width="20" height="20" enable-background="new 0 0 316 32" id="Glyph" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z" id="XMLID_223_"/>
+          </svg>
+          &nbsp;&nbsp;&nbsp;<input
+            v-model="searchTerm"
+            type="text"
+            placeholder="Buscar por nombre"
+            class="mb-4 p-2 border rounded"
+          />
+          </div>
           <table class="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
@@ -73,6 +84,7 @@ export default {
     const productos = ref([]);
     const currentPage = ref(1);
     const productsPerPage = 12;
+    const searchTerm = ref('');
 
     const fetchProductos = async () => {
       try {
@@ -85,13 +97,18 @@ export default {
 
     fetchProductos();
 
+    // Filtrar productos en base al término de búsqueda
+    const filteredProductos = computed(() => {
+      return productos.value.filter(producto =>
+        producto.name.toLowerCase().includes(searchTerm.value.toLowerCase())
+      );
+    });
 
-    //Paginacion
-    
+    // Paginación
     const startIndex = computed(() => (currentPage.value - 1) * productsPerPage);
-    const endIndex = computed(() => Math.min(startIndex.value + productsPerPage, productos.value.length));
-    const paginatedProductos = computed(() => productos.value.slice(startIndex.value, endIndex.value));
-    const totalPages = computed(() => Math.ceil(productos.value.length / productsPerPage));
+    const endIndex = computed(() => Math.min(startIndex.value + productsPerPage, filteredProductos.value.length));
+    const paginatedProductos = computed(() => filteredProductos.value.slice(startIndex.value, endIndex.value));
+    const totalPages = computed(() => Math.ceil(filteredProductos.value.length / productsPerPage));
 
     const previousPage = () => {
       if (currentPage.value > 1) {
@@ -126,6 +143,7 @@ export default {
     return {
       productos,
       currentPage,
+      searchTerm,
       paginatedProductos,
       totalPages,
       previousPage,
