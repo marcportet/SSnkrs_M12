@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile/destroy', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::delete('/profile/google_destroy', [ProfileController::class, 'google_destroy'])->name('profile.google_destroy');
+    Route::delete('/profile/destroy_id/{id}', [ProfileController::class, 'destroy_id'])->name('profile.destroy_id');
 });
 
 Route::get('/catalogo/{marca?}', [SneakersController::class, 'catalogo'])->name('catalogo');
@@ -71,14 +72,12 @@ Route::get('/detalle/{id}', [SneakersController::class, 'detalle'])->name('detal
 Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto');
 Route::get('/stock', [SneakersController::class, 'stock'])->name('stock');
 Route::get('/usuarios', [SneakersController::class, 'usuarios'])->name('usuarios');
+Route::get('/fqs', [SneakersController::class, 'fqs'])->name('fqs');
 
 Route::middleware('auth')->group(function () {
     Route::get('/carrito/{id_carrito}', [SneakersController::class, 'carrito'])->name('carrito.show');
     Route::put('/carrito/{id_producto}/{id_cliente}/{size}', [SneakersController::class, 'carrito_add'])->name('carrito.add');
 });
-
-
-Route::get('/fqs', [SneakersController::class, 'fqs'])->name('fqs');
 
 Route::get('/equipo', function () {
     return Inertia::render('Views/equipo');
@@ -87,3 +86,12 @@ Route::get('/equipo', function () {
 require __DIR__ . '/auth.php';
 
 Route::post('/contacto', ContactController::class)->name('contact');
+
+//Rutas pagina Usuario
+
+Route::put('/profile/add_marketing/{id}', [ProfileController::class, 'add_marketing'])->name('profile.add_marketing');
+Route::put('/profile/remove_marketing/{id}', [ProfileController::class, 'remove_marketing'])->name('profile.remove_marketing');
+
+Route::put('/profile/add_admin/{id}', [ProfileController::class, 'add_admin'])->name('profile.add_admin');
+Route::put('/profile/remove_admin/{id}', [ProfileController::class, 'remove_admin'])->name('profile.remove_admin');
+

@@ -13,7 +13,7 @@
                   <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Permisos</th>
                   <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Admin</th>
                   <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Marketing</th>
-                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Client</th>
+                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">User</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-gray-200">
@@ -27,15 +27,30 @@
                     <span v-if="user.id_marketing">, Marketing</span>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    <button v-if="!user.id_admin" type="button" class="btn btn-warning">Añadir Rol Admin</button>
-                    <button v-if="user.id_admin" type="button" class="btn btn-danger">Eliminar Rol Admin</button>&nbsp;&nbsp;
+                    <Link v-if="!user.id_admin" type="button" class="btn btn-warning" as="button"
+                    :href="'/profile/add_admin/' + user.id" method="put">
+                    Añadir Rol Admin
+                    </Link>
+                    <Link v-if="user.id_admin" type="button" class="btn btn-danger" as="button"
+                    :href="'/profile/remove_admin/' + user.id" method="put">
+                    Eliminar Rol Admin
+                    </Link>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    <button v-if="user.id_client && !user.id_marketing" type="button" class="btn btn-info">Añadir Rol Marketing</button>
-                    <button v-if="user.id_marketing" type="button" class="btn btn-danger">Eliminar Rol Marketing</button>&nbsp;&nbsp;
+                    <Link v-if="user.id_client && !user.id_marketing" type="button" as="button" class="btn btn-info"
+                    :href="'/profile/add_marketing/' + user.id" method="put">
+                      Añadir Rol Marketing
+                    </Link>
+                    <Link v-if="user.id_marketing" type="button" class="btn btn-danger" as="button"
+                    :href="'/profile/remove_marketing/' + user.id" method="put">
+                      Eliminar Rol Marketing
+                    </Link>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    <button v-if="user.id_client" type="button" class="btn btn-danger">Eliminar Cliente</button>
+                    <Link v-if="user.id_client" type="button" as="button" class="btn btn-danger"
+                    :href="'/profile/destroy_id/' + user.id" method="delete">
+                      Eliminar User
+                    </Link>
                   </td>
                 </tr>
               </tbody>
@@ -52,32 +67,22 @@
   import Footer from '../footer.vue';
   import { ref, computed } from 'vue';
   import axios from 'axios';
+  import { Link } from '@inertiajs/vue3'
+
   
   
   export default {
     components: {
       Navbar,
       Footer,
+      Link,
     },
     props:{
         users: Object,
     },
-    methods: {
-        
-    getPermissions(user) {
-      if (user.id_admin === '1') {
-        return 'Admin';
-      } else if (user.id_marketing === '1') {
-        return 'Marketing';
-      } else if (user.id_client === '1') {
-        return 'Client';
-      } else {
-        return 'No te permisos';
-      }
-    }
-  }
   };
   </script>
+
   
   <style scoped>
   button:disabled {
