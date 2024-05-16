@@ -67,6 +67,25 @@ class ProfileController extends Controller
 
         $user->delete();
 
+        if($user->id_client){
+            $id_client = $user->id_client;
+            $client = Client::find($id_client);
+            $carrito = Carrito::find($client->id_carrito);
+
+            $client->delete();
+            $carrito->delete();
+        }
+        if($user->id_admin){
+            $id_admin = $user->id_admin;
+            $admin = Admin::find($id_admin);
+            $admin->delete();
+        }
+        if($user->id_marketing){
+            $id_marketing = $user->id_marketing;
+            $marketing = Marketing::find($id_marketing);
+            $marketing->delete();
+        }
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
