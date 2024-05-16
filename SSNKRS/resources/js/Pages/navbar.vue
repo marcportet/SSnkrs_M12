@@ -203,8 +203,8 @@
                   class="flex items-center text-sm font-medium text-gray-900">{{ page.name
                   }}
                 </a>
-                <div v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" class="separador"></div>
-                <a  v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" href="/stock" class="flex items-center text-sm font-medium text-gray-900">Stock</a>
+                <div v-if="$page.props.auth.user && ($page.props.auth.user.id_admin || $page.props.auth.user.id_marketing !== null)" class="separador"></div>
+                <a  v-if="$page.props.auth.user && ($page.props.auth.user.id_admin || $page.props.auth.user.id_marketing !== null)" href="/stock" class="flex items-center text-sm font-medium text-gray-900">Stock</a>
                 <a  v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" href="/usuarios" class="flex items-center text-sm font-medium text-gray-900">Usuarios</a>
               </div>
             </PopoverGroup>

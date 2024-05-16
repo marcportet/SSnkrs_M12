@@ -18,6 +18,8 @@
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
         @inertiaHead
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     </head>
     <body class="font-sans antialiased">
         @inertia
