@@ -44,7 +44,7 @@ class SneakersController extends Controller
 
     public function carrito_add($id_producto, $id_cliente, $size)
     {
-        if($size == "null"){
+        if ($size == "null") {
             return redirect()->back()->with('message', 'Talla no seleccionada.');
         }
 
@@ -54,14 +54,16 @@ class SneakersController extends Controller
         $productos = json_decode($carrito->productos, true);
 
         $producto_existente = false;
-        foreach ($productos as $producto) {
-            if ($producto['id_producto'] == $id_producto && $producto['size'] == $size) {
-                $producto_existente = true;
-                break;
+        if ($productos != null) {
+            foreach ($productos as $producto) {
+                if ($producto['id_producto'] == $id_producto && $producto['size'] == $size) {
+                    $producto_existente = true;
+                    break;
+                }
             }
-        }
-        if ($producto_existente) {
-            return redirect()->back()->with('message', 'El producto ya está en el carrito con la misma talla.');
+            if ($producto_existente) {
+                return redirect()->back()->with('message', 'El producto ya está en el carrito con la misma talla.');
+            }
         }
 
         $nuevo_producto = array(

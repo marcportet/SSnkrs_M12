@@ -9,6 +9,8 @@ use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Client;
+use App\Models\Carrito;
 
 
 Route::get('/', function () {
@@ -40,11 +42,18 @@ Route::get('/google-auth/callback', function () {
     //Login con google
     $user_google = Socialite::driver('google')->user();
 
+    $carrito = Carrito::create([]);
+
+    $client = Client::create([
+        'id_carrito' => $carrito->id,
+    ]);
+
     $user = User::updateOrCreate([
         'google_id' => $user_google->id,
     ], [
         'name' => $user_google->name,
         'email' => $user_google->email,
+        'id_client' => $client->id,
     ]);
 
     Auth::login($user);
@@ -95,4 +104,3 @@ Route::put('/profile/remove_marketing/{id}', [ProfileController::class, 'remove_
 
 Route::put('/profile/add_admin/{id}', [ProfileController::class, 'add_admin'])->name('profile.add_admin');
 Route::put('/profile/remove_admin/{id}', [ProfileController::class, 'remove_admin'])->name('profile.remove_admin');
-
