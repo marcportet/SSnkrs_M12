@@ -10,7 +10,7 @@
             <li v-for="(product, index) in productDetails" :key="index" class="flex py-6 sm:py-10">
               <div class="flex-shrink-0">
                 <img :src="product[0].image" :alt="product[0].name" :href="'/detalle/' + product[0].id"
-                  class="w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48" />
+                  class="w-24 h-24 rounded-md object-center sm:w-48 sm:h-36" />
               </div>
 
               <div class="ml-4 flex-1 flex flex-col justify-between sm:ml-6">
