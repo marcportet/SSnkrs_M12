@@ -47,7 +47,7 @@
                     </Link>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                    <Link v-if="user.id_client" type="button" as="button" class="btn btn-danger"
+                    <Link v-if="user.id_client && user.id_client != $page.props.auth.user.id_client" type="button" as="button" class="btn btn-danger"
                     :href="'/profile/destroy_id/' + user.id" method="delete">
                       Eliminar User
                     </Link>
