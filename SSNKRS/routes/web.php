@@ -77,6 +77,7 @@ Route::get('/fqs', [SneakersController::class, 'fqs'])->name('fqs');
 Route::middleware('auth')->group(function () {
     Route::get('/carrito/{id_carrito}', [SneakersController::class, 'carrito'])->name('carrito.show');
     Route::put('/carrito/{id_producto}/{id_cliente}/{size}', [SneakersController::class, 'carrito_add'])->name('carrito.add');
+    Route::delete('/carrito/{id_carrito}/{id_producto}/{size}', [SneakersController::class, 'carrito_delete'])->name('carrito.delete');
 });
 
 Route::get('/equipo', function () {

@@ -22,8 +22,11 @@ const form = useForm({
 const confirmUserDeletion = () => {
     confirmingUserDeletion.value = true;
 
-    nextTick(() => passwordInput.value.focus());
-    nextTick(() => emailInput.value.focus());
+    if (passwordInput.value) {
+        nextTick(() => passwordInput.value.focus());
+    } else if (emailInput.value) {
+        nextTick(() => emailInput.value.focus());
+    }
 };
 
 const deleteUser = () => {
@@ -89,8 +92,8 @@ const closeModal = () => {
                 <div class="mt-6" v-if="user.google_id">
                     <InputLabel for="email" value="Email" class="sr-only" />
 
-                    <TextInput id="email" ref="emailInput" v-model="form.email" type="text"
-                        class="mt-1 block w-3/4" placeholder="Email" @keyup.enter="deleteUser" />
+                    <TextInput id="email" ref="emailInput" v-model="form.email" type="text" class="mt-1 block w-3/4"
+                        placeholder="Email" @keyup.enter="deleteUser" />
 
                     <InputError :message="form.errors.email" class="mt-2" />
                 </div>

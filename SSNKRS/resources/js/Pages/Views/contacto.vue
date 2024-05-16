@@ -1,11 +1,11 @@
 <template>
-    <layout>
+    <div class="bg-white">
 
         <Head title="Contacto" />
         <Navbar />
         <section class="relative flex flex-wrap lg:h-screen lg:items-center">
             <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
-                
+
                 <div class="mx-auto max-w-lg text-center">
                     <h1 class="text-center text-2xl font-bold text-blue-600 sm:text-3xl">Contactanos en unos segundos
                     </h1>
@@ -16,9 +16,10 @@
                         contestaremos lo antes posible.
                     </p>
                     <br>
-                <div v-if="showMessage" class="inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white w-100">
-                    Correo enviado correctamente!
-                </div>
+                    <div v-if="showMessage"
+                        class="inline-block rounded-lg bg-green-500 px-5 py-3 text-sm font-medium text-white w-100">
+                        Correo enviado correctamente!
+                    </div>
                 </div>
 
                 <form @submit.prevent="submitForm" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
@@ -26,7 +27,8 @@
                         <label for="name" class="sr-only">Nombre y Apellidos</label>
 
                         <div class="relative">
-                            <input v-model="form.name" type="text" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            <input v-model="form.name" type="text"
+                                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Introduce el Nombre y Apellidos" />
                         </div>
                         <span v-if="form.errors.name" class="text-sm m-2 text-red-400">{{ form.errors.name }}</span>
@@ -36,7 +38,8 @@
                         <label for="email" class="sr-only">Email</label>
 
                         <div class="relative">
-                            <input v-model="form.email" type="email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            <input v-model="form.email" type="email"
+                                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 placeholder="Enter email" />
 
                             <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -54,7 +57,8 @@
                         <label for="text" class="sr-only">descripcion</label>
 
                         <div class="relative">
-                            <textarea v-model="form.text" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            <textarea v-model="form.text"
+                                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 style="resize: none;height: 200px;" placeholder="Describe el problema" />
                         </div>
 
@@ -73,7 +77,7 @@
             </div>
         </section>
         <Footer />
-    </layout>
+    </div>
 </template>
 
 <script setup>
@@ -85,14 +89,14 @@ defineProps({ user: Object })
 
 const showMessage = ref(false);
 
-function setshowMessage(value){
+function setshowMessage(value) {
     showMessage.value = value;
 }
 
-function clearForm(){
+function clearForm() {
     form.reset();
     setshowMessage(true);
-    setTimeout(()=> setshowMessage(false),3000)
+    setTimeout(() => setshowMessage(false), 3000)
 }
 const form = useForm({
     name: '',

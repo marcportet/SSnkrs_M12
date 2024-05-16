@@ -1,8 +1,6 @@
 <template>
-    <Layout>
-
-        <Head title="Home" />
         <div class="home bg-white">
+            <Head title="Home" />
             <Navbar />
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
@@ -129,7 +127,6 @@
             </div>
             <Footer />
         </div>
-    </Layout>
 </template>
 
 <script setup>

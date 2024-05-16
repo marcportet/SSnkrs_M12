@@ -1,22 +1,6 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
--->
 <template>
-  <Layout>
-
-    <Head title="Catalogo" />
     <div class="bg-white">
+      <Head title="Catalogo" />
       <Navbar />
       <div>
         <!-- Mobile filter dialog -->
@@ -250,9 +234,8 @@
           </section>
         </main>
       </div>
+      <Footer />
     </div>
-    <Footer />
-  </Layout>
 </template>
 
 <script setup>
