@@ -1,5 +1,6 @@
 <template>
   <div class="bg-white">
+    <Head title="Carrito" />
     <Navbar />
     <div class="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
       <h1 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Carrito de productos</h1>
@@ -142,6 +143,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import { Head } from '@inertiajs/vue3'
 
 export default {
   data() {
@@ -206,6 +208,7 @@ export default {
     InputLabel,
     PrimaryButton,
     TextInput,
+    Head
   },
   mounted() {
     this.loadProductDetails(this.carrito);
