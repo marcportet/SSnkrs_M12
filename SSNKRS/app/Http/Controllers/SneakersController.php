@@ -8,15 +8,8 @@ use App\Models\Carrito;
 use App\Models\Comanda;
 
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Requests\CarritoSubmitRequest;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
-use Inertia\Response;
 
 class SneakersController extends Controller
 {
@@ -100,7 +93,7 @@ class SneakersController extends Controller
         return redirect()->back();
     }
 
-    public function carrito_submit(CarritoSubmitRequest $request): RedirectResponse
+    public function carrito_submit(CarritoSubmitRequest $request)
     {
         $user = $request->user();
         $client = Client::find($user->id_client);
@@ -121,9 +114,10 @@ class SneakersController extends Controller
             'id_client' => $client->id,
         ]);
 
-        $carrito->productos = [];
+        $carrito->productos = json_encode([]);
+        $carrito->save();
 
-        return Redirect::route('Views/comanda', ['comanda' => $comanda]);
+        return Inertia::render('Views/comanda', ['comanda' => $comanda]);
     }
 
     public function fqs()
