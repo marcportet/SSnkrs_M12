@@ -121,7 +121,9 @@ class SneakersController extends Controller
             'id_client' => $client->id,
         ]);
 
-        return Redirect::route('/comanda/'.$comanda->id);
+        $carrito->productos = [];
+
+        return Redirect::route('Views/comanda', ['comanda' => $comanda]);
     }
 
     public function fqs()
@@ -139,8 +141,11 @@ class SneakersController extends Controller
         return Inertia::render('Views/usuarios', ['users' => $users]);
     }
 
-    public function comanda()
+    public function comanda($id_comanda)
     {
-        return Inertia::render('Views/comanda');
+        $comanda = DB::table('comandas')
+            ->where('id', $id_comanda)
+            ->first();
+        return Inertia::render('Views/comanda', ['comanda' => $comanda]);
     }
 }
