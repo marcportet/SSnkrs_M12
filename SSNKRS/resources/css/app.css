@@ -39,3 +39,16 @@
     border-bottom: 1px solid #c2c2c2;
     margin-bottom: 20px;
 }
+
+/*Border radius cajas resmuen comanda*/
+.flex.flex-col.justify-start.items-start.bg-gray-50.px-4.py-4.md\:py-6.md\:p-6.xl\:p-8.w-full.border-4.border-blue-500 {
+    border-radius: 30px;
+}
+
+.flex.justify-center.flex-col.md\:flex-row.flex-col.items-stretch.w-full.space-y-4.md\:space-y-0.md\:space-x-6.xl\:space-x-8.border-4.border-blue-500{
+    border-radius: 30px;
+}
+
+.border-4.border-blue-500.w-full.xl\:w-96.flex.justify-between.items-center.md\:items-start.px-4.py-6.md\:p-6.xl\:p-8.flex-col{
+    border-radius: 30px;
+}
