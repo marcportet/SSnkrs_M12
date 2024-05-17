@@ -9,7 +9,7 @@
           <ul role="list" class="border-t border-b border-gray-200 divide-y divide-gray-200">
             <li v-for="(product, index) in productDetails" :key="index" class="flex py-6 sm:py-10">
               <div class="flex-shrink-0">
-                <img :src="product[0].image" :alt="product[0].name" :href="'/detalle/' + product[0].id"
+                <img :src="product.image" :alt="product.name" :href="'/detalle/' + product.id"
                   class="w-24 h-24 rounded-md object-center sm:w-48 sm:h-36" />
               </div>
 
@@ -18,28 +18,28 @@
                   <div>
                     <div class="flex justify-between">
                       <h3 class="text-sm">
-                        <a :href="'/detalle/' + product[0].id" class="font-medium text-gray-700 hover:text-gray-800">
-                          {{ product[0].name }}
+                        <a :href="'/detalle/' + product.id" class="font-medium text-gray-700 hover:text-gray-800">
+                          {{ product.name }}
                         </a>
                       </h3>
                     </div>
                     <div class="mt-1 flex text-sm">
                       <p class="text-gray-500">
-                        {{ product[0].brand }}
+                        {{ product.brand }}
                       </p>
-                      <p v-if="product" class="ml-4 pl-4 border-l border-gray-200 text-gray-500">
+                      <p v-if="product.size" class="ml-4 pl-4 border-l border-gray-200 text-gray-500">
                         {{ product.size }}
                       </p>
                     </div>
-                    <p class="mt-1 text-sm font-medium text-gray-900">{{ product[0].price }}€</p>
+                    <p class="mt-1 text-sm font-medium text-gray-900">{{ product.price }}€</p>
                   </div>
 
                   <div class="mt-4 sm:mt-0 sm:pr-9">
-                    <label :for="`quantity-${index}`" class="sr-only">Quantity, {{ product[0].name }}</label>
+                    <label :for="`quantity-${index}`" class="sr-only">Quantity, {{ product.name }}</label>
                     <div class="absolute top-0 right-0">
                       <Link @click="deleteItem()" as="button" type="button" method="delete"
                         class="-m-2 p-2 inline-flex text-gray-400 hover:text-gray-500"
-                        :href="'/carrito/' + carrito.id + '/' + product[0].id + '/' + product.size">
+                        :href="'/carrito/' + carrito.id + '/' + product.id + '/' + product.size">
                       <span class="sr-only">Eliminar</span>
                       <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -58,29 +58,72 @@
         <!-- Order summary -->
         <section aria-labelledby="summary-heading"
           class="mt-16 bg-gray-50 rounded-lg px-4 py-6 sm:p-6 lg:p-8 lg:mt-0 lg:col-span-5">
-          <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Resumen del pedido</h2>
+          <form @submit.prevent="form.patch(route('carrito.submit'))">
+            <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Dirección de envio</h2>
+            <div class="grid grid-cols-2 gap-4 m-2">
+              <div>
+                <InputLabel for="poblacion" value="Población" />
 
-          <dl class="mt-6 space-y-4">
-            <div class="flex items-center justify-between">
-              <dt class="text-sm text-gray-600">Subtotal</dt>
-              <dd class="text-sm font-medium text-gray-900">{{ productosprices }}€</dd>
-            </div>
-            <div class="border-t border-gray-200 pt-4 flex items-center justify-between">
-              <dt class="flex items-center text-sm text-gray-600">
-                <span>Coste de envio estimado</span>
-              </dt>
-              <dd class="text-sm font-medium text-gray-900">{{ productosprices * 0.05 }}€</dd>
-            </div>
-            <div class="border-t border-gray-200 pt-4 flex items-center justify-between">
-              <dt class="text-base font-medium text-gray-900">Total del pedido</dt>
-              <dd class="text-base font-medium text-gray-900">{{ (productosprices) + (productosprices * 0.05) }}€</dd>
-            </div>
-          </dl>
+                <TextInput placeholder="ej. Barcelona" id="poblacion" type="text" class="mt-1 block w-full text-sm"
+                  v-model="form.poblacion" autofocus autocomplete="poblacion" />
 
-          <div class="mt-6">
-            <button type="submit"
-              class="w-full bg-indigo-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">Checkout</button>
-          </div>
+                <InputError class="mt-2" :message="form.errors.poblacion" />
+              </div>
+              <div>
+                <InputLabel for="cpostal" value="Código Postal" />
+
+                <input placeholder="ej. 08001" type="text" name="cpostal" id="cpostal"
+                  class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  autocomplete="cpostal" v-model="form.cpostal" @input="filterNonNumeric" />
+
+                <InputError class="mt-2" :message="form.errors.cpostal" />
+              </div>
+            </div>
+            <div class="m-2">
+              <InputLabel for="calle" value="Dirección de la vivienda" />
+
+              <TextInput placeholder="ej. C/ d'Aragó, 401, 2" id="calle" type="text" class="mt-1 block w-full text-sm"
+                v-model="form.calle" autofocus autocomplete="calle" />
+
+              <InputError class="mt-2" :message="form.errors.calle" />
+            </div>
+            <div class="m-2">
+              <InputLabel for="info_adicional" value="Informacón adicional de envio" />
+
+              <textarea placeholder="Añade instrucciones e información adicional para el envio." name="info_adicional"
+                id="info_adicional" cols="30" rows="10" autocomplete="info_adicional" v-model="form.info_adicional"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm resize-none"></textarea>
+
+              <InputError class="mt-2" :message="form.errors.info_adicional" />
+            </div>
+
+            <h2 id="summary-heading" class="text-lg font-medium text-gray-900">Resumen del pedido</h2>
+
+            <dl class="mt-6 space-y-4">
+              <div class="m-2 flex items-center justify-between">
+                <dt class="text-sm text-gray-600">Subtotal</dt>
+                <dd class="text-sm font-medium text-gray-900">{{ productosprices ? productosprices : 0 }}€</dd>
+              </div>
+              <div class="m-2 border-t border-gray-200 pt-4 flex items-center justify-between">
+                <dt class="flex items-center text-sm text-gray-600">
+                  <span>Coste de envio estimado</span>
+                </dt>
+                <dd class="text-sm font-medium text-gray-900">{{ productosprices ? productosprices * 0.05 : 0 }}€</dd>
+              </div>
+              <div class="border-t border-gray-200 pt-4 flex items-center justify-between">
+                <dt class="text-base font-medium text-gray-900">Total del pedido</dt>
+                <dd class="text-base font-medium text-gray-900">{{ productosprices ? (productosprices) +
+                  (productosprices * 0.05) : 0 }}€</dd>
+              </div>
+            </dl>
+
+            <div class="mt-6">
+              <PrimaryButton :disabled="form.processing" v-if="$page.props.auth.client"
+                class="w-full bg-blue-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500">
+                Realizar pedido
+              </PrimaryButton>
+            </div>
+          </form>
         </section>
       </form>
     </div>
@@ -91,32 +134,46 @@
 <script>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { usePage, Link, useForm } from '@inertiajs/vue3';
 
 import Navbar from '../navbar.vue';
 import Footer from '../footer.vue';
-import { Link } from '@inertiajs/vue3'
+import InputError from '@/Components/InputError.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import TextInput from '@/Components/TextInput.vue';
 
 export default {
   data() {
     return {
       productDetails: [],
+      productosprices: 0,
     };
   },
   props: {
     carrito: Object,
   },
-  setup(props) {
+  setup() {
+    const page = usePage();
+    const client = page.props.auth.client;
+
+    const form = useForm({
+      calle: client ? client.calle : '',
+      poblacion: client ? client.poblacion : '',
+      cpostal: client ? client.cpostal : '',
+      info_adicional: client ? client.info_adicional : '',
+    });
+
     const productDetails = ref([]);
     const productosprices = ref(0);
 
-    const loadProductDetails = async () => {
+    const loadProductDetails = async (carrito) => {
       try {
-        const productosArray = JSON.parse(props.carrito.productos);
-
+        const productosArray = JSON.parse(carrito.productos);
         for (const product of productosArray) {
           const response = await axios.get(`http://localhost:3000/api/sneakers/${product.id_producto}`);
           const size = product.size;
-          const productWithSize = { ...response.data, size };
+          const productWithSize = { ...response.data[0], size };
           productDetails.value.push(productWithSize);
           productosprices.value += response.data[0].price;
         }
@@ -125,26 +182,33 @@ export default {
       }
     };
 
-    onMounted(() => {
-      loadProductDetails();
-    });
-
     return {
       productDetails,
       productosprices,
+      form,
+      loadProductDetails,
+      deleteItem() {
+        setTimeout(() => {
+          window.location.reload();
+        }, 200);
+      },
+      filterNonNumeric(event) {
+        const input = event.target.value;
+        form.cpostal = input.replace(/\D/g, ''); // Solo deja los dígitos
+      },
     };
   },
   components: {
     Navbar,
     Footer,
-    Link
+    Link,
+    InputError,
+    InputLabel,
+    PrimaryButton,
+    TextInput,
   },
-  methods: {
-    deleteItem() {
-      setTimeout(() => {
-        window.location.reload();
-      }, 200); // 5000 milisegundos = 5 segundos
-    }
+  mounted() {
+    this.loadProductDetails(this.carrito);
   },
 };
 </script>

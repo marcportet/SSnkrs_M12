@@ -82,11 +82,15 @@ Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto
 Route::get('/stock', [SneakersController::class, 'stock'])->name('stock');
 Route::get('/usuarios', [SneakersController::class, 'usuarios'])->name('usuarios');
 Route::get('/fqs', [SneakersController::class, 'fqs'])->name('fqs');
+Route::get('/comanda/{id}', [SneakersController::class, 'comanda'])->name('comanda');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/carrito/{id_carrito}', [SneakersController::class, 'carrito'])->name('carrito.show');
     Route::put('/carrito/{id_producto}/{id_cliente}/{size}', [SneakersController::class, 'carrito_add'])->name('carrito.add');
     Route::delete('/carrito/{id_carrito}/{id_producto}/{size}', [SneakersController::class, 'carrito_delete'])->name('carrito.delete');
+    Route::post('/carrito/{id_carrito}', [SneakersController::class, 'carrito_delete'])->name('carrito.delete');
+    Route::patch('/carrito', [SneakersController::class, 'carrito_submit'])->name('carrito.submit');
 });
 
 Route::get('/equipo', function () {

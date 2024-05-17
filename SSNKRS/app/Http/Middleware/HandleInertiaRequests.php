@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use App\Models\Client;
+use App\Models\Carrito;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -30,23 +31,29 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        if($request->user()){
+        $sharedData = [
+            ...parent::share($request),
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+            ],
+        ];
+
+        if ($request->user()) {
             $clientId = $request->user()->id_client;
             $client = Client::find($clientId);
-            return [
-                ...parent::share($request),
-                'auth' => [
-                    'user' => $request->user(),
-                     'client' => $client
-                ],
+            $carrito = Carrito::find($client->id_carrito);
+            $sharedData['auth'] = [
+                'user' => $request->user(),
+                'client' => $client,
+                'carrito' => $carrito,
             ];
-        }else{
-            return [
-                ...parent::share($request),
-                'auth' => [
-                    'user' => $request->user(),
-                ],
+        } else {
+            $sharedData['auth'] = [
+                'user' => $request->user(),
             ];
         }
+
+        return $sharedData;
     }
 }

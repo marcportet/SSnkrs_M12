@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Client;
 use App\Models\Carrito;
-use App\Models\User;
-
+use App\Models\Comanda;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\CarritoSubmitRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class SneakersController extends Controller
     public function carrito_add($id_producto, $id_cliente, $size)
     {
         if ($size == "null") {
-            return redirect()->back()->with('message', 'Talla no seleccionada.');
+            return redirect()->back()->with('error', 'Talla no seleccionada.');
         }
 
         $client = Client::find($id_cliente);
@@ -62,7 +63,7 @@ class SneakersController extends Controller
                 }
             }
             if ($producto_existente) {
-                return redirect()->back()->with('message', 'El producto ya está en el carrito con la misma talla.');
+                return redirect()->back()->with('error', 'El producto ya está en el carrito con la misma talla.');
             }
         }
 
@@ -76,7 +77,7 @@ class SneakersController extends Controller
 
         $carrito->update(['productos' => $productos_json]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Producto añadido correctamente.');
     }
 
     public function carrito_delete($id_carrito, $id_producto, $size)
@@ -99,6 +100,30 @@ class SneakersController extends Controller
         return redirect()->back();
     }
 
+    public function carrito_submit(CarritoSubmitRequest $request): RedirectResponse
+    {
+        $user = $request->user();
+        $client = Client::find($user->id_client);
+        $carrito = Carrito::find($client->id_carrito);
+        $productos = $carrito->productos;
+
+        $calle = $request->input('calle');
+        $poblacion = $request->input('poblacion');
+        $cpostal = $request->input('cpostal');
+        $info_adicional = $request->input('info_adicional');
+
+        $direccion = "$calle, $poblacion, $cpostal, $info_adicional";
+
+        $comanda = Comanda::create([
+            'productos' => $productos,
+            'dir_envio' => $direccion,
+            'fecha_compra' => now()->toDateString(),
+            'id_client' => $client->id,
+        ]);
+
+        return Redirect::route('/comanda/'.$comanda->id);
+    }
+
     public function fqs()
     {
         return Inertia::render('Views/fqs');
@@ -112,5 +137,10 @@ class SneakersController extends Controller
         $users = DB::table('users')->get();
 
         return Inertia::render('Views/usuarios', ['users' => $users]);
+    }
+
+    public function comanda()
+    {
+        return Inertia::render('Views/comanda');
     }
 }

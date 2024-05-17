@@ -28,9 +28,13 @@ const form = useForm({
     info_adicional: client.info_adicional,
 });
 
-function filterNonNumeric(event) {
+function filterNonNumerictelf(event) {
     const input = event.target.value;
     form.telefon = input.replace(/\D/g, ''); // Solo deja los dígitos
+}
+function filterNonNumericcpostal(event) {
+    const input = event.target.value;
+    form.cpostal = input.replace(/\D/g, ''); // Solo deja los dígitos
 }
 </script>
 
@@ -78,7 +82,7 @@ function filterNonNumeric(event) {
                 <div class="relative mt-2 rounded-md shadow-sm">
                     <input type="text" name="telefon" id="telefon"
                         class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        autocomplete="telefon" v-model="form.telefon" @input="filterNonNumeric" />
+                        autocomplete="telefon" v-model="form.telefon" @input="filterNonNumerictelf" />
                 </div>
 
                 <InputError class="mt-2" :message="form.errors.telefon" />
@@ -89,7 +93,7 @@ function filterNonNumeric(event) {
                     <InputLabel for="poblacion" value="Población" />
                     <input type="text" name="poblacion" id="poblacion"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        autocomplete="poblacion" v-model="form.cpostal" />
+                        autocomplete="poblacion" v-model="form.poblacion" />
 
                     <InputError class="mt-2" :message="form.errors.poblacion" />
                 </div>
@@ -97,7 +101,7 @@ function filterNonNumeric(event) {
                     <InputLabel for="calle" value="Calle" />
                     <input type="text" name="calle" id="calle"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        autocomplete="calle" v-model="form.cpostal" />
+                        autocomplete="calle" v-model="form.calle" />
 
                     <InputError class="mt-2" :message="form.errors.calle" />
                 </div>
@@ -105,10 +109,18 @@ function filterNonNumeric(event) {
                     <InputLabel for="cpostal" value="Código postal" />
                     <input type="text" name="cpostal" id="cpostal"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        autocomplete="cpostal" v-model="form.cpostal" @input="filterNonNumeric" />
+                        autocomplete="cpostal" v-model="form.cpostal" @input="filterNonNumericcpostal" />
 
                     <InputError class="mt-2" :message="form.errors.cpostal" />
                 </div>
+            </div>
+            <div>
+                <InputLabel for="info_adicional" value="Informacón adicional de envio" />
+
+                <textarea name="info_adicional" id="info_adicional" cols="30" rows="10" autocomplete="info_adicional" v-model="form.info_adicional"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+
+                <InputError class="mt-2" :message="form.errors.info_adicional" />
             </div>
 
             <div v-if="mustVerifyEmail && user.email_verified_at === null">
