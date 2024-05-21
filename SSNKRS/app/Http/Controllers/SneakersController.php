@@ -142,4 +142,12 @@ class SneakersController extends Controller
             ->first();
         return Inertia::render('Views/comanda', ['comanda' => $comanda]);
     }
+
+    public function historial($id_client)
+    {
+        $comandes = DB::table('comandas')
+            ->where('id_client', $id_client)
+            ->get();
+        return Inertia::render('Views/historial', ['comandes' => $comandes]);
+    }
 }

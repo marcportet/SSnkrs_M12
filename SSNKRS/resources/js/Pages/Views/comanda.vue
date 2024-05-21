@@ -17,33 +17,32 @@
                             Carrito</p>
 
                         <div v-for="(product, index) in productDetails" :key="index">
-                            <div 
-                            class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
-                            <div class="pb-4 md:pb-8 w-full md:w-40">
-                                <img class="w-full hidden md:block" :src="product.image"
-                                    alt="dress" />
-                            </div>
                             <div
-                                class="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0">
-                                <div class="w-full flex flex-col justify-start items-start space-y-8">
-                                    <h3
-                                        class="text-xl dark:text-black xl:text-2xl font-semibold leading-6 text-gray-800">
-                                        {{ product.name }}</h3>
-                                    <div class="flex justify-start items-start flex-col space-y-2">
-                                        <p class="text-sm dark:text-black leading-none text-gray-800"><span
-                                                class="dark:text-gray-400 text-black">Size: </span>
-                                            {{ product.size }}</p>
+                                class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
+                                <div class="pb-4 md:pb-8 w-full md:w-40">
+                                    <img class="w-full hidden md:block" :src="product.image" alt="dress" />
+                                </div>
+                                <div
+                                    class="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0">
+                                    <div class="w-full flex flex-col justify-start items-start space-y-8">
+                                        <h3
+                                            class="text-xl dark:text-black xl:text-2xl font-semibold leading-6 text-gray-800">
+                                            {{ product.name }}</h3>
+                                        <div class="flex justify-start items-start flex-col space-y-2">
+                                            <p class="text-sm dark:text-black leading-none text-gray-800"><span
+                                                    class="dark:text-gray-400 text-black">Size: </span>
+                                                {{ product.size }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between space-x-8 items-start w-full">
+                                        <p
+                                            class="text-base dark:text-black xl:text-lg font-semibold leading-6 text-gray-800">
+                                            {{ product.price }} €</p>
                                     </div>
                                 </div>
-                                <div class="flex justify-between space-x-8 items-start w-full">
-                                    <p
-                                        class="text-base dark:text-black xl:text-lg font-semibold leading-6 text-gray-800">
-                                        {{ product.price }} €</p>
-                                </div>
                             </div>
                         </div>
-                        </div>
-                        
+
                     </div>
 
                     <div
@@ -55,18 +54,21 @@
                                 class="flex justify-center items-center w-full space-y-4 flex-col border-gray-200 border-b pb-4">
                                 <div class="flex justify-between w-full">
                                     <p class="text-base dark:text-black leading-4 text-gray-800">Subtotal</p>
-                                    <p class="text-base dark:text-black leading-4 text-gray-600">{{ productosprices ? productosprices : 0 }}€</p>
+                                    <p class="text-base dark:text-black leading-4 text-gray-600">{{ productosprices ?
+                                        productosprices : 0 }}€</p>
                                 </div>
                                 <div class="flex justify-between items-center w-full">
                                     <p class="text-base dark:text-black leading-4 text-gray-800">Coste de envio estimado
                                     </p>
-                                    <p class="text-base dark:text-black leading-4 text-gray-600">{{ productosprices ? productosprices * 0.05 : 0 }}€</p>
+                                    <p class="text-base dark:text-black leading-4 text-gray-600">{{ productosprices ?
+                                        productosprices * 0.05 : 0 }}€</p>
                                 </div>
                             </div>
                             <div class="flex justify-between items-center w-full">
                                 <p class="text-base dark:text-black font-semibold leading-4 text-gray-800">Total</p>
-                                <p class="text-base dark:text-black font-semibold leading-4 text-gray-600">{{ productosprices ? (productosprices) +
-                  (productosprices * 0.05) : 0 }}€</p>
+                                <p class="text-base dark:text-black font-semibold leading-4 text-gray-600">{{
+                                    productosprices ? (productosprices) +
+                                    (productosprices * 0.05) : 0 }}€</p>
                             </div>
                         </div>
                     </div>
@@ -138,7 +140,6 @@
 import Navbar from '../navbar.vue';
 import Footer from '../footer.vue';
 import { ref } from 'vue';
-import Carrito from './carrito.vue';
 
 export default {
     methods: {
@@ -155,9 +156,11 @@ export default {
             productDetails: [],
             productosprices: 0,
         };
-    }, props: {
+    },
+    props: {
         comanda: Object,
-    }, setup() {
+    }, 
+    setup() {
         const productDetails = ref([]);
         const productosprices = ref(0);
 
