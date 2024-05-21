@@ -103,7 +103,7 @@
                                         Datos de envio</p>
                                     <p
                                         class="w-48 lg:w-full dark:text-black xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">
-                                        {{ $page.props.auth.client.calle }}, {{ $page.props.auth.client.poblacion }} {{ $page.props.auth.client.cpostal }}</p>
+                                        {{ comanda.dir_envio}}</p>
                                 </div>
                             </div>
                         </div>
