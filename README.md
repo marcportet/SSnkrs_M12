@@ -66,6 +66,12 @@ npm install -D @tailwindcss/forms
 ```
 composer require laravel/socialite
 ```
+
+- Generar PDF a partir de VUE:
+
+```
+npm -i html2pdf.js@0.9.0
+```
 ## Guía de Funcionament 🔩
 
 - Iniciar Projecte:

@@ -31,7 +31,7 @@
                                     class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                     <table class="min-w-full divide-x table-auto divide-gray-200">
                                         <tbody>
-                                            <tr v-for="producto in comanda.productos" :key="producto.id">
+                                            <tr v-for="producto, index in comanda.productos" :key="producto.id+'_'+index">
                                                 <td class="py-3 whitespace-nowrap text-sm font-medium text-gray-800">
                                                     <img :src="producto.image" alt="sneaker image" class="w-15 h-10">
                                                 </td>
