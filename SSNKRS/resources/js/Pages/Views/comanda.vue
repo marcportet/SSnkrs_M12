@@ -16,7 +16,13 @@
                             class="text-lg md:text-xl dark:text-black font-semibold leading-6 xl:leading-5 text-gray-800">
                             Carrito</p>
 
-                        <div v-for="(product, index) in productDetails" :key="index">
+                        <div v-for="(product, index) in productDetails" :key="index" class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
+                            <div 
+                            class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
+                            <div class="pb-4 md:pb-8 w-full md:w-40">
+                                <img class="w-full hidden md:block" :src="product.image"
+                                    alt="dress" />
+                            </div>
                             <div
                                 class="mt-4 md:mt-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                                 <div class="pb-4 md:pb-8 w-full md:w-40">
@@ -39,6 +45,11 @@
                                             class="text-base dark:text-black xl:text-lg font-semibold leading-6 text-gray-800">
                                             {{ product.price }} €</p>
                                     </div>
+                                </div>
+                                <div class="flex justify-end space-x-8 items-start w-full">
+                                    <p
+                                        class="text-base dark:text-black xl:text-lg font-semibold leading-6 text-gray-800">
+                                        {{ product.price }} €</p>
                                 </div>
                             </div>
                         </div>
@@ -86,19 +97,13 @@
                                 <div class="flex justify-start items-start flex-col space-y-2">
                                     <p
                                         class="text-base dark:text-black font-semibold leading-4 text-left text-gray-800">
-                                        David Kent</p>
+                                        Nombre:&nbsp;&nbsp;{{ $page.props.auth.user.name }}</p>
                                 </div>
                             </div>
-
                             <div
                                 class="flex justify-center text-gray-800 dark:text-black md:justify-start items-center space-x-4 py-4 border-b border-gray-200 w-full">
-                                <img class="dark:hidden"
-                                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/order-summary-3-svg1.svg"
-                                    alt="email">
-                                <img class="hidden dark:block"
-                                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/order-summary-3-svg1dark.svg"
-                                    alt="email">
-                                <p class="cursor-pointer text-sm leading-5 ">david89@gmail.com</p>
+                                <svg id="Capa_1"  style=" height: 40px; enable-background:new 0 0 20 20;" version="1.1" viewBox="0 0 60 60" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M0,8.5v2.291v38.418V51.5h60v-2.291V10.791V8.5H0z M36.625,30.564l-5.446,5.472c-0.662,0.615-1.698,0.614-2.332,0.026  l-5.473-5.498l0.048-0.047L3.647,10.5h52.719L36.577,30.518L36.625,30.564z M20.524,30.533L2,48.355V11.923L20.524,30.533z   M21.934,31.95l5.523,5.549c0.709,0.661,1.619,0.993,2.533,0.993c0.923,0,1.85-0.339,2.581-1.02l5.496-5.522L56.304,49.5H3.686  L21.934,31.95z M39.477,30.534L58,11.922v36.433L39.477,30.534z"/></svg>
+                                <p class="cursor-pointer text-sm leading-5 "> {{ $page.props.auth.user.email }}</p>
                             </div>
                         </div>
                         <div class="flex justify-between xl:h-full items-stretch w-full flex-col mt-6 md:mt-0">
@@ -111,20 +116,7 @@
                                         Datos de envio</p>
                                     <p
                                         class="w-48 lg:w-full dark:text-black xl:w-48 text-center md:text-left text-sm leading-5 text-gray-600">
-                                        180 North King Street, Northhampton MA 1060</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex justify-between xl:h-full items-stretch w-full flex-col mt-6 md:mt-0">
-                            <div
-                                class="flex justify-center md:justify-start xl:flex-col flex-col md:space-x-6 lg:space-x-8 xl:space-x-0 space-y-4 xl:space-y-12 md:space-y-0 md:flex-row items-center md:items-start">
-                                <div
-                                    class="flex justify-center md:justify-start items-center md:items-start flex-col space-y-4 xl:mt-8">
-                                    <p
-                                        class="text-base dark:text-black font-semibold leading-4 text-center md:text-left text-gray-800">
-                                        Descargar resumen pedido</p>
-                                    <button
-                                        class="hover:bg-black dark:bg-blue-500 dark:text-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-3 w-96 md:w-full bg-gray-800 text-base font-medium leading-4 text-white">Descargar</button>
+                                        {{ comanda.dir_envio}}</p>
                                 </div>
                             </div>
                         </div>
