@@ -4,18 +4,27 @@
     <div class="flex-1 overflow-x-auto flex justify-center">
       <div class="p-1.5 min-w-full">
         <div class="overflow-hidden"><br>
-          <div class="flex">
+          <div class="flex space-between">
             &nbsp;&nbsp;
-            <svg style="margin-top: 10px;" width="20" height="20" enable-background="new 0 0 316 32" id="Glyph" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z" id="XMLID_223_"/>
-          </svg>
-          &nbsp;&nbsp;&nbsp;<input
-            v-model="searchTerm"
-            type="text"
-            placeholder="Buscar por nombre"
-            class="mb-4 p-2 border rounded"
-          />
+            <svg style="margin-top: 10px;" width="20" height="20" enable-background="new 0 0 316 32" id="Glyph"
+              version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <path
+                d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14  s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0  C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z"
+                id="XMLID_223_" />
+            </svg>
+            &nbsp;&nbsp;&nbsp;
+        
+            <input v-model="searchTerm" type="text" placeholder="Buscar por nombre"
+              class="mb-4 p-2 border rounded" />
+            
+            <div class="w-full grid justify-items-end">
+              <a @click="PDF()" style="cursor: pointer" class="mr-5 h-14 bg-blue-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500">
+              Descargar Pdf
+            </a>
+            </div>
           </div>
-          <table class="min-w-full divide-y divide-gray-200">
+          <table id="element-to-pdf" class="min-w-full divide-y divide-gray-200">
             <thead>
               <tr>
                 <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Id</th>
@@ -36,29 +45,41 @@
             </tbody>
           </table>
           <div class="flex justify-center mt-8">
-            <button @click="goToPage(1)" :disabled="currentPage === 1" class="px-3 py-1 mr-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+            <button @click="goToPage(1)" :disabled="currentPage === 1"
+              class="px-3 py-1 mr-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-3 h-3">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
               </svg>
             </button>
-            <button @click="previousPage" :disabled="currentPage === 1" class="px-3 py-1 mr-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+            <button @click="previousPage" :disabled="currentPage === 1"
+              class="px-3 py-1 mr-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-3 h-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
               </svg>
             </button>
             <div v-for="page in visiblePages" :key="page">
-              <button @click="goToPage(page)" :class="['px-3 py-1 mx-1 rounded-md border border-gray-300 bg-white text-sm font-medium', { 'bg-blue-600 text-gray-800': page === currentPage }]" class="text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <button @click="goToPage(page)"
+                :class="['px-3 py-1 mx-1 rounded-md border border-gray-300 bg-white text-sm font-medium', { 'bg-blue-600 text-gray-800': page === currentPage }]"
+                class="text-gray-500 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 {{ page }}
               </button>
             </div>
-            <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 ml-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+            <button @click="nextPage" :disabled="currentPage === totalPages"
+              class="px-3 py-1 ml-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-3 h-3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
               </svg>
             </button>
-            <button @click="goToPage(totalPages)" :disabled="currentPage === totalPages" class="px-3 py-1 ml-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+            <button @click="goToPage(totalPages)" :disabled="currentPage === totalPages"
+              class="px-3 py-1 ml-2 rounded-md border border-gray-300 bg-white text-sm font-medium text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="w-3 h-3">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
               </svg>
             </button>
           </div>
@@ -74,11 +95,25 @@ import Navbar from '../navbar.vue';
 import Footer from '../footer.vue';
 import { ref, computed } from 'vue';
 import axios from 'axios';
-
+import html2pdf from "html2pdf.js";
 export default {
   components: {
     Navbar,
     Footer,
+  },
+  methods: {
+    PDF() {
+      var element = document.getElementById('element-to-pdf');
+      var opt = {
+        margin: 0.5,
+        filename: 'Stock_Total.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 3 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().from(element).set(opt).save();
+
+    }
   },
   setup() {
     const productos = ref([]);
