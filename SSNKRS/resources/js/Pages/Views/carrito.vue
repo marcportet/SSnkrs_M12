@@ -119,7 +119,8 @@
             </dl>
 
             <div class="mt-6">
-              <PrimaryButton :disabled="form.processing || productDetails.value == [] || productDetails.value == null || productDetails.value == undefined" v-if="$page.props.auth.client"
+              {{ console.log(carrito.productos.length) }}
+              <PrimaryButton :disabled="form.processing || carrito.productos.length === 2 " v-if="$page.props.auth.client"
                 class="w-full bg-blue-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500">
                 Realizar pedido
               </PrimaryButton>
