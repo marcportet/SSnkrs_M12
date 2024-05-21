@@ -93,9 +93,9 @@
                     page.name }}</a>
                 </div>
                 <div v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null">
-                    <div class="separadorDown"></div>
-                    <a href="/stock" class="-m-2 block p-2 font-medium text-gray-900">Stock</a>
-                    <a href="/usuarios" class="-m-2 block p-2 font-medium text-gray-900">Usuarios</a>
+                  <div class="separadorDown"></div>
+                  <a href="/stock" class="-m-2 block p-2 font-medium text-gray-900">Stock</a>
+                  <a href="/usuarios" class="-m-2 block p-2 font-medium text-gray-900">Usuarios</a>
                 </div>
 
               </div>
@@ -112,6 +112,9 @@
               <div class="space-y-6 border-t border-gray-200 px-4 py-6" v-if="$page.props.auth.user">
                 <div class="flow-root">
                   <Link @click="scrollToTop" :href="route('profile.edit')">Perfil</Link>
+                </div>
+                <div class="flow-root">
+                  <Link @click="scrollToTop" :href="route('historial', $page.props.auth.client.id)">Compras Realizadas</Link>
                 </div>
                 <div class="flow-root">
                   <Link :href="route('logout')" @click="show = true" method="POST" as="button">Cerrar Sesión</Link>
@@ -203,9 +206,13 @@
                   class="flex items-center text-sm font-medium text-gray-900">{{ page.name
                   }}
                 </a>
-                <div v-if="$page.props.auth.user && ($page.props.auth.user.id_admin || $page.props.auth.user.id_marketing !== null)" class="separador"></div>
-                <a  v-if="$page.props.auth.user && ($page.props.auth.user.id_admin || $page.props.auth.user.id_marketing !== null)" href="/stock" class="flex items-center text-sm font-medium text-gray-900">Stock</a>
-                <a  v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" href="/usuarios" class="flex items-center text-sm font-medium text-gray-900">Usuarios</a>
+                <div
+                  v-if="$page.props.auth.user && ($page.props.auth.user.id_admin || $page.props.auth.user.id_marketing !== null)"
+                  class="separador"></div>
+                <a v-if="$page.props.auth.user && ($page.props.auth.user.id_admin || $page.props.auth.user.id_marketing !== null)"
+                  href="/stock" class="flex items-center text-sm font-medium text-gray-900">Stock</a>
+                <a v-if="$page.props.auth.user && $page.props.auth.user.id_admin !== null" href="/usuarios"
+                  class="flex items-center text-sm font-medium text-gray-900">Usuarios</a>
               </div>
             </PopoverGroup>
 
@@ -243,6 +250,7 @@
 
                 <template #content>
                   <DropdownLink :href="route('profile.edit')"> Perfil </DropdownLink>
+                  <DropdownLink :href="route('historial', $page.props.auth.client.id)"> Compras Realizadas </DropdownLink>
                   <DropdownLink :href="route('logout')" @click="show = true" method="post" as="button">
                     Cerrar Sesión
                   </DropdownLink>
