@@ -17,7 +17,10 @@
                                     Envio</th>
                                 <th scope="col"
                                     class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Fecha de
-                                    compra</th>
+                                    pedido</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Ver Pedido
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
@@ -25,21 +28,24 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">{{ comanda.id
                                     }}</td>
                                 <td
-                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 flex overflow-scroll">
-                                    <table class="min-w-full divide-y table-auto divide-gray-200 overflow-scroll">
-                                        <tbody class="divide-x divide-gray-200 flex">
-                                            <tr v-for="producto in comanda.productos" :key="producto.id" class="flex">
-                                                <td class="px-6 py-3 whitespace-nowrap text-sm font-medium text-gray-800">
+                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                    <table class="min-w-full divide-x table-auto divide-gray-200">
+                                        <tbody>
+                                            <tr v-for="producto in comanda.productos" :key="producto.id">
+                                                <td class="py-3 whitespace-nowrap text-sm font-medium text-gray-800">
                                                     <img :src="producto.image" alt="sneaker image" class="w-15 h-10">
                                                 </td>
-                                                <td class="px-6 py-4 inline-block align-baseline whitespace-nowrap text-sm font-medium text-gray-800">
+                                                <td
+                                                    class="py-4 inline-block align-baseline whitespace-nowrap text-sm font-medium text-gray-800">
                                                     {{ producto.name }}
                                                 </td>
-                                                <td class="px-6 py-4 inline-block align-baseline whitespace-nowrap text-sm font-medium text-gray-800">
+                                                <td
+                                                    class="px-6 py-4 inline-block align-baseline whitespace-nowrap text-sm font-medium text-gray-800">
                                                     {{ producto.price }}€
                                                 </td>
-                                                <td class="px-6 py-4 inline-block align-baseline whitespace-nowrap text-sm font-medium text-gray-800">
-                                                    {{ producto.size }}
+                                                <td
+                                                    class="px-6 py-4 inline-block align-baseline whitespace-nowrap text-sm font-medium text-gray-800">
+                                                    Talla: {{ producto.size }}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -48,6 +54,12 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ comanda.dir_envio }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ comanda.fecha_compra }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                    <a :href="route('comanda',comanda.id)"
+                                        class="w-full bg-blue-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500">
+                                        ver comanda
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -62,6 +74,7 @@
 <script>
 import Navbar from '../navbar.vue';
 import Footer from '../footer.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { ref } from 'vue';
 
 export default {
@@ -72,7 +85,8 @@ export default {
     },
     components: {
         Navbar,
-        Footer
+        Footer,
+        PrimaryButton
     },
     data() {
         return {
