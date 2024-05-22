@@ -41,6 +41,7 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ producto.brand }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ producto.price }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{{ producto.stock }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><a href="">Modificar Stock</a></td>
               </tr>
             </tbody>
           </table>

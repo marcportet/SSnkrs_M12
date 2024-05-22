@@ -173,4 +173,58 @@ class SneakersController extends Controller
             ->get();
         return Inertia::render('Views/historial', ['comandes' => $comandes]);
     }
+
+    public function modstock($id)
+{
+    // Crear una nueva instancia del cliente HTTP
+    $httpClient = new HttpClient();
+
+    try {
+        // Obtener la información del sneaker
+        $response = $httpClient->request('GET', "http://localhost:3000/api/sneakers/$id");
+        if ($response->getStatusCode() !== 200) {
+            throw new \Exception("Error obteniendo información del producto $id");
+        }
+        $sneaker = json_decode($response->getBody()->getContents(), true);
+
+        // Obtener la información de los sizes
+        $response = $httpClient->request('GET', "http://localhost:3000/api/sizes");
+        if ($response->getStatusCode() !== 200) {
+            throw new \Exception("Error obteniendo tamaños para el producto $id");
+        }
+        $sizes = json_decode($response->getBody()->getContents(), true);
+
+        // Suponiendo que 'sneaker' tiene propiedades 'sizes' y 'stock' que son cadenas de texto
+        $sizesArray = explode(',', $sneaker[0]['sizes']);
+        $stockArray = explode(',', $sneaker[0]['stock']);
+
+        // Verificar si los arrays se dividieron correctamente
+        if (count($sizesArray) !== count($stockArray)) {
+            throw new \Exception("La cantidad de tamaños y stock no coincide");
+        }
+
+        // Construir el nuevo array $size_stock
+        $size_stock = [];
+        for ($i = 0; $i < count($sizesArray); $i++) {
+            $size_stock[] = [
+                'size' => $sizesArray[$i],
+                'stock' => $stockArray[$i]
+            ];
+        }
+
+        // Añadir el array combinado como una nueva propiedad del sneaker
+        $sneaker[0]['size_stock'] = $size_stock;
+
+        // Renderizar la vista con Inertia, pasando los datos del sneaker
+        return Inertia::render('Views/modstock', [
+            'sneaker' => $sneaker,
+            'sizes' => $sizes,
+        ]);
+    } catch (\Exception $e) {
+        return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+    }
+}
+
+
+
 }

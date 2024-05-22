@@ -82,6 +82,7 @@ Route::get('/contacto', [SneakersController::class, 'contacto'])->name('contacto
 Route::get('/stock', [SneakersController::class, 'stock'])->name('stock');
 Route::get('/usuarios', [SneakersController::class, 'usuarios'])->name('usuarios');
 Route::get('/fqs', [SneakersController::class, 'fqs'])->name('fqs');
+Route::get('/modstock/{id}', [SneakersController::class, 'modstock'])->name('modstock');
 
 Route::middleware('auth')->group(function () {
     Route::get('/comanda/{id}', [SneakersController::class, 'comanda'])->name('comanda');
