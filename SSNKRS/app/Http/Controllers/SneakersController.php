@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Client;
 use App\Models\Carrito;
 use App\Models\Comanda;
+use GuzzleHttp\Client as HttpClient;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CarritoSubmitRequest;
@@ -99,6 +100,28 @@ class SneakersController extends Controller
         $client = Client::find($user->id_client);
         $carrito = Carrito::find($client->id_carrito);
         $productos = $carrito->productos;
+        $productos_arr = json_decode($carrito->productos, true);
+
+        $httpClient = new HttpClient();
+
+        foreach ($productos_arr as $key => $value) {
+            $idProducto = $value['id_producto'];
+            $sizeproducto = $value['size'];
+            try {
+                $response = $httpClient->put("http://localhost:3000/api/sneakers_sizes/stock/$idProducto", [
+                    'json' => [
+                        'size' => $sizeproducto
+                    ]
+                ]);
+                if ($response->getStatusCode() !== 200) {
+                    // Manejo del caso donde la respuesta no sea exitosa
+                    throw new \Exception("Error actualizando stock para el producto $idProducto");
+                }
+            } catch (\Exception $e) {
+                // Manejo del error
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
+        }
 
         $calle = $request->input('calle');
         $poblacion = $request->input('poblacion');
