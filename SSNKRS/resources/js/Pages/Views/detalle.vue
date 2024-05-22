@@ -145,7 +145,7 @@ axios.get(`http://localhost:3000/api/sneakers/` + productID)
       sizes: producto.sizes.split(',').map((size, index) => ({
         size: parseInt(size),
         stock: parseInt(producto.stock.split(',')[index])
-      })),
+      })).filter((sizeObj) => sizeObj.stock > 0),
     }));
   })
   .catch(error => {

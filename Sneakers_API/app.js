@@ -33,7 +33,7 @@ app.get("/api/sneakers", (req, res) => {
   if (type) {
     switch (type) {
       case "like":
-        if(filtro){
+        if (filtro) {
           sql += " WHERE s." + columna + " LIKE '" + filtro + "'";
         }
         break;
@@ -50,7 +50,7 @@ app.get("/api/sneakers", (req, res) => {
     }
   }
   if (type != "limit" || !type) {
-    sql += " GROUP BY s.id ORDER BY s.brand"; 
+    sql += " GROUP BY s.id ORDER BY s.brand";
   }
   sql += ";";
 
@@ -266,5 +266,49 @@ app.delete('/api/sneakers/:id', async (req, res) => {
     }
   });
 
+});
+
+// Reducir stcok por id de sneaker
+app.put("/api/sneakers_sizes/stock/:id", (req, res) => {
+  const sneakerId = req.params.id;
+  const { size } = req.body;
+
+  // Reducir Talla
+  const sneakerSizesSql =
+    "UPDATE sneaker_sizes SET stock = (stock-1) WHERE sneaker_id = ? AND size_id = ?";
+    db.query(
+      sneakerSizesSql,
+      [sneakerId, size],
+      (err, result) => {
+        if (err) {
+          console.error("Error al insertar talla:", err);
+        }
+      }
+    );
+  return res
+    .status(200)
+    .json({ message: "Tallas de la sneaker actualizadas exitosamente" });
+});
+
+// Aumentar Stcok por id de sneaker
+app.put("/api/sneakers_sizes/stock/:id", (req, res) => {
+  const sneakerId = req.params.id;
+  const { size, stock } = req.body;
+
+  // Reducir Talla
+  const sneakerSizesSql =
+    "UPDATE sneaker_sizes SET stock = ? WHERE sneaker_id = ? AND size_id = ?";
+    db.query(
+      sneakerSizesSql,
+      [stock, sneakerId, size],
+      (err, result) => {
+        if (err) {
+          console.error("Error al insertar talla:", err);
+        }
+      }
+    );
+  return res
+    .status(200)
+    .json({ message: "Tallas de la sneaker actualizadas exitosamente" });
 });
 
