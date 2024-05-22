@@ -268,47 +268,81 @@ app.delete('/api/sneakers/:id', async (req, res) => {
 
 });
 
-// Reducir stcok por id de sneaker
-app.put("/api/sneakers_sizes/stock/:id", (req, res) => {
+// Reducir stock por id de sneaker
+app.put("/api/sneakers_sizes/delstock/:id", (req, res) => {
   const sneakerId = req.params.id;
   const { size } = req.body;
 
   // Reducir Talla
   const sneakerSizesSql =
     "UPDATE sneaker_sizes SET stock = (stock-1) WHERE sneaker_id = ? AND size_id = ?";
-    db.query(
-      sneakerSizesSql,
-      [sneakerId, size],
-      (err, result) => {
-        if (err) {
-          console.error("Error al insertar talla:", err);
-        }
+  db.query(
+    sneakerSizesSql,
+    [sneakerId, size],
+    (err, result) => {
+      if (err) {
+        console.error("Error al reducir stock:", err);
       }
-    );
+    }
+  );
   return res
     .status(200)
     .json({ message: "Tallas de la sneaker actualizadas exitosamente" });
 });
 
-// Aumentar Stcok por id de sneaker
-app.put("/api/sneakers_sizes/stock/:id", (req, res) => {
+// Aumentar stock por id de sneaker
+app.put("/api/sneakers_sizes/addstock/:id", (req, res) => {
   const sneakerId = req.params.id;
   const { size, stock } = req.body;
 
   // Reducir Talla
   const sneakerSizesSql =
-    "UPDATE sneaker_sizes SET stock = ? WHERE sneaker_id = ? AND size_id = ?";
-    db.query(
-      sneakerSizesSql,
-      [stock, sneakerId, size],
-      (err, result) => {
-        if (err) {
-          console.error("Error al insertar talla:", err);
+    "UPDATE sneaker_sizes SET stock = (stock+?) WHERE sneaker_id = ? AND size_id = ?";
+  db.query(
+    sneakerSizesSql,
+    [stock, sneakerId, size],
+    (err, result) => {
+      if (err) {
+        console.error("Error al agregar stock:", err);
+      } else {
+        if (result.affectedRows === 0) {
+          const sneakerSizesSql =
+            "INSERT INTO sneaker_sizes (sneaker_id, size_id, stock) VALUES (?, ?, ?)";
+          db.query(
+            sneakerSizesSql,
+            [sneakerId, size, stock],
+            (err, result) => {
+              if (err) {
+                console.error("Error al insertar talla:", err);
+              }
+            }
+          )
         }
       }
-    );
+    }
+  );
   return res
     .status(200)
     .json({ message: "Tallas de la sneaker actualizadas exitosamente" });
 });
 
+// Endpoint para obtener las tallas
+app.get("/api/sizes", (req, res) => {
+  const sql =
+    "SELECT * FROM `sizes`;";
+  db.query(sql, (err, result) => {
+    if (err) {
+      res.status(500).json({ message: err.message });
+    } else {
+      if (result.affectedRows === 0) {
+        return res
+          .status(404)
+          .json({
+            message: "No se encontró el sneaker con el ID proporcionado",
+          });
+      } else {
+        res.json(result);
+      }
+    }
+  });
+});
