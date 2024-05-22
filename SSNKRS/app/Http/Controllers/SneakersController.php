@@ -108,7 +108,7 @@ class SneakersController extends Controller
             $idProducto = $value['id_producto'];
             $sizeproducto = $value['size'];
             try {
-                $response = $httpClient->put("http://localhost:3000/api/sneakers_sizes/stock/$idProducto", [
+                $response = $httpClient->put("http://localhost:3000/api/sneakers_sizes/delstock/$idProducto", [
                     'json' => [
                         'size' => $sizeproducto
                     ]
