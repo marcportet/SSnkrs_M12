@@ -72,6 +72,12 @@ composer require laravel/socialite
 ```
 npm i html2pdf.js@0.9.0
 ```
+
+- Instalació Cloudinary API:
+
+```
+npm install cloudinary
+```
 ## Guía de Funcionament 🔩
 
 - Iniciar Projecte:
