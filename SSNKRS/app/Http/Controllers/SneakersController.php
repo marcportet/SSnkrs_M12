@@ -10,6 +10,7 @@ use GuzzleHttp\Client as HttpClient;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CarritoSubmitRequest;
+use App\Http\Requests\StockAddRequest;
 use Inertia\Inertia;
 
 class SneakersController extends Controller
@@ -151,6 +152,7 @@ class SneakersController extends Controller
     {
         return Inertia::render('Views/stock');
     }
+
     public function usuarios()
     {
         $users = DB::table('users')->get();
@@ -175,56 +177,84 @@ class SneakersController extends Controller
     }
 
     public function modstock($id)
-{
-    // Crear una nueva instancia del cliente HTTP
-    $httpClient = new HttpClient();
+    {
+        // Crear una nueva instancia del cliente HTTP
+        $httpClient = new HttpClient();
 
-    try {
-        // Obtener la información del sneaker
-        $response = $httpClient->request('GET', "http://localhost:3000/api/sneakers/$id");
-        if ($response->getStatusCode() !== 200) {
-            throw new \Exception("Error obteniendo información del producto $id");
+        try {
+            // Obtener la información del sneaker
+            $response = $httpClient->request('GET', "http://localhost:3000/api/sneakers/$id");
+            if ($response->getStatusCode() !== 200) {
+                throw new \Exception("Error obteniendo información del producto $id");
+            }
+            $sneaker = json_decode($response->getBody()->getContents(), true);
+
+            // Obtener la información de los sizes
+            $response = $httpClient->request('GET', "http://localhost:3000/api/sizes");
+            if ($response->getStatusCode() !== 200) {
+                throw new \Exception("Error obteniendo tamaños para el producto $id");
+            }
+            $sizes = json_decode($response->getBody()->getContents(), true);
+
+            // Suponiendo que 'sneaker' tiene propiedades 'sizes' y 'stock' que son cadenas de texto
+            $sizesArray = explode(',', $sneaker[0]['sizes']);
+            $stockArray = explode(',', $sneaker[0]['stock']);
+
+            // Verificar si los arrays se dividieron correctamente
+            if (count($sizesArray) !== count($stockArray)) {
+                throw new \Exception("La cantidad de tamaños y stock no coincide");
+            }
+
+            // Construir el nuevo array $size_stock y $stock_final
+            $size_stock = [];
+            for ($i = 0; $i < count($sizesArray); $i++) {
+                $size_stock[] = [
+                    'size' => $sizesArray[$i],
+                    'stock' => $stockArray[$i]
+                ];
+            }
+
+            $stock_final = [];
+            foreach ($sizes as $size) {
+                $found = false;
+                foreach ($size_stock as $index => $stockItem) {
+                    if ($stockItem['size'] == $size['size']) {
+                        $stock_final[] = $stockItem['stock'];
+                        $found = true;
+                        break;
+                    }
+                }
+                if (!$found) {
+                    $stock_final[] = 0;
+                }
+            }
+
+            // Añadir el array combinado como una nueva propiedad del sneaker
+            $sneaker[0]['size_stock'] = $size_stock;
+            $sneaker[0]['stock_final'] = $stock_final;
+
+            // Renderizar la vista con Inertia, pasando los datos del sneaker
+            return Inertia::render('Views/modstock', [
+                'sneaker' => $sneaker,
+                'sizes' => $sizes,
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
-        $sneaker = json_decode($response->getBody()->getContents(), true);
-
-        // Obtener la información de los sizes
-        $response = $httpClient->request('GET', "http://localhost:3000/api/sizes");
-        if ($response->getStatusCode() !== 200) {
-            throw new \Exception("Error obteniendo tamaños para el producto $id");
-        }
-        $sizes = json_decode($response->getBody()->getContents(), true);
-
-        // Suponiendo que 'sneaker' tiene propiedades 'sizes' y 'stock' que son cadenas de texto
-        $sizesArray = explode(',', $sneaker[0]['sizes']);
-        $stockArray = explode(',', $sneaker[0]['stock']);
-
-        // Verificar si los arrays se dividieron correctamente
-        if (count($sizesArray) !== count($stockArray)) {
-            throw new \Exception("La cantidad de tamaños y stock no coincide");
-        }
-
-        // Construir el nuevo array $size_stock
-        $size_stock = [];
-        for ($i = 0; $i < count($sizesArray); $i++) {
-            $size_stock[] = [
-                'size' => $sizesArray[$i],
-                'stock' => $stockArray[$i]
-            ];
-        }
-
-        // Añadir el array combinado como una nueva propiedad del sneaker
-        $sneaker[0]['size_stock'] = $size_stock;
-
-        // Renderizar la vista con Inertia, pasando los datos del sneaker
-        return Inertia::render('Views/modstock', [
-            'sneaker' => $sneaker,
-            'sizes' => $sizes,
-        ]);
-    } catch (\Exception $e) {
-        return redirect()->back()->withErrors(['message' => $e->getMessage()]);
     }
-}
 
-
-
+    public function modstock_add($idsneaker, StockAddRequest $request)
+    {
+        $httpClient = new HttpClient();
+        $response = $httpClient->put("http://localhost:3000/api/sneakers_sizes/addstock/$idsneaker", [
+            'json' => [
+                'size' => $request->size,
+                'stock' => $request->stock,
+            ]
+        ]);
+        if ($response->getStatusCode() !== 200) {
+            return redirect()->back()->with('error', 'Error añadiendo stock.');
+        }
+        return redirect()->back()->with('success', 'Talla añadido correctamente.');
+    }
 }
