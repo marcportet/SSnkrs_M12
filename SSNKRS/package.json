@@ -6,22 +6,31 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "@inertiajs/vue3": "^1.0.0",
         "@popperjs/core": "^2.11.6",
         "@tailwindcss/aspect-ratio": "^0.4.2",
-        "@vitejs/plugin-vue": "^4.5.0",
-        "autoprefixer": "^10.4.19",
+        "@tailwindcss/forms": "^0.5.3",
+        "@vitejs/plugin-vue": "^5.0.0",
+        "autoprefixer": "^10.4.12",
         "axios": "^1.6.4",
         "bootstrap": "^5.2.3",
         "laravel-vite-plugin": "^1.0",
-        "postcss": "^8.4.38",
+        "postcss": "^8.4.31",
         "sass": "^1.56.1",
-        "tailwindcss": "^3.4.3",
+        "tailwindcss": "^3.2.1",
         "vite": "^5.0",
-        "vue": "^3.2.37"
+        "vue": "^3.4.0"
     },
     "dependencies": {
+        "@cloudinary/url-gen": "^1.19.0",
+        "@cloudinary/vue": "^1.12.1",
         "@headlessui/vue": "^1.7.19",
         "@heroicons/vue": "^2.1.3",
-        "bootstrap-icons": "^1.11.3"
+        "@vue-hero-icons/outline": "^1.7.2",
+        "bootstrap-icons": "^1.11.3",
+        "html2pdf.js": "^0.9.0",
+        "pdfmake": "^0.2.10",
+        "tw-elements": "^2.0.0",
+        "vue-router": "^4.3.0"
     }
 }

@@ -20,6 +20,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'google_id',
+        'id_client',
+        'id_admin',
+        'id_marketing',
     ];
 
     /**
@@ -44,4 +48,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public static function correoEstaRegistrado($correo) {
+        // Buscar el correo en la tabla de usuarios
+        $usuario = User::where('email', $correo)->first();
+        
+        // Si se encontró un usuario con ese correo, devuelve true, de lo contrario, devuelve false
+        return $usuario !== null;
+    }
+    
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['client'];
 }

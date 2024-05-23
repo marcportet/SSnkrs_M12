@@ -2,50 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/*Distancia lateral brands Navbar*/
-ul.mt-6.space-y-6.sm\:mt-4.sm\:space-y-4 {
-    margin-left: -30px !important;
-}
-
-/*Quiatr underline*/
-
-a {
-    text-decoration: none !important;
-}
-
-/*Color text brand Navbar*/
-ul.mt-6.space-y-6.sm\:mt-4.sm\:space-y-4 a{
-    color: grey;
-}
-
-
-/*Colores bg de tailwind 
-
-Principal: bg-blue-500 (rgb(59 130 246) )
-
-*/
-
-/* 
-    Añadir imagenes con :src="'img/logotipo.png'" 
-
-*/
-
-
-/* CSS HOME */
-/* Estilos para el carrusel */
-#carouselExampleAutoplaying {
-    max-height: 85vh;
-    overflow: hidden;
-}
-
 /* Estilos para lo mas vendido */
-.titulo{
-    padding: 5%;
-    font-size: 20px;
-    color:black;
-}
 .titulo {
-    padding: 5%;
     font-size: 20px;
     color: black;
     display: flex;
@@ -54,11 +12,43 @@ Principal: bg-blue-500 (rgb(59 130 246) )
 .vermas {
     margin-left: auto;
     color:black;
+    display: flex;
 }
+
 .vermas:hover{
     color:#3B86F6;
 }
 
+#acordeon > details {
+    margin-bottom: 15px;
+    color: black;
+}
 
+#acordeon > details > p {
+    margin-top: 10px;
+    color: rgb(49, 49, 49);
+}
 
-    
+.separador{
+    border-left: 1px solid #c2c2c2;
+    height: 40px;
+    margin-top: 12px;
+}
+
+.separadorDown{
+    border-bottom: 1px solid #c2c2c2;
+    margin-bottom: 20px;
+}
+
+/*Border radius cajas resmuen comanda*/
+.flex.flex-col.justify-start.items-start.bg-gray-50.px-4.py-4.md\:py-6.md\:p-6.xl\:p-8.w-full.border-4.border-blue-500 {
+    border-radius: 30px;
+}
+
+.flex.justify-center.flex-col.md\:flex-row.flex-col.items-stretch.w-full.space-y-4.md\:space-y-0.md\:space-x-6.xl\:space-x-8.border-4.border-blue-500{
+    border-radius: 30px;
+}
+
+.border-4.border-blue-500.w-full.xl\:w-96.flex.justify-between.items-center.md\:items-start.px-4.py-6.md\:p-6.xl\:p-8.flex-col{
+    border-radius: 30px;
+}
