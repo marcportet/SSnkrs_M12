@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="min-h-screen flex flex-col">
         <Navbar />
 
-        <div class="overflow-x-auto">
+        <div class="flex-grow overflow-x-auto">
             <h1 style="text-align:center; margin-top: 5%; font-size: 40px;"><strong>{{ sneaker[0].name }}</strong></h1>
             <div class="flex justify-center">
                 <table class="w-50 mt-10 mx-10 table table-striped-columns">
@@ -33,25 +33,27 @@
                 </div>
             </div>
             <div class="flex justify-center mt-10">
-                <form @submit.prevent="form.patch(route('modstock.add', sneaker[0].id))" class="flex">
+                <form @submit.prevent="form.patch(route('modstock.add', sneaker[0].id))" class="flex space-x-4">
                     <div>
                         <InputLabel for="size" value="Size" />
-                        <select name="size" id="size" v-model="form.size">
+                        <select name="size" id="size" v-model="form.size" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full text-sm">
                             <option v-for="size in sizes" :key="size.id" :value="size.id">{{ size.size }}</option>
                         </select>
-                        <InputError class="mt-2" :message="form.errors.size" />
                     </div>
                     <div>
                         <InputLabel for="stock" value="Cantidad de Stock" />
-                        <input type="number" name="stock" id="stock" v-model="form.stock">
+                        <input type="number" name="stock" id="stock" v-model="form.stock" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full text-sm">
                     </div>
 
-                    <PrimaryButton :disabled="form.processing"
-                        class="w-full bg-blue-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500">
-                        Añadir Stock
-                    </PrimaryButton>
+                    <div class="flex items-end">
+                        <PrimaryButton :disabled="form.processing"
+                            class="w-full bg-blue-600 border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-blue-500">
+                            Añadir Stock
+                        </PrimaryButton>
+                    </div>
                 </form>
             </div>
+            <InputError style="text-align: center;" class="mt-2" :message="form.errors.size" />
 
         </div>
 
@@ -92,3 +94,21 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.min-h-screen {
+    min-height: 100vh;
+}
+.flex {
+    display: flex;
+}
+.flex-col {
+    flex-direction: column;
+}
+.flex-grow {
+    flex-grow: 1;
+}
+.space-x-4 > * + * {
+    margin-left: 1rem;
+}
+</style>
